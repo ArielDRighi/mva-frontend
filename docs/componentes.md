@@ -1,10 +1,13 @@
-# 📂 components/
+# 📚 Estructura de Componentes
 
+Este documento describe la organización de los componentes en el proyecto, detallando su ubicación, propósito y mejores prácticas.
+
+---
+
+## 🗂 `components/`
 Este directorio contiene todos los componentes reutilizables de la aplicación, organizados en subcarpetas para mejorar la escalabilidad y el mantenimiento.
 
-## 📁 Estructura de Carpetas
-
-### 🏗 `layout/`
+### 🏢 `layout/`
 📌 **Componentes relacionados con la estructura global de la aplicación.**  
 Estos elementos se repiten en todas las páginas, como la barra de navegación y el pie de página.
 
@@ -15,7 +18,7 @@ Estos elementos se repiten en todas las páginas, como la barra de navegación y
 
 ---
 
-### 📁 `sections/`
+### 📚 `sections/`
 📌 **Secciones reutilizables de la interfaz.**  
 Incluye secciones completas utilizadas en varias páginas, como el hero, testimonios o preguntas frecuentes.
 
@@ -26,7 +29,7 @@ Incluye secciones completas utilizadas en varias páginas, como el hero, testimo
 
 ---
 
-### 📁 `ui/`
+### 🛏️ `ui/`
 📌 **Componentes reutilizables de la interfaz de usuario.**  
 Contiene botones, inputs, modales y otros elementos pequeños pero reutilizables.
 
@@ -37,7 +40,7 @@ Contiene botones, inputs, modales y otros elementos pequeños pero reutilizables
 
 ---
 
-### 📁 `providers/`
+### 💪 `providers/`
 📌 **Proveedores de estado y contexto global.**  
 Aquí se manejan temas como el cambio de tema, autenticación o configuración global.
 
@@ -47,7 +50,31 @@ Aquí se manejan temas como el cambio de tema, autenticación o configuración g
 
 ---
 
-## 📌 Resumen
+## 📃 `pages/`
+📌 **Contiene los archivos relacionados con cada página de la aplicación.**  
+Cada archivo aquí representa una vista dentro del sistema de rutas de Next.js.
+
+#### Ejemplos:
+- `Home.tsx` → Página de inicio.
+- `About.tsx` → Página de "Sobre mí".
+- `Contact.tsx` → Página de contacto.
+
+🔹 **Nota:** Como usas el **App Router**, esta carpeta probablemente refleje la estructura de `app/`, y puedes aprovechar la segmentación de rutas (`page.tsx` en cada subdirectorio).
+
+---
+
+## 📩 `forms/`
+📌 **Formularios reutilizables con validaciones y control de estado.**  
+Aquí se centralizan los formularios para mantener la lógica de validación en un solo lugar.
+
+#### Ejemplos:
+- `ContactForm.tsx` → Formulario de contacto con `react-hook-form` y `zod`.
+- `LoginForm.tsx` → Formulario de autenticación.
+- `RegisterForm.tsx` → Formulario de registro de usuario.
+
+---
+
+## 🔄 Resumen de Carpetas
 
 | Carpeta      | Función |
 |-------------|---------|
@@ -55,6 +82,8 @@ Aquí se manejan temas como el cambio de tema, autenticación o configuración g
 | `sections/` | Secciones reutilizables en diferentes páginas (Hero, Features, Testimonials). |
 | `ui/`       | Elementos de interfaz pequeños pero reutilizables (Button, Input, Modal). |
 | `providers/` | Contextos globales y proveedores de estado (ThemeProvider, AuthProvider). |
+| `pages/`    | Contiene las vistas principales de la aplicación. |
+| `forms/`    | Formularios reutilizables con validaciones. |
 
 ---
 
@@ -65,5 +94,7 @@ Aquí se manejan temas como el cambio de tema, autenticación o configuración g
 
 ---
 
-✍ **Última actualización:** _(2025-04-08)_  
+📅 **Última actualización:** _(2025-04-08)_  
 🚀 **Mantenido por:** _(Ignacio Lopez)_
+
+
