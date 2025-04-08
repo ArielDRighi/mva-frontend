@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 };
 
 const NotFoundPage = () => {
-  return <>
+  return <main>
   
-  </>;
+  </main>;
 };
 
 export default NotFoundPage;

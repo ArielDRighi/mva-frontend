@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Clientes = () => {
-  return <div>Clientes</div>;
+  return <main>Clientes</main>;
 };
 
 export default Clientes;

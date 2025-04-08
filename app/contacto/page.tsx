@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Contacto = () => {
-  return <div>Contacto</div>;
+  return <main>Contacto</main>;
 };
 
 export default Contacto;

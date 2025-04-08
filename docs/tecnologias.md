@@ -55,3 +55,6 @@ const useStore = create((set) => ({
   increment: () => set((state) => ({ count: state.count + 1 })),
 }));
 ```
+
+✍ **Última actualización:** _(2025-04-07)_  
+🚀 **Mantenido por:** _(Ignacio Lopez)_

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const Servicios = () => {
-  return <div>Servicios</div>;
+  return <main>Servicios</main>;
 };
 
 export default Servicios;

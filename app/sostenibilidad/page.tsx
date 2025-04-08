@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const Sostenibilidad = () => {
-  return <div>Sostenibilidad</div>;
+  return <main>Sostenibilidad</main>;
 };
 
 export default Sostenibilidad;
