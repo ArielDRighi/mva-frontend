@@ -1,4 +1,28 @@
-import Image from 'next/image'
+import { Metadata } from "next";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "MVA Logística y Servicios | Soluciones en Baños Químicos y Servicios Integrales",
+  description:
+    "Empresa líder en alquiler, limpieza y desagote de baños químicos. Comprometidos con la calidad, seguridad y el medio ambiente.",
+  keywords:
+    "baños químicos, limpieza, desagote, alquiler, seguridad, mantenimiento",
+  openGraph: {
+    title: "MVA Logística y Servicios | Soluciones en Baños Químicos",
+    description:
+      "Empresa líder en alquiler, limpieza y desagote de baños químicos. Seguridad y compromiso con el medio ambiente.",
+    url: "https://mva.com.ar/",
+    type: "website",
+    images: [
+      {
+        url: "/images/MVA_LogoJPG.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MVA Logística y Servicios | Soluciones en Baños Químicos",
+      },
+    ],
+  },
+};
 
 export default function Home() {
   return (
@@ -15,7 +39,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -47,7 +71,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
+            Docs{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -64,7 +88,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
+            Learn{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -81,7 +105,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
+            Templates{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -98,7 +122,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
+            Deploy{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
@@ -109,5 +133,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
