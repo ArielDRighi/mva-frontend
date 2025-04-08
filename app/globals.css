@@ -80,3 +80,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden;
+  }
+}
