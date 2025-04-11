@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
 
       {/* Botón de cambio de tema */}
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
     </nav>
   );
 };

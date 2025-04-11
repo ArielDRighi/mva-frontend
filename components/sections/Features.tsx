@@ -38,7 +38,8 @@ const Features = () => {
         {/* Animación de título */}
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-4xl md:text-5xl font-bold text-center text-[#003F4F] font-montserrat"
         >
@@ -48,7 +49,8 @@ const Features = () => {
         {/* Animación de descripción */}
         <motion.p
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
           className="mt-6 text-lg text-center text-gray-700 max-w-3xl mx-auto font-poppins leading-relaxed"
         >
@@ -62,7 +64,8 @@ const Features = () => {
             <motion.div
               key={title}
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{
                 duration: 0.6,
                 ease: "easeOut",

@@ -7,7 +7,7 @@ import Cta from "../sections/Cta";
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="font-montserrat">
       <Hero />
       <AboutUsHome />
       <Features />

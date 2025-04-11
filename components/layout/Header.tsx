@@ -59,7 +59,7 @@ const Header = () => {
             <Image
               src="/images/MVA_LogoPNG.png"
               alt="Logo"
-              width={80}
+              width={150}
               height={60}
               // className={`transition-all ${
               //   isScrolled ? "brightness-100" : "brightness-200"
