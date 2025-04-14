@@ -16,7 +16,7 @@ const AboutUsHome = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            className="text-[50px] leading-[61px] tracking-wider font-bold text-[#333333] font-montserrat"
+            className="text-[50px] leading-[61px] tracking-wider font-bold text-textBlackTitle font-montserrat"
           >
             MVA SRL <br /> EN UN VISTAZO
           </motion.h2>
@@ -67,7 +67,7 @@ const AboutUsHome = () => {
             className="col-span-1 md:col-span-1 flex justify-center md:order-3 lg:order-4"
           >
             <Card className="w-full border-none">
-              <CardContent>
+              <CardContent className="p-10 flex flex-col justify-between h-full">
                 <TinyBoxHome template={2} />
               </CardContent>
             </Card>

@@ -5,9 +5,13 @@ const TinyBoxHome = ({ template }: { template: number }) => {
     <>
       {template === 1 && (
         <>
-          <h1 className="text-2xl font-medium">Experiencia y Liderazgo</h1>
+          <h1 className="text-2xl font-medium text-textBlack">
+            Experiencia y Liderazgo
+          </h1>
           <div className="flex flex-col gap-1">
-            <p className="text-[54px] leading-[66px] font-light">6+ Años</p>
+            <p className="text-[54px] leading-[66px] font-light text-textBlack">
+              6+ Años
+            </p>
             <p className="text-lg text-gray-600">
               de experiencia en la industria minera
             </p>
@@ -16,20 +20,22 @@ const TinyBoxHome = ({ template }: { template: number }) => {
       )}
       {template === 2 && (
         <>
-          <h1 className="text-3xl font-semibold">
-            Compromiso con la Comunidad
-          </h1>
-          <p className="text-gray-600">
-            Proyectos sociales y sostenibles en las regiones donde operamos.
-          </p>
-          <div className="flex flex-col">
-            <div>
-              <p>2024</p>
-              <p>20+</p>
+          <div>
+            <h1 className="text-xl font-medium text-textBlack">
+              Compromiso con la Comunidad
+            </h1>
+            <p className="text-base text-gray-600 mt-3">
+              Proyectos sociales y sostenibles en las regiones donde operamos.
+            </p>
+          </div>
+          <div className="flex flex-col w-full gap-4">
+            <div className="flex justify-between items-center px-2 bg-[#00A6B2] h-10 rounded-r-sm">
+              <p className="text-xs text-textBlack">2024</p>
+              <p className="text-base text-textBlack">20+</p>
             </div>
-            <div>
-              <p>2023</p>
-              <p>15+</p>
+            <div className="flex justify-between px-2 h-10 items-center">
+              <p className="text-xs text-textBlack">2023</p>
+              <p className="text-base text-textBlack">15+</p>
             </div>
           </div>
         </>

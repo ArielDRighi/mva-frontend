@@ -33,7 +33,7 @@ const AsksData = [
 
 const Asks = () => {
   return (
-    <section className="py-20 bg-gray-100 text-gray-900">
+    <section className="pb-20 bg-gray-100 text-gray-900">
       <div className="container mx-auto px-6 max-w-5xl">
         {/* Título con animación */}
         <motion.h2

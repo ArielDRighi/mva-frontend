@@ -46,9 +46,9 @@ const Hero = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-8 flex gap-6"
+          className="mt-8 flex gap-6 w-full justify-center"
         >
-          <ButtonHome text="Servicios" />
+          <ButtonHome text="Servicios" className="max-w-[206.77px] w-full"/>
           <ButtonHomeServices />
         </motion.div>
       </motion.div>

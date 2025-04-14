@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'md-tablet': '850px',
+      },
       fontFamily: {
         montserrat: ["Stem", "Montserrat", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
@@ -24,6 +27,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        textBlack: "#202020",
+        textBlackTitle: "#333333",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

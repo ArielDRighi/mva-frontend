@@ -41,7 +41,7 @@ const Header = () => {
             ? isScrolled
               ? "#31606E"
               : "rgba(0, 0, 0, 0)"
-            : "#31606E", // Azul petróleo si no está en home
+            : "#31606E", 
       }}
       transition={{ duration: 0.3 }}
       className={`fixed top-0 w-full z-50 transition-all ${
@@ -49,7 +49,6 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 max-w-7xl">
-        {/* Logo con mejor visibilidad */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,9 +60,6 @@ const Header = () => {
               alt="Logo"
               width={150}
               height={60}
-              // className={`transition-all ${
-              //   isScrolled ? "brightness-100" : "brightness-200"
-              // }`}
             />
           </Link>
         </motion.div>

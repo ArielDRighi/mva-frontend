@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import ButtonHome from "../ui/local/ButtonHomeSinFlecha";
+import ButtonHomeServices from "../ui/local/ButtonHomeConFlecha";
 
 const Cta = () => {
   return (
-    <section className="py-20 bg-[#003F4F] text-white text-center">
+    <section className="py-20 bg-gradient-to-b from-[#346e7c] to-gray-900 text-white text-center">
       <div className="container mx-auto px-6 max-w-5xl">
         {/* Animación del título */}
         <motion.h2
@@ -66,18 +67,11 @@ const Cta = () => {
           initial={{ scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.7 }}
-          className="mt-8 flex flex-col sm:flex-row gap-6 justify-center"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-8 flex gap-6 justify-center"
         >
-          <Button className="px-10 py-4 text-lg font-semibold font-poppins bg-[#00A6B2] text-white rounded-lg shadow-lg hover:bg-[#008C9B] transition-all duration-300">
-            Contactarnos
-          </Button>
-          <Button
-            variant="outline"
-            className="px-10 py-4 text-lg font-semibold font-poppins border-2 border-[#00A6B2] text-[#00A6B2] rounded-lg shadow-lg hover:bg-[#00A6B2] hover:text-white transition-all duration-300"
-          >
-            Ver Servicios
-          </Button>
+          <ButtonHome text="Servicios" className="max-w-[206.77px] w-full" />
+          <ButtonHomeServices />
         </motion.div>
       </div>
     </section>
