@@ -16,7 +16,7 @@ const AboutUsHome = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            className="text-[50px] leading-[61px] tracking-wider font-bold text-textBlackTitle font-montserrat"
+            className="text-4xl sm-tablet:text-[50px] sm-tablet:leading-[61px] tracking-wider font-bold text-textBlackTitle font-montserrat"
           >
             MVA SRL <br /> EN UN VISTAZO
           </motion.h2>
@@ -26,7 +26,7 @@ const AboutUsHome = () => {
             transition={{ duration: 0.5 }}
             className="mt-6"
           >
-            <ButtonHome text={"Conocenos"} className=" px-10 h-14" />
+            <ButtonHome text={"Conocenos"} className="px-5 sm-tablet:px-10 h-12 sm-tablet:h-14" />
           </motion.div>
         </div>
         <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">

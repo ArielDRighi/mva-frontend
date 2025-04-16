@@ -1,33 +1,26 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { Menu } from "lucide-react";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
 import Image from "next/image";
 import Link from "next/link";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 const Header = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname(); // Detecta la ruta actual
+  const [open, setOpen] = useState(false);
 
-  // Deshabilitar scroll cuando el sidebar está abierto
   useEffect(() => {
-    document.body.style.overflow = isSidebarOpen ? "hidden" : "auto";
-  }, [isSidebarOpen]);
+    if (pathname !== "/") return;
 
-  // Detectar scroll solo en la página de inicio
-  useEffect(() => {
-    if (pathname !== "/") return; // Solo aplica en el home
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
@@ -41,7 +34,7 @@ const Header = () => {
             ? isScrolled
               ? "#31606E"
               : "rgba(0, 0, 0, 0)"
-            : "#31606E", 
+            : "#31606E",
       }}
       transition={{ duration: 0.3 }}
       className={`fixed top-0 w-full z-50 transition-all ${
@@ -60,39 +53,37 @@ const Header = () => {
               alt="Logo"
               width={150}
               height={60}
+              className="sm-tablet:w-[150px] w-[100px] object-contain"
             />
           </Link>
         </motion.div>
 
-        {/* Navbar - Solo visible en escritorio */}
+        {/* Navbar desktop */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="hidden md:block">
+          <div className="hidden md-tablet:block">
             <Navbar />
           </div>
         </motion.div>
 
-        {/* Botón para abrir Sidebar en móvil/tablet */}
-        <div className="md:hidden">
-          <Button
-            variant="ghost"
-            className="rounded-full p-2 transition-all hover:bg-[#00A6B2] hover:text-white"
-            onClick={() => setIsSidebarOpen(true)}
-          >
-            <Menu size={24} />
-          </Button>
+        {/* Drawer mobile */}
+        <div className="md-tablet:hidden relative">
+          <Drawer open={open} onOpenChange={setOpen} direction="right">
+            <DrawerTrigger asChild>
+              <Button
+                variant="ghost"
+                className="w-20 h-20 group transition-all hover:bg-transparent"
+              >
+                <Menu className="!w-10 !h-10 text-gray-300 group-hover:text-[#00A6B2] transition-colors" />
+              </Button>
+            </DrawerTrigger>
+            <Sidebar onClose={() => setOpen(false)} />
+          </Drawer>
         </div>
       </div>
-
-      {/* Sidebar con fondo opaco */}
-      <AnimatePresence>
-        {isSidebarOpen && (
-          <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-        )}
-      </AnimatePresence>
     </motion.header>
   );
 };

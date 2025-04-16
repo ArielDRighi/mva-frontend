@@ -32,7 +32,7 @@ const Hero = () => {
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-20 flex flex-col items-center"
       >
-        <h1 className="text-5xl md:text-7xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg">
+        <h1 className="text-4xl sm-tablet:text-5xl md:text-7xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg">
           Impulsa tu Negocio con
           <br />
           <span className="text-[#00A6B2]">Innovación y Tecnología</span>
@@ -46,9 +46,9 @@ const Hero = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-8 flex gap-6 w-full justify-center"
+          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
         >
-          <ButtonHome text="Servicios" className="max-w-[206.77px] w-full"/>
+          <ButtonHome text="Servicios" className="max-w-[215px] w-full h-11"/>
           <ButtonHomeServices />
         </motion.div>
       </motion.div>

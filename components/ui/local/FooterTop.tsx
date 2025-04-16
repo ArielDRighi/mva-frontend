@@ -1,14 +1,10 @@
-"use client";
 import clsx from "clsx";
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
 import { Separator } from "../separator";
 
 const FooterTop = () => {
-  const pathname = usePathname(); // Obtiene la ruta actual
-
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/nosotros", label: "Sobre Nosotros" },

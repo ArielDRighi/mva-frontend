@@ -35,7 +35,6 @@ const Features = () => {
   return (
     <section className="py-20 bg-white text-gray-900">
       <div className="container mx-auto px-6 max-w-7xl">
-        {/* Animación de título */}
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +45,6 @@ const Features = () => {
           Características y Beneficios
         </motion.h2>
 
-        {/* Animación de descripción */}
         <motion.p
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,11 +56,11 @@ const Features = () => {
           nuestra calidad, seguridad y atención personalizada.
         </motion.p>
 
-        {/* Lista de beneficios */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map(({ icon: Icon, title, description }, index) => (
             <motion.div
               key={title}
+              className="h-full"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -72,8 +70,8 @@ const Features = () => {
                 delay: index * 0.2,
               }}
             >
-              <Card className="shadow-lg border-t-4 border-[#00A6B2] hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-6 text-center flex flex-col items-center">
+              <Card className="h-full min-h-[300px] shadow-lg border-t-4 border-[#00A6B2] hover:shadow-xl transition-all duration-300 flex flex-col">
+                <CardContent className="p-6 text-center flex flex-col items-center justify-start flex-grow">
                   <Icon className="w-12 h-12 text-[#00A6B2] mb-4" />
                   <h3 className="text-xl font-semibold text-[#003F4F] font-montserrat">
                     {title}

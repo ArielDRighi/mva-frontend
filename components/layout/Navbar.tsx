@@ -37,9 +37,6 @@ const Navbar = () => {
           </Link>
         ))}
       </div>
-
-      {/* Botón de cambio de tema */}
-      {/* <ThemeToggle /> */}
     </nav>
   );
 };

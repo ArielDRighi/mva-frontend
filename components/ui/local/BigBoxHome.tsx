@@ -20,7 +20,7 @@ const BigBoxHome = ({ template }: { template: number }) => {
           </h3>
 
           <div className="flex justify-between relative">
-            <div className="flex flex-col gap-1">
+            <div className="hidden sm-tablet:flex flex-col gap-1">
               <p className="text-[#F2F1EF] text-[50px] font-light leading-[61px] drop-shadow-lg">
                 10m³ - 30m³
               </p>

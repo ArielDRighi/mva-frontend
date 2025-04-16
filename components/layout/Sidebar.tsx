@@ -1,52 +1,53 @@
-"use client";
-
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+// components/Sidebar.tsx
+import {
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
+import clsx from "clsx";
 import Link from "next/link";
+import { X } from "lucide-react"; // Ícono de cerrar
 
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-}
+type SidebarProps = {
+  onClose: () => void;
+};
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
+const Sidebar = ({ onClose }: SidebarProps) => {
+  const links = [
+    { href: "/", label: "Inicio" },
+    { href: "/nosotros", label: "Sobre Nosotros" },
+    { href: "/servicios", label: "Servicios" },
+    { href: "/contacto", label: "Contacto" },
+    { href: "/sostenibilidad", label: "Sostenibilidad" },
+    { href: "/clientes", label: "Clientes" },
+  ];
+
   return (
-    <>
-      {/* Fondo opaco que cierra el sidebar al hacer clic fuera */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <motion.aside
-        initial={{ x: "100%" }}
-        animate={{ x: isOpen ? 0 : "100%" }}
-        exit={{ x: "100%" }}
-        transition={{ type: "tween", duration: 0.3 }}
-        className="fixed right-0 top-0 h-full w-64 bg-background shadow-lg z-50"
-      >
-        {/* Botón de cerrar */}
-        <div className="flex justify-end p-4">
-          <Button variant="ghost" onClick={() => setIsOpen(false)}>
-            <X size={24} />
-          </Button>
-        </div>
-
-        {/* Menú */}
-        <nav className="mt-6 flex flex-col space-y-4 p-6">
-          <Link href="/" className="hover:underline" onClick={() => setIsOpen(false)}>Inicio</Link>
-          <Link href="/about" className="hover:underline" onClick={() => setIsOpen(false)}>Sobre Nosotros</Link>
-          <Link href="/services" className="hover:underline" onClick={() => setIsOpen(false)}>Servicios</Link>
-          <Link href="/contact" className="hover:underline" onClick={() => setIsOpen(false)}>Contacto</Link>
-        </nav>
-      </motion.aside>
-    </>
+    <DrawerContent className="p-6 bg-[#121928]">
+      <DrawerHeader className="flex items-center justify-between">
+        <DrawerTitle className="text-3xl text-[#31606E]">MVA SRL</DrawerTitle>
+        <button
+          onClick={onClose}
+          className="text-gray-400 hover:text-white transition-colors"
+        >
+          <X className="w-6 h-6" />
+        </button>
+      </DrawerHeader>
+      <nav className="space-y-4 px-4 flex flex-col">
+        {links.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={clsx(
+              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-[#00A6B2] after:scale-x-100"
+            )}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
+    </DrawerContent>
   );
 };
 
 export default Sidebar;
-
