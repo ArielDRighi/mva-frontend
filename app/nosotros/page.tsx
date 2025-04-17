@@ -1,3 +1,4 @@
+import AboutUsPage from "@/components/pages/AboutUsPage";
 import { Metadata } from "next";
 import React from "react";
 
@@ -9,7 +10,11 @@ export const metadata: Metadata = {
 };
 
 const Nosotros = () => {
-  return <main>Nosotros</main>;
+  return (
+    <main className="pb-20 pt-40 px-4 md:px-8 bg-white text-gray-900">
+      <AboutUsPage />
+    </main>
+  );
 };
 
 export default Nosotros;
