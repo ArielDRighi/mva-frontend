@@ -1,5 +1,5 @@
+import NosotrosPage from "@/components/pages/NosotrosPage";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Nosotros | MVA Logística y Servicios",
@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   keywords: "historia, experiencia, valores, misión, visión, MVA SRL",
 };
 
-const Nosotros = () => {
-  return <main>Nosotros</main>;
-};
-
-export default Nosotros;
+export default function Page() {
+  return <NosotrosPage />;
+}
