@@ -1,15 +1,13 @@
+import ClientesPage from "@/components/pages/ClientesPage";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Clientes | MVA Logística y Servicios",
   description:
-    "Empresas que confían en nosotros: Livent, First Quantum Minerals, Posco SAU, DHL, Grupo AGV y más.",
-  keywords: "clientes, empresas, proyectos, confianza, MVA SRL",
+    "Conoce las empresas que confían en MVA para sus soluciones logísticas. Descubre nuestros casos de éxito y testimonios.",
+  keywords: "clientes, testimonios, casos de éxito, empresas, logística, MVA",
 };
 
-const Clientes = () => {
-  return <main>Clientes</main>;
-};
-
-export default Clientes;
+export default function Page() {
+  return <ClientesPage />;
+}
