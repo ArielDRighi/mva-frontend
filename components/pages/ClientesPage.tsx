@@ -44,7 +44,7 @@ export default function ClientesPage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-white mt-[150px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

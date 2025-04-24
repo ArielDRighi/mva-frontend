@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function ContactoPage() {
   return (
     <motion.div
-      className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 p-4 py-16"
+      className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 p-4 py-16 mt-[150px]"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

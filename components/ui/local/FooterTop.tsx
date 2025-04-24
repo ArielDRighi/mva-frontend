@@ -9,9 +9,9 @@ const FooterTop = () => {
     { href: "/", label: "Inicio" },
     { href: "/nosotros", label: "Sobre Nosotros" },
     { href: "/servicios", label: "Servicios" },
-    { href: "/contacto", label: "Contacto" },
     { href: "/sostenibilidad", label: "Sostenibilidad" },
     { href: "/clientes", label: "Clientes" },
+    { href: "/contacto", label: "Contacto" },
   ];
   return (
     <div className="max-w-screen-xl mx-auto md-tablet:h-20 flex justify-between w-full flex-col md-tablet:flex-row items-center py-4 md-tablet:py-0">
