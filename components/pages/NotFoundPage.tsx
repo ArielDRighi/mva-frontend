@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import ButtonHomeSinFlecha from "@/components/ui/local/ButtonHomeSinFlecha";
+import ButtonHomeConFlecha from "@/components/ui/local/ButtonHomeConFlecha";
 
 export default function NotFoundPage() {
   return (
@@ -22,29 +22,19 @@ export default function NotFoundPage() {
         <h1 className="text-8xl font-bold text-[#003F4F] mb-6 font-montserrat">404</h1>
         <h2 className="text-3xl font-bold text-[#00A6B2] mb-6 font-montserrat">Página no encontrada</h2>
 
-        <p className="text-lg text-gray-600 mb-8 font-poppins">
+        <p className="text-lg text-gray-600 mb-12 font-poppins">
           Lo sentimos, la página que estás buscando no existe o ha sido movida.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
           <Link href="/">
-            <Button
-              className="bg-[#003F4F] hover:bg-[#003F4F]/90 text-white font-montserrat flex items-center gap-2"
-              size="lg"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Volver a inicio
-            </Button>
+            <ButtonHomeSinFlecha text="Volver a inicio" className="max-w-[215px] w-full h-11" />
           </Link>
 
           <Link href="/contacto">
-            <Button
-              variant="outline"
-              className="border-[#00A6B2] text-[#00A6B2] hover:bg-[#00A6B2] hover:text-white font-montserrat"
-              size="lg"
-            >
-              Contactar soporte
-            </Button>
+            <div className="w-[215px]">
+              <ButtonHomeConFlecha />
+            </div>
           </Link>
         </div>
       </motion.div>
