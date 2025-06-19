@@ -3,13 +3,18 @@
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Quote } from "lucide-react";
+import PortalClientes from "../sections/PortalClientes";
 
 export default function ClientesPage() {
   // Datos de ejemplo para clientes
   const clientes = [
     { nombre: "Empresa Industrial SA", sector: "Manufactura", logo: "EI" },
     { nombre: "Distribuciones Nacionales", sector: "Distribución", logo: "DN" },
-    { nombre: "Comercio Global", sector: "Importación/Exportación", logo: "CG" },
+    {
+      nombre: "Comercio Global",
+      sector: "Importación/Exportación",
+      logo: "CG",
+    },
     { nombre: "TechLogic", sector: "Tecnología", logo: "TL" },
     { nombre: "Alimentos del Sur", sector: "Alimentación", logo: "AS" },
     { nombre: "Farmacéutica Argentina", sector: "Farmacéutico", logo: "FA" },
@@ -56,13 +61,15 @@ export default function ClientesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h1 className="text-5xl font-bold text-[#003F4F] text-center mb-6 font-montserrat">Nuestros Clientes</h1>
+        <h1 className="text-5xl font-bold text-[#003F4F] text-center mb-6 font-montserrat">
+          Nuestros Clientes
+        </h1>
         <p className="text-lg text-gray-600 max-w-3xl text-center mb-10 font-poppins">
-          Empresas líderes en diversos sectores confían en MVA para optimizar sus operaciones logísticas. Conoce algunas
-          de las organizaciones con las que trabajamos.
+          Empresas líderes en diversos sectores confían en MVA para optimizar
+          sus operaciones logísticas. Conoce algunas de las organizaciones con
+          las que trabajamos.
         </p>
       </motion.section>
-
       {/* Grid de clientes */}
       <motion.section
         className="w-full py-16 bg-gray-50"
@@ -90,14 +97,17 @@ export default function ClientesPage() {
                 <div className="w-20 h-20 bg-[#003F4F] rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
                   {cliente.logo}
                 </div>
-                <h3 className="text-lg font-semibold text-[#003F4F] mb-1 font-montserrat">{cliente.nombre}</h3>
-                <p className="text-sm text-gray-500 font-poppins">{cliente.sector}</p>
+                <h3 className="text-lg font-semibold text-[#003F4F] mb-1 font-montserrat">
+                  {cliente.nombre}
+                </h3>
+                <p className="text-sm text-gray-500 font-poppins">
+                  {cliente.sector}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
-
       {/* Sectores */}
       <motion.section
         className="w-full py-16"
@@ -125,9 +135,18 @@ export default function ClientesPage() {
                 nombre: "Retail y E-commerce",
                 desc: "Distribución eficiente para tiendas físicas y comercio electrónico.",
               },
-              { nombre: "Farmacéutico", desc: "Transporte y almacenamiento con condiciones controladas." },
-              { nombre: "Importación/Exportación", desc: "Gestión integral de operaciones de comercio internacional." },
-              { nombre: "Construcción", desc: "Logística de materiales y equipos para proyectos constructivos." },
+              {
+                nombre: "Farmacéutico",
+                desc: "Transporte y almacenamiento con condiciones controladas.",
+              },
+              {
+                nombre: "Importación/Exportación",
+                desc: "Gestión integral de operaciones de comercio internacional.",
+              },
+              {
+                nombre: "Construcción",
+                desc: "Logística de materiales y equipos para proyectos constructivos.",
+              },
             ].map((sector, i) => (
               <motion.div
                 key={i}
@@ -137,14 +156,15 @@ export default function ClientesPage() {
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-xl font-bold text-[#003F4F] mb-4 font-montserrat">{sector.nombre}</h3>
+                <h3 className="text-xl font-bold text-[#003F4F] mb-4 font-montserrat">
+                  {sector.nombre}
+                </h3>
                 <p className="text-gray-600 font-poppins">{sector.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
-
       {/* Testimonios */}
       <motion.section
         className="w-full py-16 bg-[#003F4F]"
@@ -169,13 +189,19 @@ export default function ClientesPage() {
                 viewport={{ once: true }}
               >
                 <Quote className="h-10 w-10 text-[#00A6B2] mb-4" />
-                <p className="text-gray-600 mb-6 italic font-poppins">{testimonio.texto}</p>
+                <p className="text-gray-600 mb-6 italic font-poppins">
+                  {testimonio.texto}
+                </p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-[#003F4F]/10 rounded-full flex items-center justify-center mr-4">
-                    <span className="font-bold text-[#003F4F]">{testimonio.autor.charAt(0)}</span>
+                    <span className="font-bold text-[#003F4F]">
+                      {testimonio.autor.charAt(0)}
+                    </span>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-[#003F4F] font-montserrat">{testimonio.autor}</h4>
+                    <h4 className="font-semibold text-[#003F4F] font-montserrat">
+                      {testimonio.autor}
+                    </h4>
                     <p className="text-sm text-gray-500 font-poppins">
                       {testimonio.cargo}, {testimonio.empresa}
                     </p>
@@ -186,7 +212,6 @@ export default function ClientesPage() {
           </div>
         </div>
       </motion.section>
-
       {/* Casos de éxito */}
       <motion.section
         className="w-full py-16"
@@ -196,7 +221,9 @@ export default function ClientesPage() {
         viewport={{ once: true }}
       >
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-[#003F4F] text-center mb-16 font-montserrat">Casos de Éxito</h2>
+          <h2 className="text-3xl font-bold text-[#003F4F] text-center mb-16 font-montserrat">
+            Casos de Éxito
+          </h2>
 
           <div className="space-y-12">
             {[
@@ -207,14 +234,16 @@ export default function ClientesPage() {
                   "La empresa enfrentaba retrasos significativos en sus entregas y costos elevados de almacenamiento.",
                 solucion:
                   "Implementamos un sistema integrado de gestión logística y rediseñamos sus rutas de distribución.",
-                resultados: "Reducción del 30% en tiempos de entrega y ahorro del 25% en costos operativos.",
+                resultados:
+                  "Reducción del 30% en tiempos de entrega y ahorro del 25% en costos operativos.",
               },
               {
                 cliente: "Distribuciones Nacionales",
                 titulo: "Expansión de Cobertura Nacional",
                 desafio:
                   "Necesitaban ampliar su cobertura a todo el país sin incrementar significativamente sus costos.",
-                solucion: "Desarrollamos un modelo híbrido de distribución con centros estratégicos regionales.",
+                solucion:
+                  "Desarrollamos un modelo híbrido de distribución con centros estratégicos regionales.",
                 resultados:
                   "Aumento del 40% en la cobertura geográfica manteniendo la estructura de costos controlada.",
               },
@@ -235,21 +264,37 @@ export default function ClientesPage() {
                         .map((word) => word[0])
                         .join("")}
                     </div>
-                    <h3 className="text-xl font-bold text-[#003F4F] mb-2 font-montserrat">{caso.cliente}</h3>
-                    <p className="text-[#00A6B2] font-semibold font-poppins">{caso.titulo}</p>
+                    <h3 className="text-xl font-bold text-[#003F4F] mb-2 font-montserrat">
+                      {caso.cliente}
+                    </h3>
+                    <p className="text-[#00A6B2] font-semibold font-poppins">
+                      {caso.titulo}
+                    </p>
                   </div>
                   <div className="md:w-2/3 md:pl-8 md:border-l border-gray-200">
                     <div className="mb-4">
-                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">El Desafío</h4>
-                      <p className="text-gray-600 font-poppins">{caso.desafio}</p>
+                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">
+                        El Desafío
+                      </h4>
+                      <p className="text-gray-600 font-poppins">
+                        {caso.desafio}
+                      </p>
                     </div>
                     <div className="mb-4">
-                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">Nuestra Solución</h4>
-                      <p className="text-gray-600 font-poppins">{caso.solucion}</p>
+                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">
+                        Nuestra Solución
+                      </h4>
+                      <p className="text-gray-600 font-poppins">
+                        {caso.solucion}
+                      </p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">Resultados</h4>
-                      <p className="text-gray-600 font-poppins">{caso.resultados}</p>
+                      <h4 className="font-semibold text-[#003F4F] mb-2 font-montserrat">
+                        Resultados
+                      </h4>
+                      <p className="text-gray-600 font-poppins">
+                        {caso.resultados}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -257,8 +302,7 @@ export default function ClientesPage() {
             ))}
           </div>
         </div>
-      </motion.section>
-
+      </motion.section>{" "}
       {/* CTA */}
       <motion.section
         className="w-full py-16 bg-gradient-to-br from-[#00A6B2]/10 to-gray-50"
@@ -272,14 +316,19 @@ export default function ClientesPage() {
             ¿Listo para optimizar tu logística?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8 font-poppins">
-            Únete a las empresas líderes que confían en MVA para transformar sus operaciones logísticas y mejorar su
-            competitividad.
+            Únete a las empresas líderes que confían en MVA para transformar sus
+            operaciones logísticas y mejorar su competitividad.
           </p>
-          <Button className="bg-[#00A6B2] text-white hover:bg-[#00A6B2]/90 font-montserrat" size="lg">
+          <Button
+            className="bg-[#00A6B2] text-white hover:bg-[#00A6B2]/90 font-montserrat"
+            size="lg"
+          >
             Solicitar una consulta
           </Button>
         </div>
       </motion.section>
+      {/* Portal de Clientes */}
+      <PortalClientes />
     </motion.div>
   );
 }

@@ -7,7 +7,8 @@ import { CheckCircle } from "lucide-react";
 const servicios = [
   {
     title: "Baños Químicos",
-    description: "Alquiler, limpieza y mantenimiento de baños químicos para proyectos mineros e industriales.",
+    description:
+      "Alquiler, limpieza y mantenimiento de baños químicos para proyectos mineros e industriales.",
     features: [
       "Disponibles 24/7",
       "Mantenimiento programado",
@@ -18,7 +19,8 @@ const servicios = [
   },
   {
     title: "Desagote de Cámaras Sépticas",
-    description: "Servicio de desagote con camiones especializados y personal capacitado.",
+    description:
+      "Servicio de desagote con camiones especializados y personal capacitado.",
     features: [
       "Equipos de última generación",
       "Capacidad de 10m³ - 30m³",
@@ -29,13 +31,20 @@ const servicios = [
   },
   {
     title: "Limpieza de Oficinas",
-    description: "Servicios completos de limpieza para oficinas y espacios de trabajo.",
-    features: ["Personal especializado", "Productos ecológicos", "Horarios flexibles", "Planes personalizados"],
+    description:
+      "Servicios completos de limpieza para oficinas y espacios de trabajo.",
+    features: [
+      "Personal especializado",
+      "Productos ecológicos",
+      "Horarios flexibles",
+      "Planes personalizados",
+    ],
     image: "/images/camionetas.jpg",
   },
   {
     title: "Mantenimiento de Campamentos",
-    description: "Gestión integral de campamentos mineros y espacios temporales.",
+    description:
+      "Gestión integral de campamentos mineros y espacios temporales.",
     features: [
       "Logística completa",
       "Soluciones habitacionales",
@@ -64,10 +73,13 @@ export default function ServiciosPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat">Nuestros Servicios</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat">
+              Nuestros Servicios
+            </h1>
             <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed font-poppins">
-              Ofrecemos soluciones integrales de alta calidad para proyectos mineros e industriales, cumpliendo con los
-              más altos estándares de seguridad y eficiencia.
+              Ofrecemos soluciones integrales de alta calidad para proyectos
+              mineros e industriales, cumpliendo con los más altos estándares de
+              seguridad y eficiencia.
             </p>
           </motion.div>
         </div>
@@ -88,7 +100,11 @@ export default function ServiciosPage() {
                   index % 2 === 1 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                <div className={`order-2 ${index % 2 === 1 ? "md:order-1" : "md:order-2"}`}>
+                <div
+                  className={`order-2 ${
+                    index % 2 === 1 ? "md:order-1" : "md:order-2"
+                  }`}
+                >
                   <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#00A6B2]/30 to-[#003F4F]/30"></div>
                     <div
@@ -98,12 +114,23 @@ export default function ServiciosPage() {
                   </div>
                 </div>
 
-                <div className={`order-1 ${index % 2 === 1 ? "md:order-2" : "md:order-1"}`}>
-                  <h2 className="text-3xl font-bold text-[#003F4F] mb-4 font-montserrat">{servicio.title}</h2>
-                  <p className="text-gray-700 mb-6 font-poppins">{servicio.description}</p>
+                <div
+                  className={`order-1 ${
+                    index % 2 === 1 ? "md:order-2" : "md:order-1"
+                  }`}
+                >
+                  <h2 className="text-3xl font-bold text-[#003F4F] mb-4 font-montserrat">
+                    {servicio.title}
+                  </h2>
+                  <p className="text-gray-700 mb-6 font-poppins">
+                    {servicio.description}
+                  </p>
                   <ul className="space-y-2">
                     {servicio.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-gray-700 font-poppins">
+                      <li
+                        key={idx}
+                        className="flex items-center text-gray-700 font-poppins"
+                      >
                         <CheckCircle className="mr-2 h-5 w-5 text-[#00A6B2]" />
                         {feature}
                       </li>
@@ -130,8 +157,8 @@ export default function ServiciosPage() {
               ¿Necesitas un servicio personalizado?
             </h2>
             <p className="text-xl text-gray-700 mb-6 max-w-3xl mx-auto font-poppins">
-              Contáctanos para discutir tus necesidades específicas y diseñar una solución a medida para tu proyecto o
-              empresa.
+              Contáctanos para discutir tus necesidades específicas y diseñar
+              una solución a medida para tu proyecto o empresa.
             </p>
             <a
               href="/contacto"

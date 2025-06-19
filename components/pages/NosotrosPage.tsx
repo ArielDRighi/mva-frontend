@@ -25,8 +25,8 @@ export default function NosotrosPage() {
               Sobre MVA Logística y Servicios
             </h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-poppins">
-              Más de 6 años de experiencia ofreciendo soluciones de calidad en baños químicos y servicios integrales
-              para la industria minera.
+              Más de 6 años de experiencia ofreciendo soluciones de calidad en
+              baños químicos y servicios integrales para la industria minera.
             </p>
           </motion.div>
         </div>
@@ -43,16 +43,20 @@ export default function NosotrosPage() {
             className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
           >
             <div>
-              <h2 className="text-3xl font-bold text-[#003F4F] mb-4 font-montserrat">Nuestra Historia</h2>
+              <h2 className="text-3xl font-bold text-[#003F4F] mb-4 font-montserrat">
+                Nuestra Historia
+              </h2>
               <p className="text-gray-700 mb-4 font-poppins">
-                MVA SRL nació en 2018 como respuesta a la creciente demanda de servicios de calidad en el sector minero.
-                Con un enfoque inicial en baños químicos, rápidamente expandimos nuestra oferta hacia soluciones
-                logísticas integrales.
+                MVA SRL nació en 2018 como respuesta a la creciente demanda de
+                servicios de calidad en el sector minero. Con un enfoque inicial
+                en baños químicos, rápidamente expandimos nuestra oferta hacia
+                soluciones logísticas integrales.
               </p>
               <p className="text-gray-700 mb-4 font-poppins">
-                En estos años hemos construido una reputación basada en la confiabilidad, la calidad de servicio y el
-                compromiso con nuestros clientes, siempre manteniendo altos estándares de seguridad y cuidado del medio
-                ambiente.
+                En estos años hemos construido una reputación basada en la
+                confiabilidad, la calidad de servicio y el compromiso con
+                nuestros clientes, siempre manteniendo altos estándares de
+                seguridad y cuidado del medio ambiente.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">
@@ -73,7 +77,9 @@ export default function NosotrosPage() {
             transition={{ duration: 0.8 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-3xl font-bold text-[#003F4F] font-montserrat">Misión, Visión y Valores</h2>
+            <h2 className="text-3xl font-bold text-[#003F4F] font-montserrat">
+              Misión, Visión y Valores
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -86,10 +92,14 @@ export default function NosotrosPage() {
             >
               <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">Misión</h3>
+                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
+                    Misión
+                  </h3>
                   <p className="text-gray-700 font-poppins">
-                    Brindar soluciones logísticas y servicios de excelencia que superen las expectativas de nuestros
-                    clientes, contribuyendo al desarrollo sostenible y al bienestar de las comunidades donde operamos.
+                    Brindar soluciones logísticas y servicios de excelencia que
+                    superen las expectativas de nuestros clientes, contribuyendo
+                    al desarrollo sostenible y al bienestar de las comunidades
+                    donde operamos.
                   </p>
                 </CardContent>
               </Card>
@@ -104,10 +114,13 @@ export default function NosotrosPage() {
             >
               <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">Visión</h3>
+                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
+                    Visión
+                  </h3>
                   <p className="text-gray-700 font-poppins">
-                    Ser líderes reconocidos en el sector de servicios logísticos para la industria minera, destacándonos
-                    por nuestra innovación, calidad y compromiso con la sostenibilidad.
+                    Ser líderes reconocidos en el sector de servicios logísticos
+                    para la industria minera, destacándonos por nuestra
+                    innovación, calidad y compromiso con la sostenibilidad.
                   </p>
                 </CardContent>
               </Card>
@@ -122,7 +135,9 @@ export default function NosotrosPage() {
             >
               <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">Valores</h3>
+                  <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
+                    Valores
+                  </h3>
                   <ul className="text-gray-700 space-y-2 font-poppins">
                     <li>• Compromiso con la excelencia</li>
                     <li>• Integridad y transparencia</li>
@@ -147,9 +162,12 @@ export default function NosotrosPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-[#003F4F] font-montserrat">Nuestro Equipo</h2>
+            <h2 className="text-3xl font-bold text-[#003F4F] font-montserrat">
+              Nuestro Equipo
+            </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto mt-4 font-poppins">
-              Contamos con profesionales capacitados y comprometidos con la excelencia en cada proyecto.
+              Contamos con profesionales capacitados y comprometidos con la
+              excelencia en cada proyecto.
             </p>
           </motion.div>
 
@@ -166,7 +184,9 @@ export default function NosotrosPage() {
                 <div className="w-40 h-40 rounded-full bg-gray-200 mb-4 overflow-hidden">
                   <div className="h-full w-full bg-[url('/images/MVA_LogoPNG.png')] bg-cover bg-center"></div>
                 </div>
-                <h3 className="text-xl font-semibold text-[#003F4F] font-montserrat">Nombre Ejecutivo</h3>
+                <h3 className="text-xl font-semibold text-[#003F4F] font-montserrat">
+                  Nombre Ejecutivo
+                </h3>
                 <p className="text-gray-600 font-poppins">Cargo en MVA</p>
               </motion.div>
             ))}

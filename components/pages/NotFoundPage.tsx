@@ -19,8 +19,12 @@ export default function NotFoundPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h1 className="text-8xl font-bold text-[#003F4F] mb-6 font-montserrat">404</h1>
-        <h2 className="text-3xl font-bold text-[#00A6B2] mb-6 font-montserrat">Página no encontrada</h2>
+        <h1 className="text-8xl font-bold text-[#003F4F] mb-6 font-montserrat">
+          404
+        </h1>
+        <h2 className="text-3xl font-bold text-[#00A6B2] mb-6 font-montserrat">
+          Página no encontrada
+        </h2>
 
         <p className="text-lg text-gray-600 mb-12 font-poppins">
           Lo sentimos, la página que estás buscando no existe o ha sido movida.
@@ -28,7 +32,10 @@ export default function NotFoundPage() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
           <Link href="/">
-            <ButtonHomeSinFlecha text="Volver a inicio" className="max-w-[215px] w-full h-11" />
+            <ButtonHomeSinFlecha
+              text="Volver a inicio"
+              className="max-w-[215px] w-full h-11"
+            />
           </Link>
 
           <Link href="/contacto">
