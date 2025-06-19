@@ -22,12 +22,12 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     descripcion: "",
     prioridad: ""
   });
-
   const tiposReclamo = [
     { value: "CALIDAD_SERVICIO", label: "Calidad del Servicio" },
     { value: "DEMORA", label: "Demora en el Servicio" },
-    { value: "DAÑO_EQUIPO", label: "Daño de Equipo" },
     { value: "FACTURACION", label: "Facturación" },
+    { value: "PERSONAL", label: "Comportamiento del Personal" },
+    { value: "PRODUCTO_DEFECTUOSO", label: "Defecto del Producto" },
     { value: "OTRO", label: "Otro" }
   ];
 
@@ -37,6 +37,49 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     { value: "ALTA", label: "Alta", color: "text-orange-600" },
     { value: "CRITICA", label: "Crítica", color: "text-red-600" }
   ];
+
+  // Funciones helper para convertir enums
+  const convertirTipoReclamo = (tipo: string) => {
+    const mapeo: { [key: string]: string } = {
+      'CALIDAD_SERVICIO': 'service_quality',
+      'DEMORA': 'delay',
+      'FACTURACION': 'billing',
+      'PERSONAL': 'staff_behavior',
+      'PRODUCTO_DEFECTUOSO': 'product_defect',
+      'OTRO': 'other'
+    };
+    return mapeo[tipo] || 'other';
+  };
+
+  const convertirPrioridad = (prioridad: string) => {
+    const mapeo: { [key: string]: string } = {
+      'BAJA': 'low',
+      'MEDIA': 'medium',
+      'ALTA': 'high',
+      'CRITICA': 'critical'
+    };
+    return mapeo[prioridad] || 'medium';
+  };
+  // Función de mapeo de datos para el backend
+  const mapearDatosReclamo = (formData: typeof formulario) => {
+    return {
+      // Mapeo de campos del formulario a campos del backend
+      cliente: formData.nombreEmpresa,
+      titulo: `Reclamo de ${formData.nombreContacto} - ${tiposReclamo.find(t => t.value === formData.tipoReclamo)?.label || formData.tipoReclamo}`,
+      descripcion: `${formData.descripcion}\n\nDatos de contacto:\nContacto: ${formData.nombreContacto}\nTeléfono: ${formData.telefonoContacto}\nEmail: ${formData.emailContacto}`,
+      
+      // Convertir enums a formato correcto (lowercase con underscores)
+      tipoReclamo: convertirTipoReclamo(formData.tipoReclamo),
+      prioridad: convertirPrioridad(formData.prioridad),
+      
+      // Fecha actual en formato ISO
+      fechaIncidente: new Date().toISOString(),
+      
+      // Campos adicionales según DTO
+      esUrgente: formData.prioridad === 'ALTA' || formData.prioridad === 'CRITICA',
+      requiereCompensacion: false
+    };
+  };
 
   const manejarCambio = (campo: string, valor: string) => {
     setFormulario(prev => ({
@@ -58,7 +101,6 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     
     return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
   };
-
   const enviarReclamo = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -70,12 +112,15 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     setCargando(true);
     
     try {
+      // Mapear los datos según el formato esperado por el backend
+      const datosParaBackend = mapearDatosReclamo(formulario);
+      
       const respuesta = await fetch("http://localhost:3000/api/clients_portal/claims", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formulario),
+        body: JSON.stringify(datosParaBackend),
       });
 
       if (respuesta.ok) {
@@ -93,7 +138,9 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           onClose();
         }, 1500);
       } else {
-        throw new Error("Error al enviar el reclamo");
+        const errorData = await respuesta.json().catch(() => ({}));
+        console.error("Error del servidor:", errorData);
+        throw new Error(errorData.message || "Error al enviar el reclamo");
       }
     } catch (error) {
       toast.error("Error al enviar el reclamo. Inténtalo nuevamente.");

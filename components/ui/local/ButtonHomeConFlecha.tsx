@@ -1,8 +1,11 @@
 import React from "react";
 
-const ButtonHomeServices = () => {
+const ButtonHomeServices = ({ onClick }: { onClick?: () => void }) => {
   return (
-    <button className="cssbuttons-io-button uppercase">
+    <button 
+      className="cssbuttons-io-button uppercase"
+      onClick={onClick}
+    >
       Contactanos
       <div className="icon">
         <svg

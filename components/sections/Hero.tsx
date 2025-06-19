@@ -3,10 +3,21 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import ButtonHomeServices from "../ui/local/ButtonHomeConFlecha";
 import ButtonHome from "../ui/local/ButtonHomeSinFlecha";
 
 const Hero = () => {
+  const router = useRouter();
+
+  const handleServiciosClick = () => {
+    router.push('/servicios');
+  };
+
+  const handleContactoClick = () => {
+    router.push('/contacto');
+  };
+
   return (
     <section className="relative flex flex-col overflow-hidden items-center justify-center h-screen text-center px-6 bg-gradient-to-b from-[#346e7c] to-gray-900">
       <motion.div
@@ -45,11 +56,14 @@ const Hero = () => {
           initial={{ scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
+          transition={{ duration: 0.5, ease: "easeOut" }}          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
         >
-          <ButtonHome text="Servicios" className="max-w-[215px] w-full h-11" />
-          <ButtonHomeServices />
+          <ButtonHome 
+            text="Servicios" 
+            className="max-w-[215px] w-full h-11" 
+            onClick={handleServiciosClick}
+          />
+          <ButtonHomeServices onClick={handleContactoClick} />
         </motion.div>
       </motion.div>
       <motion.div

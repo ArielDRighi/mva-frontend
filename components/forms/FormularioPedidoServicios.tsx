@@ -12,8 +12,7 @@ interface FormularioPedidoServiciosProps {
 }
 
 const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ onClose }) => {
-  const [cargando, setCargando] = useState(false);
-  const [formulario, setFormulario] = useState({
+  const [cargando, setCargando] = useState(false);  const [formulario, setFormulario] = useState({
     nombreEmpresa: "",
     nombreContacto: "",
     telefonoContacto: "",
@@ -23,7 +22,9 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
     ubicacion: "",
     fechaDeseada: "",
     duracionEstimada: "",
-    detallesAdicionales: ""
+    detallesAdicionales: "",
+    cuit: "",
+    rubroEmpresa: ""
   });
 
   const manejarCambio = (campo: string, valor: string) => {
@@ -47,12 +48,41 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
     
     return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
   };
-
   const obtenerFechaMinima = () => {
     const hoy = new Date();
     const manana = new Date(hoy);
     manana.setDate(hoy.getDate() + 1);
     return manana.toISOString().split('T')[0];
+  };
+
+  // Función para convertir cantidad de baños al formato enum esperado
+  const convertirCantidadBanos = (cantidad: string) => {
+    const num = parseInt(cantidad);
+    if (num >= 1 && num <= 5) return "1-5";
+    if (num >= 6 && num <= 10) return "5-10";
+    return "+10";
+  };
+
+  // Función de mapeo de datos para el backend
+  const mapearDatosSolicitudServicio = (formData: typeof formulario) => {
+    return {
+      // Campos requeridos
+      nombrePersona: formData.nombreContacto,
+      email: formData.emailContacto,
+      telefono: formData.telefonoContacto,
+      nombreEmpresa: formData.nombreEmpresa,
+      zonaDireccion: formData.ubicacion,
+      
+      // Campos opcionales
+      rolPersona: "Contacto",
+      cuit: formData.cuit || "",
+      rubroEmpresa: formData.rubroEmpresa || "",
+      cantidadBaños: convertirCantidadBanos(formData.cantidadBanos),
+      tipoEvento: "Servicio de baños químicos",
+      duracionAlquiler: `${formData.duracionEstimada} días`,
+      startDate: new Date(formData.fechaDeseada).toISOString(),
+      comentarios: formData.detallesAdicionales || ""
+    };
   };
 
   const enviarPedido = async (e: React.FormEvent) => {
@@ -74,26 +104,25 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
     }
 
     setCargando(true);
-    
-    try {
-      const datosEnvio = {
-        ...formulario,
-        cantidadBanos: parseInt(formulario.cantidadBanos),
-        duracionEstimada: parseInt(formulario.duracionEstimada),
-        fechaDeseada: new Date(formulario.fechaDeseada).toISOString()
-      };
+      try {
+      // Mapear los datos según el formato esperado por el backend
+      const solicitudData = mapearDatosSolicitudServicio(formulario);
+      
+      console.log('Datos a enviar:', solicitudData); // Para debug
 
-      const respuesta = await fetch("http://localhost:3000/api/clients_portal/service-requests", {
+      const respuesta = await fetch("http://localhost:3000/api/clients_portal/ask_for_service", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(datosEnvio),
+        body: JSON.stringify(solicitudData),
       });
 
       if (respuesta.ok) {
-        toast.success("Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.");
-        setFormulario({
+        const resultado = await respuesta.json();
+        console.log('Solicitud enviada exitosamente:', resultado);
+        
+        toast.success("Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.");setFormulario({
           nombreEmpresa: "",
           nombreContacto: "",
           telefonoContacto: "",
@@ -103,13 +132,16 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
           ubicacion: "",
           fechaDeseada: "",
           duracionEstimada: "",
-          detallesAdicionales: ""
+          detallesAdicionales: "",
+          cuit: "",
+          rubroEmpresa: ""
         });
         setTimeout(() => {
           onClose();
-        }, 1500);
-      } else {
-        throw new Error("Error al enviar la solicitud");
+        }, 1500);      } else {
+        const errorData = await respuesta.json().catch(() => ({}));
+        console.error('Error del servidor:', errorData);
+        throw new Error(errorData.message || "Error al enviar la solicitud");
       }
     } catch (error) {
       toast.error("Error al enviar la solicitud. Inténtalo nuevamente.");
@@ -122,8 +154,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
   return (
     <Card className="border-0 shadow-none mx-7">
       <CardContent className="p-0">
-        <form onSubmit={enviarPedido} className="space-y-6">
-          {/* Información de la empresa */}
+        <form onSubmit={enviarPedido} className="space-y-6">          {/* Información de la empresa */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
@@ -148,6 +179,36 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
                 placeholder="Tu nombre completo"
                 value={formulario.nombreContacto}
                 onChange={(e) => manejarCambio("nombreContacto", e.target.value)}
+                className="w-full"
+              />
+            </div>
+          </div>
+
+          {/* CUIT y Rubro de Empresa */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="cuit" className="text-sm font-medium">
+                CUIT (Opcional)
+              </Label>
+              <Input
+                id="cuit"
+                type="text"
+                placeholder="XX-XXXXXXXX-X"
+                value={formulario.cuit}
+                onChange={(e) => manejarCambio("cuit", e.target.value)}
+                className="w-full"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="rubroEmpresa" className="text-sm font-medium">
+                Rubro de Empresa (Opcional)
+              </Label>
+              <Input
+                id="rubroEmpresa"
+                type="text"
+                placeholder="Ej: Construcción, Eventos, etc."
+                value={formulario.rubroEmpresa}
+                onChange={(e) => manejarCambio("rubroEmpresa", e.target.value)}
                 className="w-full"
               />
             </div>

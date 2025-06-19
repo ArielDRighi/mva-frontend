@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,6 +31,22 @@ import FormularioSatisfaccion from "../forms/FormularioSatisfaccion";
 
 const PortalClientes = () => {
   const [dialogAbierto, setDialogAbierto] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
+  // Detectar parámetro de modal en la URL
+  useEffect(() => {
+    const modalParam = searchParams.get('modal');
+    if (modalParam && ['reclamos', 'pedidos', 'satisfaccion'].includes(modalParam)) {
+      setDialogAbierto(modalParam);
+      // Hacer scroll al portal después de un pequeño delay
+      setTimeout(() => {
+        const portalSection = document.getElementById("portal-clientes");
+        if (portalSection) {
+          portalSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
 
   const serviciosPortal = [
     {
@@ -56,22 +73,52 @@ const PortalClientes = () => {
       color: "bg-green-500 hover:bg-green-600",
       colorIcono: "text-green-500",
     },
-  ];
-
-  const renderFormulario = (tipo: string) => {
-    switch (tipo) {
-      case "reclamos":
-        return <FormularioReclamos onClose={() => setDialogAbierto(null)} />;
-      case "pedidos":
-        return (
-          <FormularioPedidoServicios onClose={() => setDialogAbierto(null)} />
-        );
-      case "satisfaccion":
-        return (
-          <FormularioSatisfaccion onClose={() => setDialogAbierto(null)} />
-        );
-      default:
-        return null;
+  ];  const renderFormulario = (tipo: string) => {
+    try {
+      switch (tipo) {
+        case "reclamos":
+          return (
+            <div className="w-full">
+              <FormularioReclamos onClose={() => setDialogAbierto(null)} />
+            </div>
+          );
+        case "pedidos":
+          return (
+            <div className="w-full">
+              <FormularioPedidoServicios onClose={() => setDialogAbierto(null)} />
+            </div>
+          );
+        case "satisfaccion":
+          return (
+            <div className="w-full">
+              <FormularioSatisfaccion onClose={() => setDialogAbierto(null)} />
+            </div>
+          );
+        default:
+          return (
+            <div className="p-4">
+              <p>Formulario no encontrado</p>
+              <Button onClick={() => setDialogAbierto(null)} className="mt-4">
+                Cerrar
+              </Button>
+            </div>
+          );
+      }
+    } catch (error) {
+      console.error('Error al cargar formulario:', error);
+      return (
+        <div className="p-4">
+          <h3 className="text-lg font-semibold mb-4 text-red-600">
+            Error al cargar el formulario
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Hubo un problema al cargar el formulario de {tipo}. Por favor, intenta nuevamente.
+          </p>
+          <Button onClick={() => setDialogAbierto(null)} className="w-full">
+            Cerrar
+          </Button>
+        </div>
+      );
     }
   };
   return (
@@ -135,9 +182,10 @@ const PortalClientes = () => {
                         </DialogTitle>
                         <DialogDescription>
                           {servicio.descripcion}
-                        </DialogDescription>
-                      </DialogHeader>
-                      {renderFormulario(servicio.id)}
+                        </DialogDescription>                      </DialogHeader>
+                      <div className="max-w-none">
+                        {renderFormulario(servicio.id)}
+                      </div>
                     </DialogContent>
                   </Dialog>
                 </CardContent>

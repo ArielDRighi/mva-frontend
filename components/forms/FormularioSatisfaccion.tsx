@@ -55,10 +55,36 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
 
     return camposCompletos && calificacionesCompletas && formulario.recomendaria !== null;
   };
-
   const obtenerFechaMaxima = () => {
     const hoy = new Date();
     return hoy.toISOString().split('T')[0];
+  };
+
+  // Función de mapeo de datos para el backend
+  const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
+    // Calcular calificación promedio como la calificación principal
+    const calificaciones = [
+      formData.calificacionGeneral,
+      formData.calificacionPuntualidad,
+      formData.calificacionCalidad,
+      formData.calificacionAtencion
+    ].filter(cal => cal > 0);
+    
+    const calificacionPromedio = calificaciones.length > 0 
+      ? Math.round(calificaciones.reduce((a, b) => a + b, 0) / calificaciones.length)
+      : formData.calificacionGeneral;
+
+    return {
+      // Campos requeridos
+      cliente: formData.nombreEmpresa,
+      fecha_mantenimiento: formData.servicioFecha, // Ya está en formato correcto del input date
+      calificacion: calificacionPromedio,
+      
+      // Campos opcionales
+      comentario: formData.comentarios || "",
+      asunto: "Servicio de baños químicos",
+      aspecto_evaluado: `General: ${formData.calificacionGeneral}/5, Puntualidad: ${formData.calificacionPuntualidad}/5, Calidad: ${formData.calificacionCalidad}/5, Atención: ${formData.calificacionAtencion}/5 | Recomendaría: ${formData.recomendaria ? 'Sí' : 'No'}`
+    };
   };
 
   const renderEstrellas = (calificacion: number, campo: string) => {
@@ -81,7 +107,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
       </div>
     );
   };
-
   const enviarSatisfaccion = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -93,20 +118,23 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
     setCargando(true);
     
     try {
-      const datosEnvio = {
-        ...formulario,
-        servicioFecha: new Date(formulario.servicioFecha).toISOString()
-      };
+      // Mapear los datos según el formato esperado por el backend
+      const encuestaData = mapearDatosEncuestaSatisfaccion(formulario);
+      
+      console.log('Datos a enviar:', encuestaData); // Para debug
 
-      const respuesta = await fetch("http://localhost:3000/api/clients_portal/surveys", {
+      const respuesta = await fetch("http://localhost:3000/api/clients_portal/satisfaction_surveys", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(datosEnvio),
+        body: JSON.stringify(encuestaData),
       });
 
       if (respuesta.ok) {
+        const resultado = await respuesta.json();
+        console.log('Encuesta enviada exitosamente:', resultado);
+        
         toast.success("¡Gracias por tu feedback! Tu opinión es muy valiosa para nosotros.");
         setFormulario({
           nombreEmpresa: "",
@@ -124,7 +152,9 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
           onClose();
         }, 1500);
       } else {
-        throw new Error("Error al enviar la encuesta");
+        const errorData = await respuesta.json().catch(() => ({}));
+        console.error('Error del servidor:', errorData);
+        throw new Error(errorData.message || "Error al enviar la encuesta");
       }
     } catch (error) {
       toast.error("Error al enviar la encuesta. Inténtalo nuevamente.");

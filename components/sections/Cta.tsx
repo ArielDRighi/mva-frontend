@@ -1,11 +1,45 @@
 "use client";
 
+import React from "react";
 import { motion } from "motion/react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 import ButtonHome from "../ui/local/ButtonHomeSinFlecha";
 import ButtonHomeServices from "../ui/local/ButtonHomeConFlecha";
 
 const Cta = () => {
+  const router = useRouter();
+
+  const handleServiciosClick = () => {
+    router.push("/servicios");
+  };
+  const handleContactoClick = () => {
+    router.push("/contacto");
+  };
+  const serviciosPortal = [
+    {
+      id: "reclamos",
+      titulo: "Reclamos",
+      descripcion: "Reporta inconvenientes",
+      color: "bg-gradient-to-r from-red-500 to-red-600",
+      emoji: "📋"
+    },
+    {
+      id: "pedidos",
+      titulo: "Pedidos de Servicios",
+      descripcion: "Solicita nuestros servicios",
+      color: "bg-gradient-to-r from-blue-500 to-blue-600",
+      emoji: "💼"
+    },
+    {
+      id: "satisfaccion",
+      titulo: "Satisfacción",
+      descripcion: "Comparte tu experiencia",
+      color: "bg-gradient-to-r from-green-500 to-green-600",
+      emoji: "⭐"
+    }
+  ];
+
   return (
     <section className="py-20 bg-gradient-to-b from-[#346e7c] to-gray-900 text-white text-center">
       <div className="container mx-auto px-6 max-w-5xl">
@@ -45,73 +79,28 @@ const Cta = () => {
               </h3>
               <p className="text-center text-gray-600 font-poppins mb-6">
                 Accede a nuestros servicios digitales de forma rápida y sencilla
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Reclamos */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-red-500 to-red-600 text-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-                  onClick={() => {
-                    // Scroll to portal section or open modal
-                    const portalSection =
-                      document.getElementById("portal-clientes");
-                    if (portalSection) {
-                      portalSection.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  <div className="text-3xl mb-2">📋</div>
-                  <div className="font-montserrat font-semibold">Reclamos</div>
-                  <div className="text-sm opacity-90 font-poppins">
-                    Reporta inconvenientes
-                  </div>
-                </motion.button>
-
-                {/* Pedidos de Servicios */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-                  onClick={() => {
-                    const portalSection =
-                      document.getElementById("portal-clientes");
-                    if (portalSection) {
-                      portalSection.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  <div className="text-3xl mb-2">💼</div>
-                  <div className="font-montserrat font-semibold">
-                    Pedidos de Servicios
-                  </div>
-                  <div className="text-sm opacity-90 font-poppins">
-                    Solicita nuestros servicios
-                  </div>
-                </motion.button>
-
-                {/* Satisfacción */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium"
-                  onClick={() => {
-                    const portalSection =
-                      document.getElementById("portal-clientes");
-                    if (portalSection) {
-                      portalSection.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  <div className="text-3xl mb-2">⭐</div>
-                  <div className="font-montserrat font-semibold">
-                    Satisfacción
-                  </div>
-                  <div className="text-sm opacity-90 font-poppins">
-                    Comparte tu experiencia
-                  </div>
-                </motion.button>
+              </p>              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {serviciosPortal.map((servicio) => {
+                  return (
+                    <div key={servicio.id}>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`${servicio.color} text-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-medium w-full`}                        onClick={() => {
+                          // Navegar a clientes con el tipo de modal específico
+                          router.push(`/clientes?modal=${servicio.id}`);
+                        }}
+                      >
+                        <div className="text-3xl mb-2">{servicio.emoji}</div>
+                        <div className="font-montserrat font-semibold">
+                          {servicio.titulo}
+                        </div>
+                        <div className="text-sm opacity-90 font-poppins">
+                          {servicio.descripcion}
+                        </div>                      </motion.button>
+                    </div>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
@@ -124,8 +113,12 @@ const Cta = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
         >
-          <ButtonHome text="Servicios" className="max-w-[215px] w-full h-11" />
-          <ButtonHomeServices />
+          <ButtonHome
+            text="Servicios"
+            className="max-w-[215px] w-full h-11"
+            onClick={handleServiciosClick}
+          />
+          <ButtonHomeServices onClick={handleContactoClick} />
         </motion.div>
       </div>
     </section>
