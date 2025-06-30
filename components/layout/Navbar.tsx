@@ -10,9 +10,7 @@ const Navbar = () => {
 
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/nosotros", label: "Sobre Nosotros" },
     { href: "/servicios", label: "Servicios" },
-    { href: "/sostenibilidad", label: "Sostenibilidad" },
     { href: "/clientes", label: "Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];

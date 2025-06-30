@@ -10,7 +10,7 @@ const TinyBoxHome = ({ template }: { template: number }) => {
           </h1>
           <div className="flex flex-col gap-1">
             <p className="text-[54px] leading-[66px] font-light text-textBlack">
-              6+ Años
+              7+ Años
             </p>
             <p className="text-lg text-gray-600">
               de experiencia en la industria minera

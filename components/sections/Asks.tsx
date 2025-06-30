@@ -12,28 +12,18 @@ const AsksData = [
   {
     question: "¿Qué tipo de servicios ofrece MVA SRL?",
     answer:
-      "Ofrecemos alquiler, limpieza y desagote de baños químicos para proyectos mineros e industriales, garantizando un servicio confiable y eficiente.",
+      "Ofrecemos una amplia gama de servicios especializados: Alquiler de Baños Químicos, Servicio de Desagote de cámaras con tanques de 10m³ a 30m³, Mantenimiento de espacios Verdes, Servicio de Vigilancia, Alquiler de Garitas de Seguridad, Servicio de Limpieza de Oficinas, Limpieza y mantenimiento de Campamento, y Servicio de Fumigaciones. Todos nuestros servicios están diseñados para la industria minera e industrial.",
   },
   {
     question: "¿Cuál es el horario de atención?",
     answer:
-      "Brindamos servicio las 24 horas, los 7 días de la semana, asegurando respuesta inmediata ante cualquier necesidad o emergencia.",
-  },
-  {
-    question: "¿Cómo garantizan la calidad del servicio?",
-    answer:
-      "Cumplimos con todas las normativas de seguridad e higiene y utilizamos equipamiento de última generación para garantizar la mejor calidad.",
-  },
-  {
-    question: "¿Qué diferencia a MVA SRL de otras empresas?",
-    answer:
-      "Nos destacamos por nuestro compromiso con la seguridad, la rapidez en la respuesta y la atención personalizada a cada cliente.",
+      "Nuestro horario administrativo es de lunes a viernes de 8 a 18 hs y sábados de 8 a 13 hs. En caso de emergencias, puede comunicarse al 387-5555680.",
   },
 ];
 
 const Asks = () => {
   return (
-    <section className="pb-20 bg-gray-100 text-gray-900">
+    <section className="pb-20 bg-[#F2F1EF] text-gray-900">
       <div className="container mx-auto px-6 max-w-5xl">
         {/* Título con animación */}
         <motion.h2

@@ -7,9 +7,7 @@ import { Separator } from "../separator";
 const FooterTop = () => {
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/nosotros", label: "Sobre Nosotros" },
     { href: "/servicios", label: "Servicios" },
-    { href: "/sostenibilidad", label: "Sostenibilidad" },
     { href: "/clientes", label: "Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
@@ -33,7 +31,7 @@ const FooterTop = () => {
           orientation="vertical"
           className="absolute left-0 h-16 bg-[#7a7a7a] hidden md-tablet:block"
         />
-        <Link href="mailto:YH2mM@example.com">
+        <Link href="mailto:mva.serviciosyalquileres@gmail.com">
           <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
         </Link>
       </div>

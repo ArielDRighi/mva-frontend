@@ -63,7 +63,7 @@ export default function ContactoPage() {
                     Ubicación
                   </h3>
                   <p className="text-gray-700 font-poppins">
-                    San Juan, Argentina
+                    Salta Capital, Argentina
                   </p>
                 </div>
               </CardContent>
@@ -79,7 +79,7 @@ export default function ContactoPage() {
                     Teléfono
                   </h3>
                   <p className="text-gray-700 font-poppins">
-                    +54 9 264 567 890
+                    387-5555680
                   </p>
                 </div>
               </CardContent>
@@ -95,7 +95,7 @@ export default function ContactoPage() {
                     Email
                   </h3>
                   <p className="text-gray-700 font-poppins">
-                    contacto@mva.com.ar
+                    mva.serviciosyalquileres@gmail.com
                   </p>
                 </div>
               </CardContent>
@@ -118,20 +118,6 @@ export default function ContactoPage() {
             </Card>
           </motion.div>
         </div>
-
-        {/* Mapa */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 h-96 rounded-lg overflow-hidden shadow-lg"
-        >
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <p className="text-gray-500 font-poppins">Mapa de ubicación</p>
-            {/* Aquí se podría agregar un mapa real con Google Maps o similar */}
-          </div>
-        </motion.div>
       </div>
     </motion.div>
   );

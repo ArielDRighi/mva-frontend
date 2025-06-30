@@ -122,18 +122,8 @@ const PortalClientes = () => {
     }
   };
   return (
-    <section id="portal-clientes" className="py-16 px-4 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <section id="portal-clientes" className="pb-16 px-4 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Portal de Clientes
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Accede a nuestros servicios digitales. Realiza reclamos, solicita
-            servicios o comparte tu experiencia de manera rápida y sencilla.
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {serviciosPortal.map((servicio) => {
             const IconoComponente = servicio.icono;
@@ -209,7 +199,7 @@ const PortalClientes = () => {
                   Teléfono
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  +54 11 1234-5678
+                  387-5555680
                 </p>
               </div>
             </div>
@@ -222,7 +212,7 @@ const PortalClientes = () => {
                   Email
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  contacto@mva.com
+                  mva.serviciosyalquileres@gmail.com
                 </p>
               </div>
             </div>
@@ -235,7 +225,7 @@ const PortalClientes = () => {
                   Ubicación
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Buenos Aires, Argentina
+                  Salta Capital, Argentina
                 </p>
               </div>
             </div>

@@ -18,14 +18,16 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
     telefonoContacto: "",
     emailContacto: "",
     tipoServicio: "INSTALACION",
-    cantidadBanos: "",
     ubicacion: "",
-    fechaDeseada: "",
-    duracionEstimada: "",
     detallesAdicionales: "",
-    cuit: "",
-    rubroEmpresa: ""
+    cuit: ""
   });
+
+  const opcionesUbicacion = [
+    { value: "SALTA_CAPITAL", label: "Salta Capital" },
+    { value: "PROYECTO_MINERO", label: "Proyecto Minero" },
+    { value: "OTRO", label: "Otro" }
+  ];
 
   const manejarCambio = (campo: string, valor: string) => {
     setFormulario(prev => ({
@@ -40,27 +42,10 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
       "nombreContacto", 
       "telefonoContacto",
       "emailContacto",
-      "cantidadBanos",
-      "ubicacion",
-      "fechaDeseada",
-      "duracionEstimada"
+      "ubicacion"
     ];
     
     return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
-  };
-  const obtenerFechaMinima = () => {
-    const hoy = new Date();
-    const manana = new Date(hoy);
-    manana.setDate(hoy.getDate() + 1);
-    return manana.toISOString().split('T')[0];
-  };
-
-  // Función para convertir cantidad de baños al formato enum esperado
-  const convertirCantidadBanos = (cantidad: string) => {
-    const num = parseInt(cantidad);
-    if (num >= 1 && num <= 5) return "1-5";
-    if (num >= 6 && num <= 10) return "5-10";
-    return "+10";
   };
 
   // Función de mapeo de datos para el backend
@@ -76,11 +61,11 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
       // Campos opcionales
       rolPersona: "Contacto",
       cuit: formData.cuit || "",
-      rubroEmpresa: formData.rubroEmpresa || "",
-      cantidadBaños: convertirCantidadBanos(formData.cantidadBanos),
+      rubroEmpresa: "", // Campo eliminado del formulario
+      cantidadBaños: "1-5", // Valor por defecto ya que se eliminó del formulario
       tipoEvento: "Servicio de baños químicos",
-      duracionAlquiler: `${formData.duracionEstimada} días`,
-      startDate: new Date(formData.fechaDeseada).toISOString(),
+      duracionAlquiler: "Por definir", // Valor por defecto ya que se eliminó del formulario
+      startDate: new Date().toISOString(), // Fecha actual ya que se eliminó fecha deseada
       comentarios: formData.detallesAdicionales || ""
     };
   };
@@ -90,16 +75,6 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
     
     if (!validarFormulario()) {
       toast.error("Por favor completa todos los campos obligatorios");
-      return;
-    }
-
-    if (parseInt(formulario.cantidadBanos) <= 0) {
-      toast.error("La cantidad de baños debe ser mayor a 0");
-      return;
-    }
-
-    if (parseInt(formulario.duracionEstimada) <= 0) {
-      toast.error("La duración estimada debe ser mayor a 0");
       return;
     }
 
@@ -122,19 +97,15 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
         const resultado = await respuesta.json();
         console.log('Solicitud enviada exitosamente:', resultado);
         
-        toast.success("Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.");setFormulario({
+        toast.success("Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.");        setFormulario({
           nombreEmpresa: "",
           nombreContacto: "",
           telefonoContacto: "",
           emailContacto: "",
           tipoServicio: "INSTALACION",
-          cantidadBanos: "",
           ubicacion: "",
-          fechaDeseada: "",
-          duracionEstimada: "",
           detallesAdicionales: "",
-          cuit: "",
-          rubroEmpresa: ""
+          cuit: ""
         });
         setTimeout(() => {
           onClose();
@@ -184,34 +155,19 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
             </div>
           </div>
 
-          {/* CUIT y Rubro de Empresa */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="cuit" className="text-sm font-medium">
-                CUIT (Opcional)
-              </Label>
-              <Input
-                id="cuit"
-                type="text"
-                placeholder="XX-XXXXXXXX-X"
-                value={formulario.cuit}
-                onChange={(e) => manejarCambio("cuit", e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rubroEmpresa" className="text-sm font-medium">
-                Rubro de Empresa (Opcional)
-              </Label>
-              <Input
-                id="rubroEmpresa"
-                type="text"
-                placeholder="Ej: Construcción, Eventos, etc."
-                value={formulario.rubroEmpresa}
-                onChange={(e) => manejarCambio("rubroEmpresa", e.target.value)}
-                className="w-full"
-              />
-            </div>
+          {/* CUIT */}
+          <div className="space-y-2">
+            <Label htmlFor="cuit" className="text-sm font-medium">
+              CUIT (Opcional)
+            </Label>
+            <Input
+              id="cuit"
+              type="text"
+              placeholder="XX-XXXXXXXX-X"
+              value={formulario.cuit}
+              onChange={(e) => manejarCambio("cuit", e.target.value)}
+              className="w-full"
+            />
           </div>
 
           {/* Información de contacto */}
@@ -244,67 +200,24 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
             </div>
           </div>
 
-          {/* Detalles del servicio */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="cantidadBanos" className="text-sm font-medium">
-                Cantidad de Baños *
-              </Label>
-              <Input
-                id="cantidadBanos"
-                type="number"
-                min="1"
-                placeholder="Ej: 5"
-                value={formulario.cantidadBanos}
-                onChange={(e) => manejarCambio("cantidadBanos", e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="duracionEstimada" className="text-sm font-medium">
-                Duración Estimada (días) *
-              </Label>
-              <Input
-                id="duracionEstimada"
-                type="number"
-                min="1"
-                placeholder="Ej: 30"
-                value={formulario.duracionEstimada}
-                onChange={(e) => manejarCambio("duracionEstimada", e.target.value)}
-                className="w-full"
-              />
-            </div>
-          </div>
-
-          {/* Ubicación */}
+          {/* Ubicación con desplegable */}
           <div className="space-y-2">
             <Label htmlFor="ubicacion" className="text-sm font-medium">
               Ubicación del Servicio *
             </Label>
-            <Input
+            <select
               id="ubicacion"
-              type="text"
-              placeholder="Dirección completa donde se instalarán los baños"
               value={formulario.ubicacion}
               onChange={(e) => manejarCambio("ubicacion", e.target.value)}
-              className="w-full"
-            />
-          </div>
-
-          {/* Fecha deseada */}
-          <div className="space-y-2">
-            <Label htmlFor="fechaDeseada" className="text-sm font-medium flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              Fecha Deseada de Instalación *
-            </Label>
-            <Input
-              id="fechaDeseada"
-              type="date"
-              min={obtenerFechaMinima()}
-              value={formulario.fechaDeseada}
-              onChange={(e) => manejarCambio("fechaDeseada", e.target.value)}
-              className="w-full"
-            />
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Selecciona una ubicación</option>
+              {opcionesUbicacion.map((opcion) => (
+                <option key={opcion.value} value={opcion.value}>
+                  {opcion.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Detalles adicionales */}
@@ -314,7 +227,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
             </Label>
             <Textarea
               id="detallesAdicionales"
-              placeholder="Proporciona información adicional que consideres relevante (horarios preferidos, condiciones especiales, etc.)"
+              placeholder="Cantidad de baños requerida, fecha requerida, horarios preferidos, condiciones especiales, etc."
               value={formulario.detallesAdicionales}
               onChange={(e) => manejarCambio("detallesAdicionales", e.target.value)}
               className="min-h-[100px] resize-none"

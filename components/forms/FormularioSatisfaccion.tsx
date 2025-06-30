@@ -4,86 +4,84 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Send, Loader2, Heart, ThumbsUp } from "lucide-react";
+import { Star, Send, Loader2, Heart } from "lucide-react";
 import { toast } from "sonner";
 
 interface FormularioSatisfaccionProps {
   onClose: () => void;
 }
 
-const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose }) => {
+const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
+  onClose,
+}) => {
   const [cargando, setCargando] = useState(false);
   const [formulario, setFormulario] = useState({
+    // Información de contacto
     nombreEmpresa: "",
+    lugarProyecto: "",
     nombreContacto: "",
-    emailContacto: "",
-    servicioFecha: "",
-    calificacionGeneral: 0,
-    calificacionPuntualidad: 0,
-    calificacionCalidad: 0,
+
+    // Preguntas de la encuesta
+    contactoInicial: [] as string[],
+    tiempoRespuesta: "",
     calificacionAtencion: 0,
+    accesibilidadContacto: "",
+    relacionPrecioValor: "",
+    recomendaria: "" as string,
     comentarios: "",
-    recomendaria: null as boolean | null
   });
 
   const manejarCambio = (campo: string, valor: any) => {
-    setFormulario(prev => ({
+    setFormulario((prev) => ({
       ...prev,
-      [campo]: valor
+      [campo]: valor,
     }));
   };
 
   const validarFormulario = () => {
     const camposRequeridos = [
       "nombreEmpresa",
-      "nombreContacto", 
-      "emailContacto",
-      "servicioFecha"
+      "lugarProyecto",
     ];
-    
-    const camposCompletos = camposRequeridos.every(campo => 
-      formulario[campo as keyof typeof formulario] !== "" && 
-      formulario[campo as keyof typeof formulario] !== null
+
+    const camposCompletos = camposRequeridos.every(
+      (campo) =>
+        formulario[campo as keyof typeof formulario] !== "" &&
+        formulario[campo as keyof typeof formulario] !== null
     );
 
-    const calificacionesCompletas = [
-      formulario.calificacionGeneral,
-      formulario.calificacionPuntualidad,
-      formulario.calificacionCalidad,
-      formulario.calificacionAtencion
-    ].every(cal => cal > 0);
+    const preguntasCompletas = [
+      formulario.contactoInicial.length > 0,
+      formulario.tiempoRespuesta !== "",
+      formulario.calificacionAtencion > 0,
+      formulario.accesibilidadContacto !== "",
+      formulario.relacionPrecioValor !== "",
+      formulario.recomendaria !== "",
+    ].every((condicion) => condicion);
 
-    return camposCompletos && calificacionesCompletas && formulario.recomendaria !== null;
-  };
-  const obtenerFechaMaxima = () => {
-    const hoy = new Date();
-    return hoy.toISOString().split('T')[0];
+    return camposCompletos && preguntasCompletas;
   };
 
-  // Función de mapeo de datos para el backend
+  // Función de mapeo de datos para el backendsdfsdf
   const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
-    // Calcular calificación promedio como la calificación principal
-    const calificaciones = [
-      formData.calificacionGeneral,
-      formData.calificacionPuntualidad,
-      formData.calificacionCalidad,
-      formData.calificacionAtencion
-    ].filter(cal => cal > 0);
-    
-    const calificacionPromedio = calificaciones.length > 0 
-      ? Math.round(calificaciones.reduce((a, b) => a + b, 0) / calificaciones.length)
-      : formData.calificacionGeneral;
-
     return {
       // Campos requeridos
       cliente: formData.nombreEmpresa,
-      fecha_mantenimiento: formData.servicioFecha, // Ya está en formato correcto del input date
-      calificacion: calificacionPromedio,
-      
+      fecha_mantenimiento: new Date().toISOString().split("T")[0],
+      calificacion: formData.calificacionAtencion,
+
       // Campos opcionales
       comentario: formData.comentarios || "",
-      asunto: "Servicio de baños químicos",
-      aspecto_evaluado: `General: ${formData.calificacionGeneral}/5, Puntualidad: ${formData.calificacionPuntualidad}/5, Calidad: ${formData.calificacionCalidad}/5, Atención: ${formData.calificacionAtencion}/5 | Recomendaría: ${formData.recomendaria ? 'Sí' : 'No'}`
+      asunto: "Encuesta de Satisfacción - Servicios MVA",
+      aspecto_evaluado: `Contacto inicial: ${formData.contactoInicial.join(
+        ", "
+      )} | Tiempo respuesta: ${
+        formData.tiempoRespuesta
+      } | Atención comercial: ${
+        formData.calificacionAtencion
+      }/5 | Accesibilidad: ${formData.accesibilidadContacto} | Precio/Valor: ${
+        formData.relacionPrecioValor
+      } | Recomendaría: ${formData.recomendaria}`,
     };
   };
 
@@ -109,51 +107,56 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
   };
   const enviarSatisfaccion = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validarFormulario()) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
     }
 
     setCargando(true);
-    
+
     try {
       // Mapear los datos según el formato esperado por el backend
       const encuestaData = mapearDatosEncuestaSatisfaccion(formulario);
-      
-      console.log('Datos a enviar:', encuestaData); // Para debug
 
-      const respuesta = await fetch("http://localhost:3000/api/clients_portal/satisfaction_surveys", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(encuestaData),
-      });
+      console.log("Datos a enviar:", encuestaData); // Para debug
+
+      const respuesta = await fetch(
+        "http://localhost:3000/api/clients_portal/satisfaction_surveys",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(encuestaData),
+        }
+      );
 
       if (respuesta.ok) {
         const resultado = await respuesta.json();
-        console.log('Encuesta enviada exitosamente:', resultado);
-        
-        toast.success("¡Gracias por tu feedback! Tu opinión es muy valiosa para nosotros.");
+        console.log("Encuesta enviada exitosamente:", resultado);
+
+        toast.success(
+          "¡Gracias por tu feedback! Tu opinión es muy valiosa para nosotros."
+        );
         setFormulario({
           nombreEmpresa: "",
+          lugarProyecto: "",
           nombreContacto: "",
-          emailContacto: "",
-          servicioFecha: "",
-          calificacionGeneral: 0,
-          calificacionPuntualidad: 0,
-          calificacionCalidad: 0,
+          contactoInicial: [],
+          tiempoRespuesta: "",
           calificacionAtencion: 0,
+          accesibilidadContacto: "",
+          relacionPrecioValor: "",
+          recomendaria: "",
           comentarios: "",
-          recomendaria: null
         });
         setTimeout(() => {
           onClose();
         }, 1500);
       } else {
         const errorData = await respuesta.json().catch(() => ({}));
-        console.error('Error del servidor:', errorData);
+        console.error("Error del servidor:", errorData);
         throw new Error(errorData.message || "Error al enviar la encuesta");
       }
     } catch (error) {
@@ -164,28 +167,15 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
     }
   };
 
-  const promedioCalificaciones = () => {
-    const calificaciones = [
-      formulario.calificacionGeneral,
-      formulario.calificacionPuntualidad,
-      formulario.calificacionCalidad,
-      formulario.calificacionAtencion
-    ].filter(cal => cal > 0);
-    
-    return calificaciones.length > 0 
-      ? (calificaciones.reduce((a, b) => a + b, 0) / calificaciones.length).toFixed(1)
-      : "0.0";
-  };
-
   return (
     <Card className="border-0 shadow-none">
       <CardContent className="p-0">
         <form onSubmit={enviarSatisfaccion} className="space-y-6">
           {/* Información de la empresa */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
-                Nombre de la Empresa *
+                Nombre de la empresa *
               </Label>
               <Input
                 id="nombreEmpresa"
@@ -197,164 +187,241 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="nombreContacto" className="text-sm font-medium">
-                Nombre del Contacto *
+              <Label htmlFor="lugarProyecto" className="text-sm font-medium">
+                Lugar o Proyecto donde se instalaron los baños *
               </Label>
               <Input
-                id="nombreContacto"
+                id="lugarProyecto"
                 type="text"
-                placeholder="Tu nombre completo"
-                value={formulario.nombreContacto}
-                onChange={(e) => manejarCambio("nombreContacto", e.target.value)}
+                placeholder="Ej: Mina San José, Proyecto Cerro Negro, etc."
+                value={formulario.lugarProyecto}
+                onChange={(e) => manejarCambio("lugarProyecto", e.target.value)}
                 className="w-full"
               />
             </div>
           </div>
 
-          {/* Email y fecha del servicio */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="emailContacto" className="text-sm font-medium">
-                Email *
-              </Label>
-              <Input
-                id="emailContacto"
-                type="email"
-                placeholder="tu@email.com"
-                value={formulario.emailContacto}
-                onChange={(e) => manejarCambio("emailContacto", e.target.value)}
-                className="w-full"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="servicioFecha" className="text-sm font-medium">
-                Fecha del Servicio *
-              </Label>
-              <Input
-                id="servicioFecha"
-                type="date"
-                max={obtenerFechaMaxima()}
-                value={formulario.servicioFecha}
-                onChange={(e) => manejarCambio("servicioFecha", e.target.value)}
-                className="w-full"
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="nombreContacto" className="text-sm font-medium">
+              Nombre, Apellido y Contacto (opcional)
+            </Label>
+            <Input
+              id="nombreContacto"
+              type="text"
+              placeholder="Tu nombre completo y forma de contacto"
+              value={formulario.nombreContacto}
+              onChange={(e) => manejarCambio("nombreContacto", e.target.value)}
+              className="w-full"
+            />
           </div>
 
-          {/* Calificaciones */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-medium text-slate-900 dark:text-white">
-              Califica nuestro servicio
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">Calificación General *</Label>
-                <div className="flex items-center gap-3">
-                  {renderEstrellas(formulario.calificacionGeneral, "calificacionGeneral")}
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    {formulario.calificacionGeneral > 0 ? `${formulario.calificacionGeneral}/5` : "Sin calificar"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">Puntualidad *</Label>
-                <div className="flex items-center gap-3">
-                  {renderEstrellas(formulario.calificacionPuntualidad, "calificacionPuntualidad")}
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    {formulario.calificacionPuntualidad > 0 ? `${formulario.calificacionPuntualidad}/5` : "Sin calificar"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">Calidad del Servicio *</Label>
-                <div className="flex items-center gap-3">
-                  {renderEstrellas(formulario.calificacionCalidad, "calificacionCalidad")}
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    {formulario.calificacionCalidad > 0 ? `${formulario.calificacionCalidad}/5` : "Sin calificar"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">Atención al Cliente *</Label>
-                <div className="flex items-center gap-3">
-                  {renderEstrellas(formulario.calificacionAtencion, "calificacionAtencion")}
-                  <span className="text-sm text-slate-600 dark:text-slate-400">
-                    {formulario.calificacionAtencion > 0 ? `${formulario.calificacionAtencion}/5` : "Sin calificar"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Promedio de calificaciones */}
-            {parseFloat(promedioCalificaciones()) > 0 && (
-              <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 border">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center">
-                    <Star className="w-6 h-6 text-yellow-500 fill-current" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">
-                      Promedio de Calificación
-                    </p>
-                    <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                      {promedioCalificaciones()}/5
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Recomendación */}
+          {/* Pregunta 1: Contacto inicial */}
           <div className="space-y-3">
             <Label className="text-sm font-medium">
-              ¿Recomendarías nuestros servicios? *
+              Contacto inicial ¿Cómo conoció Ud. a MVA, por que medio de
+              comunicación? *
+            </Label>
+            <div className="grid grid-cols-1 gap-2">
+              {[
+                "Recomendación de otra empresa o colega",
+                "Relación comercial anterior",
+                "Recomendación en el mismo proyecto",
+                "Redes sociales",
+                "Publicidad en distintos medios",
+                "Otro",
+              ].map((opcion) => (
+                <label key={opcion} className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={formulario.contactoInicial.includes(opcion)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        manejarCambio("contactoInicial", [
+                          ...formulario.contactoInicial,
+                          opcion,
+                        ]);
+                      } else {
+                        manejarCambio(
+                          "contactoInicial",
+                          formulario.contactoInicial.filter(
+                            (item) => item !== opcion
+                          )
+                        );
+                      }
+                    }}
+                    className="rounded border-gray-300"
+                  />
+                  <span className="text-sm">{opcion}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Pregunta 2: Tiempo de respuesta */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium">
+              Al momento de solicitar una cotización, ¿En cuánto tiempo recibió
+              respuesta a su pedido? *
+            </Label>
+            <div className="space-y-2">
+              {[
+                "Entre 0 y 3 días",
+                "Entre 3 y 5 días",
+                "Entre 5 y 7 días",
+                "Otro",
+              ].map((opcion) => (
+                <label key={opcion} className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="tiempoRespuesta"
+                    checked={formulario.tiempoRespuesta === opcion}
+                    onChange={() => manejarCambio("tiempoRespuesta", opcion)}
+                    className="border-gray-300"
+                  />
+                  <span className="text-sm">{opcion}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Pregunta 3: Calificación de atención */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium">
+              ¿Cómo calificaría la atención recibida por parte del equipo
+              comercial de MVA SRL en el contacto inicial? *
+            </Label>
+            <div className="flex items-center gap-3">
+              {renderEstrellas(
+                formulario.calificacionAtencion,
+                "calificacionAtencion"
+              )}
+              <span className="text-sm text-slate-600 dark:text-slate-400">
+                {formulario.calificacionAtencion > 0
+                  ? `${formulario.calificacionAtencion}/5`
+                  : "Sin calificar"}
+              </span>
+            </div>
+          </div>
+
+          {/* Pregunta 5: Accesibilidad del contacto */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium">
+              ¿Qué tan accesible le resulta el contacto con el área comercial
+              ante consultas o necesidades? (Ej. Pedido de nuevo baño, cambio en
+              la frecuencia, certificaciones, facturación, etc) *
+            </Label>
+            <div className="space-y-2">
+              {[
+                "Muy accesible",
+                "Accesible",
+                "Poco accesible",
+                "Inaccesible",
+              ].map((opcion) => (
+                <label key={opcion} className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="accesibilidadContacto"
+                    checked={formulario.accesibilidadContacto === opcion}
+                    onChange={() =>
+                      manejarCambio("accesibilidadContacto", opcion)
+                    }
+                    className="border-gray-300"
+                  />
+                  <span className="text-sm">{opcion}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Pregunta 7: Relación precio/valor */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium">
+              ¿Cómo evalúa la relación precio / valor del servicio ofrecido por
+              MVA SRL? *
+            </Label>
+            <div className="space-y-2">
+              {["Muy buena", "Aceptable", "Mejorable", "Mala"].map((opcion) => (
+                <label key={opcion} className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    name="relacionPrecioValor"
+                    checked={formulario.relacionPrecioValor === opcion}
+                    onChange={() =>
+                      manejarCambio("relacionPrecioValor", opcion)
+                    }
+                    className="border-gray-300"
+                  />
+                  <span className="text-sm">{opcion}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Pregunta 9: Recomendación */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium">
+              ¿Recomendaría a MVA SRL a otra empresa o colega? *
             </Label>
             <div className="flex gap-4">
               <button
                 type="button"
-                onClick={() => manejarCambio("recomendaria", true)}
+                onClick={() => manejarCambio("recomendaria", "Sí, sin dudas")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
-                  formulario.recomendaria === true
+                  formulario.recomendaria === "Sí, sin dudas"
                     ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                     : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <ThumbsUp className={`w-5 h-5 ${
-                    formulario.recomendaria === true ? "text-green-600" : "text-slate-400"
-                  }`} />
-                  <span className={`font-medium ${
-                    formulario.recomendaria === true 
-                      ? "text-green-700 dark:text-green-400" 
-                      : "text-slate-600 dark:text-slate-400"
-                  }`}>
-                    Sí
+                  <span
+                    className={`font-medium ${
+                      formulario.recomendaria === "Sí, sin dudas"
+                        ? "text-green-700 dark:text-green-400"
+                        : "text-slate-600 dark:text-slate-400"
+                    }`}
+                  >
+                    Sí, sin dudas
                   </span>
                 </div>
               </button>
               <button
                 type="button"
-                onClick={() => manejarCambio("recomendaria", false)}
+                onClick={() => manejarCambio("recomendaria", "Tal vez")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
-                  formulario.recomendaria === false
+                  formulario.recomendaria === "Tal vez"
+                    ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
+                    : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+                }`}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <span
+                    className={`font-medium ${
+                      formulario.recomendaria === "Tal vez"
+                        ? "text-amber-700 dark:text-amber-400"
+                        : "text-slate-600 dark:text-slate-400"
+                    }`}
+                  >
+                    Tal vez
+                  </span>
+                </div>
+              </button>
+              <button
+                type="button"
+                onClick={() => manejarCambio("recomendaria", "No")}
+                className={`flex-1 p-4 rounded-lg border-2 transition-all ${
+                  formulario.recomendaria === "No"
                     ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                     : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <ThumbsUp className={`w-5 h-5 rotate-180 ${
-                    formulario.recomendaria === false ? "text-red-600" : "text-slate-400"
-                  }`} />
-                  <span className={`font-medium ${
-                    formulario.recomendaria === false 
-                      ? "text-red-700 dark:text-red-400" 
-                      : "text-slate-600 dark:text-slate-400"
-                  }`}>
+                  <span
+                    className={`font-medium ${
+                      formulario.recomendaria === "No"
+                        ? "text-red-700 dark:text-red-400"
+                        : "text-slate-600 dark:text-slate-400"
+                    }`}
+                  >
                     No
                   </span>
                 </div>
@@ -362,10 +429,11 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
             </div>
           </div>
 
-          {/* Comentarios */}
+          {/* Pregunta 10: Comentarios */}
           <div className="space-y-2">
             <Label htmlFor="comentarios" className="text-sm font-medium">
-              Comentarios Adicionales
+              ¿Desea dejar algún comentario adicional sobre la atención
+              comercial o sugerencias de mejora?
             </Label>
             <Textarea
               id="comentarios"
@@ -381,7 +449,9 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({ onClose
             <div className="flex items-center gap-3">
               <Heart className="w-5 h-5 text-green-600 dark:text-green-400" />
               <div className="text-sm text-green-800 dark:text-green-200">
-                <p className="font-medium">¡Tu opinión es muy importante para nosotros!</p>
+                <p className="font-medium">
+                  ¡Tu opinión es muy importante para nosotros!
+                </p>
                 <p>Nos ayuda a mejorar continuamente nuestros servicios.</p>
               </div>
             </div>

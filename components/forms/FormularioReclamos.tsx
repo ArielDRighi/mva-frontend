@@ -19,8 +19,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     telefonoContacto: "",
     emailContacto: "",
     tipoReclamo: "",
-    descripcion: "",
-    prioridad: ""
+    descripcion: ""
   });
   const tiposReclamo = [
     { value: "CALIDAD_SERVICIO", label: "Calidad del Servicio" },
@@ -29,13 +28,6 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     { value: "PERSONAL", label: "Comportamiento del Personal" },
     { value: "PRODUCTO_DEFECTUOSO", label: "Defecto del Producto" },
     { value: "OTRO", label: "Otro" }
-  ];
-
-  const prioridades = [
-    { value: "BAJA", label: "Baja", color: "text-green-600" },
-    { value: "MEDIA", label: "Media", color: "text-yellow-600" },
-    { value: "ALTA", label: "Alta", color: "text-orange-600" },
-    { value: "CRITICA", label: "Crítica", color: "text-red-600" }
   ];
 
   // Funciones helper para convertir enums
@@ -50,16 +42,6 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     };
     return mapeo[tipo] || 'other';
   };
-
-  const convertirPrioridad = (prioridad: string) => {
-    const mapeo: { [key: string]: string } = {
-      'BAJA': 'low',
-      'MEDIA': 'medium',
-      'ALTA': 'high',
-      'CRITICA': 'critical'
-    };
-    return mapeo[prioridad] || 'medium';
-  };
   // Función de mapeo de datos para el backend
   const mapearDatosReclamo = (formData: typeof formulario) => {
     return {
@@ -70,13 +52,13 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
       
       // Convertir enums a formato correcto (lowercase con underscores)
       tipoReclamo: convertirTipoReclamo(formData.tipoReclamo),
-      prioridad: convertirPrioridad(formData.prioridad),
+      prioridad: 'medium', // Prioridad fija en medium
       
       // Fecha actual en formato ISO
       fechaIncidente: new Date().toISOString(),
       
       // Campos adicionales según DTO
-      esUrgente: formData.prioridad === 'ALTA' || formData.prioridad === 'CRITICA',
+      esUrgente: false, // Sin selección de prioridad, por defecto no urgente
       requiereCompensacion: false
     };
   };
@@ -95,8 +77,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
       "telefonoContacto",
       "emailContacto",
       "tipoReclamo",
-      "descripcion",
-      "prioridad"
+      "descripcion"
     ];
     
     return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
@@ -131,8 +112,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           telefonoContacto: "",
           emailContacto: "",
           tipoReclamo: "",
-          descripcion: "",
-          prioridad: ""
+          descripcion: ""
         });
         setTimeout(() => {
           onClose();
@@ -214,44 +194,24 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
             </div>
           </div>
 
-          {/* Tipo de reclamo y prioridad */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="tipoReclamo" className="text-sm font-medium">
-                Tipo de Reclamo *
-              </Label>
-              <select
-                id="tipoReclamo"
-                value={formulario.tipoReclamo}
-                onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Selecciona un tipo</option>
-                {tiposReclamo.map((tipo) => (
-                  <option key={tipo.value} value={tipo.value}>
-                    {tipo.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="prioridad" className="text-sm font-medium">
-                Prioridad *
-              </Label>
-              <select
-                id="prioridad"
-                value={formulario.prioridad}
-                onChange={(e) => manejarCambio("prioridad", e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Selecciona prioridad</option>
-                {prioridades.map((prioridad) => (
-                  <option key={prioridad.value} value={prioridad.value}>
-                    {prioridad.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+          {/* Tipo de reclamo */}
+          <div className="space-y-2">
+            <Label htmlFor="tipoReclamo" className="text-sm font-medium">
+              Tipo de Reclamo *
+            </Label>
+            <select
+              id="tipoReclamo"
+              value={formulario.tipoReclamo}
+              onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
+              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Selecciona un tipo</option>
+              {tiposReclamo.map((tipo) => (
+                <option key={tipo.value} value={tipo.value}>
+                  {tipo.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Descripción */}
