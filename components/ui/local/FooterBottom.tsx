@@ -15,15 +15,6 @@ const FooterBottom = () => {
       </div>
 
       <div className="flex-1 text-right">
-        <p className="text-base text-gray-300">
-          Sitio web creado por{" "}
-          <Link
-            href="https://www.linkedin.com/in/ignacio-lopezzz/"
-            className="transition-colors duration-300 hover:text-[#00A6B2]"
-          >
-            Ignacio Lopez
-          </Link>
-        </p>
       </div>
     </div>
   );
