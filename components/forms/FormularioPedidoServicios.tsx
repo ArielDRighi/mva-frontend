@@ -85,7 +85,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
       
       console.log('Datos a enviar:', solicitudData); // Para debug
 
-      const respuesta = await fetch("http://localhost:3000/api/clients_portal/ask_for_service", {
+      const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/clients_portal/ask_for_service` || "https://mvasrl.com/api/clients_portal/ask_for_service", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Send, Loader2, Heart } from "lucide-react";
 import { toast } from "sonner";
+import { getFullApiUrl, API_ENDPOINTS } from "@/lib/api-config";
 
 interface FormularioSatisfaccionProps {
   onClose: () => void;
@@ -121,8 +122,9 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
       console.log("Datos a enviar:", encuestaData); // Para debug
 
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://mvasrl.com";
       const respuesta = await fetch(
-        "http://localhost:3000/api/clients_portal/satisfaction_surveys",
+        `${apiUrl}/api/clients_portal/satisfaction_surveys`,
         {
           method: "POST",
           headers: {
