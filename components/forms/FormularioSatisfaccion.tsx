@@ -124,7 +124,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://mvasrl.com";
       const respuesta = await fetch(
-        `${apiUrl}/api/clients_portal/satisfaction_surveys`,
+        `${apiUrl}/clients_portal/satisfaction_surveys`,
         {
           method: "POST",
           headers: {
