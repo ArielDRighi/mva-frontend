@@ -97,7 +97,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
             className={`p-1 transition-colors ${
               estrella <= calificacion
                 ? "text-yellow-400 hover:text-yellow-500"
-                : "text-gray-300 dark:text-gray-600 hover:text-gray-400"
+                : "text-gray-300 hover:text-gray-400"
             }`}
           >
             <Star className="w-6 h-6 fill-current" />
@@ -297,7 +297,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 formulario.calificacionAtencion,
                 "calificacionAtencion"
               )}
-              <span className="text-sm text-slate-600 dark:text-slate-400">
+              <span className="text-sm text-slate-600">
                 {formulario.calificacionAtencion > 0
                   ? `${formulario.calificacionAtencion}/5`
                   : "Sin calificar"}
@@ -370,16 +370,16 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 onClick={() => manejarCambio("recomendaria", "Sí, sin dudas")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
                   formulario.recomendaria === "Sí, sin dudas"
-                    ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                    : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+                    ? "border-green-500 bg-green-50"
+                    : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
                     className={`font-medium ${
                       formulario.recomendaria === "Sí, sin dudas"
-                        ? "text-green-700 dark:text-green-400"
-                        : "text-slate-600 dark:text-slate-400"
+                        ? "text-green-700"
+                        : "text-slate-600"
                     }`}
                   >
                     Sí, sin dudas
@@ -391,16 +391,16 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 onClick={() => manejarCambio("recomendaria", "Tal vez")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
                   formulario.recomendaria === "Tal vez"
-                    ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
-                    : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+                    ? "border-amber-500 bg-amber-50"
+                    : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
                     className={`font-medium ${
                       formulario.recomendaria === "Tal vez"
-                        ? "text-amber-700 dark:text-amber-400"
-                        : "text-slate-600 dark:text-slate-400"
+                        ? "text-amber-700"
+                        : "text-slate-600"
                     }`}
                   >
                     Tal vez
@@ -412,16 +412,16 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 onClick={() => manejarCambio("recomendaria", "No")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
                   formulario.recomendaria === "No"
-                    ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                    : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+                    ? "border-red-500 bg-red-50"
+                    : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
                     className={`font-medium ${
                       formulario.recomendaria === "No"
-                        ? "text-red-700 dark:text-red-400"
-                        : "text-slate-600 dark:text-slate-400"
+                        ? "text-red-700"
+                        : "text-slate-600"
                     }`}
                   >
                     No
@@ -447,10 +447,10 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           </div>
 
           {/* Mensaje de agradecimiento */}
-          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="flex items-center gap-3">
-              <Heart className="w-5 h-5 text-green-600 dark:text-green-400" />
-              <div className="text-sm text-green-800 dark:text-green-200">
+              <Heart className="w-5 h-5 text-green-600" />
+              <div className="text-sm text-green-800">
                 <p className="font-medium">
                   ¡Tu opinión es muy importante para nosotros!
                 </p>

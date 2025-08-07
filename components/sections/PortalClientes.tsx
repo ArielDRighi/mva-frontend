@@ -122,7 +122,7 @@ const PortalClientes = () => {
     }
   };
   return (
-    <section id="portal-clientes" className="pb-16 px-4 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <section id="portal-clientes" className="pb-16 px-4 bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {serviciosPortal.map((servicio) => {
@@ -130,20 +130,20 @@ const PortalClientes = () => {
             return (
               <Card
                 key={servicio.id}
-                className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-slate-300 dark:hover:border-slate-600"
+                className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-slate-300"
               >
                 <CardHeader className="text-center pb-4">
                   <div
-                    className={`w-16 h-16 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-16 h-16 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <IconoComponente
                       className={`w-8 h-8 ${servicio.colorIcono}`}
                     />
                   </div>
-                  <CardTitle className="text-xl font-semibold text-slate-900 dark:text-white">
+                  <CardTitle className="text-xl font-semibold text-slate-900">
                     {servicio.titulo}
                   </CardTitle>
-                  <CardDescription className="text-slate-600 dark:text-slate-400">
+                  <CardDescription className="text-slate-600">
                     {servicio.descripcion}
                   </CardDescription>
                 </CardHeader>
@@ -185,46 +185,46 @@ const PortalClientes = () => {
         </div>
 
         {/* Información de contacto adicional */}
-        <div className="bg-white dark:bg-slate-800 rounded-xl p-8 shadow-lg border">
-          <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-6 text-center">
+        <div className="bg-white rounded-xl p-8 shadow-lg border">
+          <h3 className="text-2xl font-semibold text-slate-900 mb-6 text-center">
             ¿Necesitas ayuda adicional?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                <Phone className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <Phone className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <p className="font-medium text-slate-900 dark:text-white">
+                <p className="font-medium text-slate-900">
                   Teléfono
                 </p>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-slate-600">
                   387-5555680
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                <Mail className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <Mail className="w-6 h-6 text-green-600" />
               </div>
               <div>
-                <p className="font-medium text-slate-900 dark:text-white">
+                <p className="font-medium text-slate-900">
                   Email
                 </p>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-slate-600">
                   mva.serviciosyalquileres@gmail.com
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-purple-600" />
               </div>
               <div>
-                <p className="font-medium text-slate-900 dark:text-white">
+                <p className="font-medium text-slate-900">
                   Ubicación
                 </p>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-slate-600">
                   Salta Capital, Argentina
                 </p>
               </div>
