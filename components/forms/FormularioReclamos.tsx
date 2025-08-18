@@ -96,7 +96,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
       // Mapear los datos según el formato esperado por el backend
       const datosParaBackend = mapearDatosReclamo(formulario);
       
-      const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clients_portal/claims` || "https://mvasrl.com/api/clients_portal/claims", {
+      const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/clients_portal/claims` || "https://mvasrl.com/api/clients_portal/claims", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
