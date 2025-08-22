@@ -64,27 +64,18 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
   };
 
   // Función de mapeo de datos para el backendsdfsdf
-  const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
-    return {
-      // Campos requeridos
-      cliente: formData.nombreEmpresa,
-      fecha_mantenimiento: new Date().toISOString().split("T")[0],
-      calificacion: formData.calificacionAtencion,
-
-      // Campos opcionales
-      comentario: formData.comentarios || "",
-      asunto: "Encuesta de Satisfacción - Servicios MVA",
-      aspecto_evaluado: `Contacto inicial: ${formData.contactoInicial.join(
-        ", "
-      )} | Tiempo respuesta: ${
-        formData.tiempoRespuesta
-      } | Atención comercial: ${
-        formData.calificacionAtencion
-      }/5 | Accesibilidad: ${formData.accesibilidadContacto} | Precio/Valor: ${
-        formData.relacionPrecioValor
-      } | Recomendaría: ${formData.recomendaria}`,
-    };
-  };
+const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
+  nombre_empresa: formData.nombreEmpresa,
+  lugar_proyecto: formData.lugarProyecto,
+  contacto: formData.nombreContacto || undefined,
+  medio_contacto: formData.contactoInicial.join(", "),
+  tiempo_respuesta: formData.tiempoRespuesta,
+  calificacion_atencion: formData.calificacionAtencion,
+  accesibilidad_comercial: formData.accesibilidadContacto,
+  relacion_precio_valor: formData.relacionPrecioValor,
+  recomendaria: formData.recomendaria,
+  comentario_adicional: formData.comentarios || undefined,
+});
 
   const renderEstrellas = (calificacion: number, campo: string) => {
     return (
