@@ -153,9 +153,13 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
         throw new Error(errorData.message || "Error al enviar la encuesta");
       }
     } catch (error) {
-      toast.error("Error al enviar la encuesta. Inténtalo nuevamente.");
-      console.error("Error:", error);
-    } finally {
+  if (error instanceof Error) {
+    toast.error(error.message || "Error al enviar la encuesta. Inténtalo nuevamente.");
+  } else {
+    toast.error("Error al enviar la encuesta. Inténtalo nuevamente.");
+  }
+  console.error("Error:", error);
+} finally {
       setCargando(false);
     }
   };
