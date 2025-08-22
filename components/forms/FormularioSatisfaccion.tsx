@@ -149,8 +149,9 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
         }, 1500);
       } else {
         const errorData = await respuesta.json().catch(() => ({}));
-        console.error("Error del servidor:", errorData);
-        throw new Error(errorData.message || "Error al enviar la encuesta");
+  console.error("Error del servidor:", errorData);
+  toast.error(errorData.message || "Error al enviar la encuesta");
+  return; 
       }
     } catch (error) {
   if (error instanceof Error) {
