@@ -203,7 +203,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
               id="tipoReclamo"
               value={formulario.tipoReclamo}
               onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Selecciona un tipo</option>
               {tiposReclamo.map((tipo) => (
@@ -229,10 +229,10 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           </div>
 
           {/* Alerta informativa */}
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-amber-800 dark:text-amber-200">
+              <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-amber-800">
                 <p className="font-medium mb-1">Importante:</p>
                 <p>Tu reclamo será procesado en un plazo máximo de 48 horas hábiles. Te contactaremos al email proporcionado con el seguimiento correspondiente.</p>
               </div>

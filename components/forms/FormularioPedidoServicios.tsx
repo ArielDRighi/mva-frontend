@@ -209,7 +209,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
               id="ubicacion"
               value={formulario.ubicacion}
               onChange={(e) => manejarCambio("ubicacion", e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Selecciona una ubicación</option>
               {opcionesUbicacion.map((opcion) => (
@@ -235,10 +235,10 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
           </div>
 
           {/* Información importante */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-blue-800 dark:text-blue-200">
+              <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-blue-800">
                 <p className="font-medium mb-1">Información del Servicio:</p>
                 <ul className="space-y-1 list-disc list-inside">
                   <li>El servicio incluye instalación, mantenimiento y retiro.</li>
