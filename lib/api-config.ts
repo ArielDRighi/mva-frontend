@@ -8,19 +8,19 @@ export const getApiUrl = (): string => {
       NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
       NODE_ENV: process.env.NODE_ENV
     });
-    return envUrl || 'https://mvasrl.com';
+    return envUrl || 'https://mvasrl.com/api';
   }
   
   // Fallback para SSR
-  const serverUrl = process.env.NEXT_PUBLIC_API_URL || 'https://mvasrl.com';
+  const serverUrl = process.env.NEXT_PUBLIC_API_URL || 'https://mvasrl.com/api';
   console.log('🖥️ API URL (SSR):', serverUrl);
   return serverUrl;
 };
 
 export const API_ENDPOINTS = {
-  SATISFACTION_SURVEYS: '/api/clients_portal/satisfaction_surveys',
-  CLAIMS: '/api/clients_portal/claims',
-  ASK_FOR_SERVICE: '/api/clients_portal/ask_for_service',
+  SATISFACTION_SURVEYS: '/clients_portal/satisfaction_surveys',
+  CLAIMS: '/clients_portal/claims',
+  ASK_FOR_SERVICE: '/clients_portal/ask_for_service',
 } as const;
 
 export const getFullApiUrl = (endpoint: string): string => {
