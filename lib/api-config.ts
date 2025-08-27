@@ -2,11 +2,19 @@
 export const getApiUrl = (): string => {
   // En el lado del cliente, process.env.NEXT_PUBLIC_API_URL está disponible
   if (typeof window !== 'undefined') {
-    return (window as any).ENV?.NEXT_PUBLIC_API_URL || 'https://mvasrl.com';
+    const envUrl = (window as any).ENV?.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_URL;
+    console.log('🌐 API URL utilizada (cliente):', envUrl);
+    console.log('🔍 Variables de entorno disponibles:', {
+      NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+      NODE_ENV: process.env.NODE_ENV
+    });
+    return envUrl || 'https://mvasrl.com';
   }
   
   // Fallback para SSR
-  return 'https://mvasrl.com';
+  const serverUrl = process.env.NEXT_PUBLIC_API_URL || 'https://mvasrl.com';
+  console.log('🖥️ API URL (SSR):', serverUrl);
+  return serverUrl;
 };
 
 export const API_ENDPOINTS = {

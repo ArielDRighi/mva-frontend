@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Send, Loader2, Info } from "lucide-react";
 import { toast } from "sonner";
+import { getFullApiUrl, API_ENDPOINTS } from "@/lib/api-config";
 
 interface FormularioPedidoServiciosProps {
   onClose: () => void;
@@ -84,8 +85,9 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
       const solicitudData = mapearDatosSolicitudServicio(formulario);
       
       console.log('Datos a enviar:', solicitudData); // Para debug
+      console.log('URL de envío:', getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE));
 
-      const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/clients_portal/ask_for_service` || "https://mvasrl.com/api/clients_portal/ask_for_service", {
+      const respuesta = await fetch(getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
