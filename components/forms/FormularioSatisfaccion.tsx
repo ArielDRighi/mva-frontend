@@ -40,42 +40,75 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
   };
 
   const validarFormulario = () => {
+    // Campos básicos requeridos
     const camposRequeridos = [
       "nombreEmpresa",
       "lugarProyecto",
     ];
 
     const camposCompletos = camposRequeridos.every(
-      (campo) =>
-        formulario[campo as keyof typeof formulario] !== "" &&
-        formulario[campo as keyof typeof formulario] !== null
+      (campo) => {
+        const valor = formulario[campo as keyof typeof formulario];
+        return valor !== "" && valor !== null && valor !== undefined;
+      }
     );
 
+    // Validar preguntas específicas requeridas según el DTO
     const preguntasCompletas = [
-      formulario.contactoInicial.length > 0,
-      formulario.tiempoRespuesta !== "",
-      formulario.calificacionAtencion > 0,
-      formulario.accesibilidadContacto !== "",
-      formulario.relacionPrecioValor !== "",
-      formulario.recomendaria !== "",
+      formulario.contactoInicial.length > 0, // medio_contacto
+      formulario.tiempoRespuesta !== "", // tiempo_respuesta
+      formulario.calificacionAtencion > 0, // calificacion_atencion
+      formulario.accesibilidadContacto !== "", // accesibilidad_comercial
+      formulario.relacionPrecioValor !== "", // relacion_precio_valor
+      formulario.recomendaria !== "", // recomendaria
     ].every((condicion) => condicion);
+
+    console.log("Validación de formulario:", {
+      camposCompletos,
+      preguntasCompletas,
+      formulario: {
+        nombreEmpresa: formulario.nombreEmpresa,
+        lugarProyecto: formulario.lugarProyecto,
+        contactoInicial: formulario.contactoInicial,
+        tiempoRespuesta: formulario.tiempoRespuesta,
+        calificacionAtencion: formulario.calificacionAtencion,
+        accesibilidadContacto: formulario.accesibilidadContacto,
+        relacionPrecioValor: formulario.relacionPrecioValor,
+        recomendaria: formulario.recomendaria,
+      }
+    });
 
     return camposCompletos && preguntasCompletas;
   };
 
-  // Función de mapeo de datos para el backendsdfsdf
-const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
-  nombre_empresa: formData.nombreEmpresa,
-  lugar_proyecto: formData.lugarProyecto,
-  contacto: formData.nombreContacto || undefined,
-  medio_contacto: formData.contactoInicial.join(", "),
-  tiempo_respuesta: formData.tiempoRespuesta,
-  calificacion_atencion: formData.calificacionAtencion,
-  accesibilidad_comercial: formData.accesibilidadContacto,
-  relacion_precio_valor: formData.relacionPrecioValor,
-  recomendaria: formData.recomendaria,
-  comentario_adicional: formData.comentarios || undefined,
-});
+  // Función de mapeo de datos para el backend
+const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
+  const mappedData = {
+    nombre_empresa: formData.nombreEmpresa.trim(),
+    lugar_proyecto: formData.lugarProyecto.trim(),
+    contacto: formData.nombreContacto.trim() || null,
+    medio_contacto: formData.contactoInicial.join(", "),
+    tiempo_respuesta: formData.tiempoRespuesta,
+    calificacion_atencion: formData.calificacionAtencion,
+    accesibilidad_comercial: formData.accesibilidadContacto,
+    relacion_precio_valor: formData.relacionPrecioValor,
+    recomendaria: formData.recomendaria,
+    comentario_adicional: formData.comentarios.trim() || null,
+  };
+  
+  console.log("Datos originales del formulario:", formData);
+  console.log("Datos mapeados para el backend:", mappedData);
+  
+  // Verificar que los campos requeridos no estén vacíos
+  const camposRequeridos = ['nombre_empresa', 'lugar_proyecto', 'medio_contacto', 'tiempo_respuesta', 'accesibilidad_comercial', 'relacion_precio_valor', 'recomendaria'];
+  camposRequeridos.forEach(campo => {
+    if (!mappedData[campo as keyof typeof mappedData] || mappedData[campo as keyof typeof mappedData] === '') {
+      console.warn(`Campo requerido vacío: ${campo}`, mappedData[campo as keyof typeof mappedData]);
+    }
+  });
+  
+  return mappedData;
+};
 
   const renderEstrellas = (calificacion: number, campo: string) => {
     return (
@@ -100,6 +133,8 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
   const enviarSatisfaccion = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log("Estado actual del formulario antes de validar:", formulario);
+
     if (!validarFormulario()) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
@@ -111,11 +146,11 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
       // Mapear los datos según el formato esperado por el backend
       const encuestaData = mapearDatosEncuestaSatisfaccion(formulario);
 
-      console.log("Datos a enviar:", encuestaData); // Para debug
+      console.log("URL de envío:", getFullApiUrl(API_ENDPOINTS.SATISFACTION_SURVEYS));
+      console.log("Datos finales a enviar:", JSON.stringify(encuestaData, null, 2));
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://mvasrl.com";
       const respuesta = await fetch(
-        `${apiUrl}/clients_portal/satisfaction_surveys`,
+        getFullApiUrl(API_ENDPOINTS.SATISFACTION_SURVEYS),
         {
           method: "POST",
           headers: {
@@ -124,6 +159,12 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
           body: JSON.stringify(encuestaData),
         }
       );
+
+      console.log("Respuesta del servidor:", {
+        status: respuesta.status,
+        statusText: respuesta.statusText,
+        ok: respuesta.ok
+      });
 
       if (respuesta.ok) {
         const resultado = await respuesta.json();
@@ -149,12 +190,16 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => ({
         }, 1500);
       } else {
         const errorData = await respuesta.json().catch(() => ({}));
-        console.error("Error del servidor:", errorData);
+        console.error("Error del servidor:", {
+          status: respuesta.status,
+          statusText: respuesta.statusText,
+          errorData
+        });
         throw new Error(errorData.message || "Error al enviar la encuesta");
       }
     } catch (error) {
       toast.error("Error al enviar la encuesta. Inténtalo nuevamente.");
-      console.error("Error:", error);
+      console.error("Error completo:", error);
     } finally {
       setCargando(false);
     }
