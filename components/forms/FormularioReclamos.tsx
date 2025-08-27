@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertTriangle, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { getFullApiUrl, API_ENDPOINTS } from "@/lib/api-config";
 
 interface FormularioReclamosProps {
   onClose: () => void;
@@ -96,15 +97,30 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
       // Mapear los datos según el formato esperado por el backend
       const datosParaBackend = mapearDatosReclamo(formulario);
       
-      const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/clients_portal/claims` || "https://mvasrl.com/api/clients_portal/claims", {
+      console.log("Datos a enviar:", datosParaBackend);
+      console.log("URL de envío:", getFullApiUrl(API_ENDPOINTS.CLAIMS));
+      
+      const respuesta = await fetch(getFullApiUrl(API_ENDPOINTS.CLAIMS), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Agregar headers adicionales para CORS si es necesario
+          "Accept": "application/json",
         },
         body: JSON.stringify(datosParaBackend),
       });
 
+      console.log("Respuesta del servidor:", {
+        status: respuesta.status,
+        statusText: respuesta.statusText,
+        ok: respuesta.ok,
+        headers: Object.fromEntries(respuesta.headers.entries())
+      });
+
       if (respuesta.ok) {
+        const resultado = await respuesta.json();
+        console.log("Reclamo enviado exitosamente:", resultado);
+        
         toast.success("Reclamo enviado exitosamente. Te contactaremos pronto.");
         setFormulario({
           nombreEmpresa: "",
@@ -119,12 +135,22 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
         }, 1500);
       } else {
         const errorData = await respuesta.json().catch(() => ({}));
-        console.error("Error del servidor:", errorData);
+        console.error("Error del servidor:", {
+          status: respuesta.status,
+          statusText: respuesta.statusText,
+          errorData
+        });
         throw new Error(errorData.message || "Error al enviar el reclamo");
       }
     } catch (error) {
-      toast.error("Error al enviar el reclamo. Inténtalo nuevamente.");
-      console.error("Error:", error);
+      console.error("Error completo:", error);
+      
+      // Detectar errores específicos de CORS
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        toast.error("Error de conexión. Verifica que el servidor esté disponible y configurado correctamente para CORS.");
+      } else {
+        toast.error("Error al enviar el reclamo. Inténtalo nuevamente.");
+      }
     } finally {
       setCargando(false);
     }
