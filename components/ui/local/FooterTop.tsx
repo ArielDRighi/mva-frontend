@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Mail } from "lucide-react";
+import { Mail, Linkedin } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Separator } from "../separator";
@@ -26,13 +26,16 @@ const FooterTop = () => {
           </Link>
         ))}
       </div>
-      <div className="flex md-tablet:mt-0 mt-4 justify-center items-center md-tablet:w-[100px] w-20 relative h-[60px] md-tablet:h-20 border border-[#7a7a7a] rounded-sm md-tablet:border-0">
+      <div className="flex md-tablet:mt-0 mt-4 justify-center items-center md-tablet:w-[140px] w-24 relative h-[60px] md-tablet:h-20 border border-[#7a7a7a] rounded-sm md-tablet:border-0 gap-4">
         <Separator
           orientation="vertical"
           className="absolute left-0 h-16 bg-[#7a7a7a] hidden md-tablet:block"
         />
-        <Link href="mailto:mva.serviciosyalquileres@gmail.com">
+        <Link href="mailto:info@mvasrl.com">
           <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
+        </Link>
+        <Link href="https://www.linkedin.com/company/mvasrl" target="_blank" rel="noopener noreferrer">
+          <Linkedin className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
         </Link>
       </div>
     </div>

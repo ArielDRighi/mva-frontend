@@ -212,7 +212,7 @@ const PortalClientes = () => {
                   Email
                 </p>
                 <p className="text-slate-600">
-                  mva.serviciosyalquileres@gmail.com
+                  info@mvasrl.com
                 </p>
               </div>
             </div>
