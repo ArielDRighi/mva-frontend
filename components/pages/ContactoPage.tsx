@@ -95,7 +95,7 @@ export default function ContactoPage() {
                     Email
                   </h3>
                   <p className="text-gray-700 font-poppins">
-                    mva.serviciosyalquileres@gmail.com
+                    info@mvasrl.com
                   </p>
                 </div>
               </CardContent>
