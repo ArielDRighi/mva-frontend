@@ -6,9 +6,9 @@ import { CheckCircle } from "lucide-react";
 
 const servicios = [
   {
-    title: "Baños Químicos",
+    title: "Limpieza Corporativa",
     description:
-      "Alquiler, limpieza y mantenimiento de baños químicos para proyectos mineros e industriales.",
+      "Mantenemos sus espacios de trabajo impecables y seguros. Ofrecemos servicios diarios o programados para oficinas, edificios y espacios comunes, con personal capacitado, supervisión constante y productos de primera calidad.",
     features: [
       "Disponibles 24/7",
       "Mantenimiento programado",
@@ -18,9 +18,9 @@ const servicios = [
     image: "/images/camionetaEnSalar.jpg",
   },
   {
-    title: "Desagote de Cámaras Sépticas",
+    title: "Limpieza final de obra",
     description:
-      "Servicio de desagote con camiones especializados y personal capacitado.",
+      "Garantizamos la entrega perfecta de su proyecto. Nos ocupamos del retiro de residuos, polvo y materiales, dejando cada ambiente listo para ser habitado o presentado, con equipamiento y protocolos adecuados a cada superficie.",
     features: [
       "Equipos de última generación",
       "Capacidad de 10m³ - 30m³",
@@ -30,9 +30,9 @@ const servicios = [
     image: "/images/Inaguracion.jpg",
   },
   {
-    title: "Limpieza de Oficinas",
+    title: "Mantenimiento de áreas verdes",
     description:
-      "Servicios completos de limpieza para oficinas y espacios de trabajo.",
+      "Cuidamos los entornos exteriores de su empresa o predio con cortes de pasto y poda. Nuestro objetivo es conservar espacios prolijos y seguros, que reflejen la imagen profesional de su organización.",
     features: [
       "Personal especializado",
       "Productos ecológicos",
@@ -42,9 +42,45 @@ const servicios = [
     image: "/images/camionetas.jpg",
   },
   {
-    title: "Mantenimiento de Campamentos",
+    title: "Alquiler de baños químicos",
     description:
-      "Gestión integral de campamentos mineros y espacios temporales.",
+      "Brindamos el servicio completo: instalación, limpieza periódica, reposición de insumos y mantenimiento, con logística propia en toda la provincia.",
+    features: [
+      "Logística completa",
+      "Soluciones habitacionales",
+      "Mantenimiento preventivo",
+      "Adaptación a necesidades específicas",
+    ],
+    image: "/images/camionetaEnSalar.jpg",
+  },
+  {
+    title: "Desagote",
+    description:
+      "Desagotes de cámaras sépticas, biodigestores y pozos ciegos. Actuamos con rapidez, seguridad y cumplimiento de las normativas vigentes.",
+    features: [
+      "Logística completa",
+      "Soluciones habitacionales",
+      "Mantenimiento preventivo",
+      "Adaptación a necesidades específicas",
+    ],
+    image: "/images/camionetaEnSalar.jpg",
+  },
+  {
+    title: "Gestión de residuos",
+    description:
+      "Ofrecemos soluciones para garantizar la gestión integral de residuos, desde su generación hasta el transporte a sitios de disposición final, de manera segura, eficiente y ambientalmente responsable.",
+    features: [
+      "Logística completa",
+      "Soluciones habitacionales",
+      "Mantenimiento preventivo",
+      "Adaptación a necesidades específicas",
+    ],
+    image: "/images/camionetaEnSalar.jpg",
+  },
+  {
+    title: "Transporte de AVU",
+    description:
+      "Transporte de aceite vegetal usado (AVU). Trabajamos en conjunto con las empresas de cátering realizando el traslado seguro del aceite de cocina que se descarta después de su uso.",
     features: [
       "Logística completa",
       "Soluciones habitacionales",

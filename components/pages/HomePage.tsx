@@ -4,13 +4,15 @@ import AboutUsHome from "../sections/AboutUsHome";
 import AboutUsSection from "../sections/AboutUsSection";
 import Asks from "../sections/Asks";
 import Cta from "../sections/Cta";
+import ServiciosPage from "./ServiciosPage";
 
 const HomePage = () => {
   return (
     <main className="font-montserrat">
       <Hero />
-      <AboutUsHome />
-      <AboutUsSection />
+      {/* <AboutUsHome />
+      <AboutUsSection /> */}
+      <ServiciosPage />
       <Asks />
       <Cta />
     </main>
