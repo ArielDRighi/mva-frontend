@@ -14,7 +14,23 @@ const FooterBottom = () => {
         </p>
       </div>
 
-      <div className="flex-1 text-right">
+      <div className="flex-1 flex text-right items-center justify-end">
+        <a
+          href="/documents/ISO-Certificate.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[14px] text-[#00A6B2] hover:underline pl-6 pb-2 inline-block font-poppins"
+        >
+          Certificado ISO
+        </a>
+        <a
+          href="/documents/Quality-Policy.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[14px] text-[#00A6B2] hover:underline pl-6 pb-2 inline-block font-poppins"
+        >
+          Política Calidad
+        </a>
       </div>
     </div>
   );

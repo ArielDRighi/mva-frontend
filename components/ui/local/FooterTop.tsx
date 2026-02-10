@@ -7,7 +7,7 @@ import { Separator } from "../separator";
 const FooterTop = () => {
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/servicios", label: "Servicios" },
+    { href: "/nosotros", label: "Nosotros" },
     { href: "/clientes", label: "Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
@@ -19,7 +19,7 @@ const FooterTop = () => {
             key={href}
             href={href}
             className={clsx(
-              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-[#00A6B2] after:scale-x-100"
+              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-[#00A6B2] after:scale-x-100",
             )}
           >
             {label}
@@ -34,7 +34,11 @@ const FooterTop = () => {
         <Link href="mailto:info@mvasrl.com">
           <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
         </Link>
-        <Link href="https://www.linkedin.com/company/mvasrl" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://www.linkedin.com/company/mvasrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Linkedin className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
         </Link>
       </div>
