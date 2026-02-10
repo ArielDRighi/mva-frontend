@@ -8,8 +8,8 @@ import { Card, CardContent } from "../ui/card";
 
 const AboutUsHome = () => {
   return (
-    <section className="bg-[#F2F1EF]">
-      <div className="container px-6 flex max-w-7xl mx-auto flex-col items-center gap-10">
+    <section className="">
+      <div className="container px-6 flex max-w-7xl mx-auto flex-col items-center gap-20">
         <div className="w-full">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
@@ -18,19 +18,9 @@ const AboutUsHome = () => {
             transition={{ duration: 0.5 }}
             className="text-4xl sm-tablet:text-[50px] sm-tablet:leading-[61px] tracking-wider font-bold text-textBlackTitle font-montserrat"
           >
-            MVA SRL <br /> EN UN VISTAZO
+            MVA SRL <br />
+            EN UN VISTAZO
           </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mt-6"
-          >
-            <ButtonHome
-              text={"Conocenos"}
-              className="px-5 sm-tablet:px-10 h-12 sm-tablet:h-14"
-            />
-          </motion.div>
         </div>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
           {/* TinyBox 1 - Izquierda */}
@@ -39,7 +29,7 @@ const AboutUsHome = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            className="col-span-1 md:col-span-1 flex justify-center md:order-2 lg:order-1"
+            className="col-span-2 md:col-span-1 flex justify-center md:order-2 lg:order-1"
           >
             <Card className="w-full border-none">
               <CardContent className="p-10 flex flex-col justify-between h-full">

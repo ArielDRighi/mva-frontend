@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/servicios", label: "Servicios" },
+    { href: "/nosotros", label: "Nosotros" },
     { href: "/clientes", label: "Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
@@ -28,7 +28,7 @@ const Navbar = () => {
               "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#00A6B2] after:transition-transform after:duration-300 after:origin-left hover:after:scale-x-100",
               pathname === href
                 ? "text-[#00A6B2] after:scale-x-100"
-                : "text-gray-300"
+                : "text-gray-300",
             )}
           >
             {label}
