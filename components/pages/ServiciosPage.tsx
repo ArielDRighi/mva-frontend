@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
+import Image from "next/image";
+import ButtonHome from "../ui/local/ButtonHomeSinFlecha";
 
 const servicios = [
   {
@@ -176,6 +178,45 @@ export default function ServiciosPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Llamado a la acción */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col mb-2 items-center bg-white rounded-lg shadow-xl p-8 text-center"
+          >
+            <span className="uppercase text-2xl font-bold text-[#003F4F] font-montserrat">
+              Estamos
+            </span>
+            <span className="relative pb-2 uppercase text-5xl text-gray-700 font-bold max-w-3xl font-poppins before:content-[''] before:w-2/3 before:h-0.5 before:bg-red-500 before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 mb-3">
+              Certificados
+            </span>
+            <Image
+              src="/images/certificado-iso-9001.png"
+              alt="Logo certificado ISO"
+              width={300}
+              height={300}
+              quality={100}
+              className="w-20 h-20"
+            />
+            <a
+              href="/documents/ISO-Certificate.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex flex-col items-center rounded-md font-semibold transition-colors duration-300"
+            >
+              <ButtonHome
+                text="Ver Certificado"
+                className="max-w-[215px] w-full h-11 !text-[12px]"
+              />
+            </a>
+          </motion.div>
         </div>
       </section>
 
