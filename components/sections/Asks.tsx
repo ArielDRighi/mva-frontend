@@ -67,7 +67,7 @@ const Asks = () => {
                   value={`faq-${index}`}
                   className="border-b border-gray-300"
                 >
-                  <AccordionTrigger className="text-xl font-semibold text-[#003F4F] font-montserrat transition-all duration-300 hover:text-[#00A6B2]">
+                  <AccordionTrigger className="text-xl font-semibold text-mva-turquesa-500 font-montserrat transition-all duration-300 hover:text-mva-turquesa">
                     {question}
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-700 font-poppins">

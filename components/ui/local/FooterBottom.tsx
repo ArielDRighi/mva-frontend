@@ -9,7 +9,7 @@ const FooterBottom = () => {
       </div>
 
       <div className="md-tablet:absolute md-tablet:left-1/2 md-tablet:transform md-tablet:-translate-x-1/2 block">
-        <p className="text-base text-[#346e7c] hover:text-[#00A6B2] transition-colors duration-300">
+        <p className="text-base text-mva-turquesa-400/60 transition-colors duration-300">
           Todos los derechos reservados.
         </p>
       </div>
@@ -19,7 +19,7 @@ const FooterBottom = () => {
           href="/documents/ISO-Certificate.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[14px] text-[#00A6B2] hover:underline pl-6 pb-2 inline-block font-poppins"
+          className="text-[14px] text-mva-turquesa hover:underline pl-6 pb-2 inline-block font-poppins"
         >
           Certificado ISO
         </a>
@@ -27,7 +27,7 @@ const FooterBottom = () => {
           href="/documents/Quality-Policy.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[14px] text-[#00A6B2] hover:underline pl-6 pb-2 inline-block font-poppins"
+          className="text-[14px] text-mva-turquesa hover:underline pl-6 pb-2 inline-block font-poppins"
         >
           Política Calidad
         </a>

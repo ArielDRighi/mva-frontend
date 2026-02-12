@@ -55,8 +55,8 @@ export default function ContactoPage() {
           >
             <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <MapPin className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa-100/30 p-3 rounded-full">
+                  <MapPin className="h-6 w-6 text-mva-turquesa" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[#003F4F] font-montserrat">
@@ -71,40 +71,36 @@ export default function ContactoPage() {
 
             <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Phone className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa-100/30 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-mva-turquesa" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[#003F4F] font-montserrat">
                     Teléfono
                   </h3>
-                  <p className="text-gray-700 font-poppins">
-                    387-5555680
-                  </p>
+                  <p className="text-gray-700 font-poppins">387-5555680</p>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Mail className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa-100/30 p-3 rounded-full">
+                  <Mail className="h-6 w-6 text-mva-turquesa" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[#003F4F] font-montserrat">
                     Email
                   </h3>
-                  <p className="text-gray-700 font-poppins">
-                    info@mvasrl.com
-                  </p>
+                  <p className="text-gray-700 font-poppins">info@mvasrl.com</p>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Clock className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa-100/30 p-3 rounded-full">
+                  <Clock className="h-6 w-6 text-mva-turquesa" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[#003F4F] font-montserrat">

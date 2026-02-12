@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { AccordionValue } from "../ui/local/AccordionValue/AccordionValue";
 
 const VALUES = [
@@ -71,7 +70,7 @@ const AboutUsSection = () => {
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00A6B2]/30 to-[#003F4F]/30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-mva-turquesa/30 to-mva-turquesa-500/30"></div>
               <div className="h-full w-full bg-[url('/images/camionetaEnSalar.jpg')] bg-cover bg-center"></div>
             </div>
           </motion.div>
@@ -101,7 +100,7 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Misión
@@ -125,7 +124,7 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Visión
@@ -150,7 +149,7 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Valores

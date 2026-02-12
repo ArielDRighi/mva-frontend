@@ -17,10 +17,10 @@ export function AccordionValue({
         onClick={onClick}
         className="flex items-center gap-2 w-full cursor-pointer py-2 px-2 rounded hover:bg-gray-100 transition-colors"
       >
-        <span className="text-[#00A6B2] font-bold">•</span>
+        <span className="text-mva-turquesa font-bold">•</span>
         <strong className="text-gray-700 flex-1">{title}</strong>
         <ChevronDown
-          className={`w-5 h-5 text-[#00A6B2] transition-transform duration-300 flex-shrink-0 ${
+          className={`w-5 h-5 text-mva-turquesa transition-transform duration-300 flex-shrink-0 ${
             isExpanded ? "rotate-180" : ""
           }`}
         />
@@ -41,7 +41,7 @@ export function AccordionValue({
             href="/documents/ISO-Certificate.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[14px] w-full text-right text-[#00A6B2] hover:underline pl-6 pb-2 inline-block font-poppins"
+            className="text-[14px] w-full text-right text-mva-turquesa hover:underline pl-6 pb-2 inline-block font-poppins"
           >
             Ver Certificado ISO
           </a>

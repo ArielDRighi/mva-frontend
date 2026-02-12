@@ -19,7 +19,7 @@ const FooterTop = () => {
             key={href}
             href={href}
             className={clsx(
-              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-[#00A6B2] after:scale-x-100",
+              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-mva-turquesa after:scale-x-100",
             )}
           >
             {label}
@@ -32,14 +32,14 @@ const FooterTop = () => {
           className="absolute left-0 h-16 bg-[#7a7a7a] hidden md-tablet:block"
         />
         <Link href="mailto:info@mvasrl.com">
-          <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
+          <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-mva-turquesa transition-colors after:scale-x-100" />
         </Link>
         <Link
           href="https://www.linkedin.com/company/mvasrl"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Linkedin className="text-lg font-medium text-gray-300 duration-300 hover:text-[#00A6B2] transition-colors after:scale-x-100" />
+          <Linkedin className="text-lg font-medium text-gray-300 duration-300 hover:text-mva-turquesa transition-colors after:scale-x-100" />
         </Link>
       </div>
     </div>

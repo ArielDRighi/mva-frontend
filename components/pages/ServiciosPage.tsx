@@ -96,13 +96,14 @@ const servicios = [
 export default function ServiciosPage() {
   return (
     <motion.div
-      className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 mt-[150px]"
+      className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <div className="h-[150px] w-full" id="servicesSection" />
       {/* Hero de Servicios */}
-      <section className="py-20 bg-gradient-to-b from-[#31606E] to-[#003F4F] text-white">
+      <section className="py-20 bg-gradient-to-b from-mva-turquesa to-mva-turquesa-500 text-white">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -144,7 +145,7 @@ export default function ServiciosPage() {
                   }`}
                 >
                   <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#00A6B2]/30 to-[#003F4F]/30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-mva-turquesa/30 to-mva-turquesa-500/30"></div>
                     <div
                       className="h-full w-full bg-cover bg-center"
                       style={{ backgroundImage: `url('${servicio.image}')` }}
@@ -169,7 +170,7 @@ export default function ServiciosPage() {
                         key={idx}
                         className="flex items-center text-gray-700 font-poppins"
                       >
-                        <CheckCircle className="mr-2 h-5 w-5 text-[#00A6B2]" />
+                        <CheckCircle className="mr-2 h-5 w-5 text-mva-turquesa" />
                         {feature}
                       </li>
                     ))}
@@ -194,7 +195,7 @@ export default function ServiciosPage() {
             <span className="uppercase text-2xl font-bold text-[#003F4F] font-montserrat">
               Estamos
             </span>
-            <span className="relative pb-2 uppercase text-5xl text-gray-700 font-bold max-w-3xl font-poppins before:content-[''] before:w-2/3 before:h-0.5 before:bg-red-500 before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 mb-3">
+            <span className="relative pb-2 uppercase text-5xl text-mva-turquesa font-bold max-w-3xl font-poppins before:content-[''] before:w-2/3 before:h-0.5 before:bg-mva-turquesa before:absolute before:bottom-0 before:left-1/2 before:-translate-x-1/2 mb-3">
               Certificados
             </span>
             <Image
@@ -213,7 +214,7 @@ export default function ServiciosPage() {
             >
               <ButtonHome
                 text="Ver Certificado"
-                className="max-w-[215px] w-full h-11 !text-[12px]"
+                className="max-w-[215px] w-full h-11 !text-[15px]"
               />
             </a>
           </motion.div>
@@ -239,7 +240,7 @@ export default function ServiciosPage() {
             </p>
             <a
               href="/contacto"
-              className="inline-block px-8 py-3 bg-[#00A6B2] text-white rounded-md font-semibold hover:bg-[#017f88] transition-colors duration-300"
+              className="inline-block px-8 py-3 bg-mva-turquesa text-white rounded-md font-semibold hover:bg-mva-turquesa-400 transition-colors duration-300"
             >
               Solicitar información
             </a>

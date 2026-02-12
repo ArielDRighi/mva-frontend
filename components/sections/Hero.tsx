@@ -10,12 +10,8 @@ import ButtonHome from "../ui/local/ButtonHomeSinFlecha";
 const Hero = () => {
   const router = useRouter();
 
-  const handleServiciosClick = () => {
-    router.push('/servicios');
-  };
-
   const handleContactoClick = () => {
-    router.push('/contacto');
+    router.push("/contacto");
   };
 
   return (
@@ -46,7 +42,7 @@ const Hero = () => {
         <h1 className="text-4xl sm-tablet:text-5xl md:text-7xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg">
           Impulsa tu Negocio con
           <br />
-          <span className="text-[#00A6B2]">Innovación y Tecnología</span>
+          <span className="text-mva-turquesa">Innovación y Tecnología</span>
         </h1>
         <p className="mt-5 text-xl text-gray-300 max-w-2xl font-poppins leading-relaxed">
           Soluciones estratégicas para optimizar tu empresa. Elevamos la
@@ -56,12 +52,17 @@ const Hero = () => {
           initial={{ scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
         >
-          <ButtonHome 
-            text="Servicios" 
-            className="max-w-[215px] w-full h-11" 
-            onClick={handleServiciosClick}
+          <ButtonHome
+            text="Servicios"
+            className="max-w-[215px] w-full h-11"
+            onClick={() =>
+              document
+                .getElementById("servicesSection")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
           />
           <ButtonHomeServices onClick={handleContactoClick} />
         </motion.div>
@@ -70,11 +71,11 @@ const Hero = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-        className="absolute bottom-0 left-0 w-full"
+        className="absolute bottom-0 left-0 w-full text-mva-turquesa"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
-            fill="#017f88"
+            fill="currentColor"
             fillOpacity="1"
             d="M0,128L120,149.3C240,171,480,213,720,208C960,203,1200,149,1320,122.7L1440,96L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
           ></path>
