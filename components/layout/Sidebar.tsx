@@ -37,7 +37,7 @@ const Sidebar = ({ onClose }: SidebarProps) => {
             key={href}
             href={href}
             className={clsx(
-              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-[#00A6B2] after:scale-x-100"
+              "relative text-lg font-medium transition-colors text-gray-300 duration-300 hover:text-mva-turquesa after:scale-x-100",
             )}
           >
             {label}

@@ -23,7 +23,7 @@ const AsksData = [
 
 const Asks = () => {
   return (
-    <section className="pb-20 bg-[#F2F1EF] text-gray-900">
+    <section className="py-16 bg-mva-blanco-100 text-textBlack">
       <div className="container mx-auto px-6 max-w-5xl">
         {/* Título con animación */}
         <motion.h2
@@ -31,7 +31,7 @@ const Asks = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-5xl font-bold text-center text-[#003F4F] font-montserrat"
+          className="text-4xl md:text-5xl font-bold text-center text-mva-azul font-montserrat"
         >
           Preguntas Frecuentes
         </motion.h2>
@@ -42,7 +42,7 @@ const Asks = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-          className="mt-6 text-lg text-center text-gray-700 max-w-3xl mx-auto font-poppins leading-relaxed"
+          className="mt-6 text-lg text-center text-textBlackTitle max-w-3xl mx-auto font-poppins leading-relaxed"
         >
           Respondemos las dudas más comunes sobre nuestros servicios, horarios y
           calidad. Si tienes más preguntas, ¡contáctanos!
@@ -65,12 +65,12 @@ const Asks = () => {
               >
                 <AccordionItem
                   value={`faq-${index}`}
-                  className="border-b border-gray-300"
+                  className="border-b border-mva-blanco-400"
                 >
-                  <AccordionTrigger className="text-xl font-semibold text-[#003F4F] font-montserrat transition-all duration-300 hover:text-[#00A6B2]">
+                  <AccordionTrigger className="text-xl font-semibold text-mva-turquesa font-montserrat transition-all duration-300 hover:text-mva-turquesa-400">
                     {question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 font-poppins">
+                  <AccordionContent className="text-textBlackTitle font-poppins">
                     {answer}
                   </AccordionContent>
                 </AccordionItem>

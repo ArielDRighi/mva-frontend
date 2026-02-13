@@ -32,9 +32,9 @@ const Header = () => {
         backgroundColor:
           pathname === "/"
             ? isScrolled
-              ? "#31606E"
+              ? "#15297C"
               : "rgba(0, 0, 0, 0)"
-            : "#31606E",
+            : "#15297C",
       }}
       transition={{ duration: 0.3 }}
       className={`fixed top-0 w-full z-50 transition-all ${
@@ -49,7 +49,7 @@ const Header = () => {
         >
           <Link href="/">
             <Image
-              src="/images/MVA_LogoPNG.png"
+              src="/images/MVA_White_LogoPNG.png"
               alt="Logo"
               width={150}
               height={60}
@@ -77,7 +77,7 @@ const Header = () => {
                 variant="ghost"
                 className="w-20 h-20 group transition-all hover:bg-transparent"
               >
-                <Menu className="!w-10 !h-10 text-gray-300 group-hover:text-[#00A6B2] transition-colors" />
+                <Menu className="!w-10 !h-10 text-gray-300 group-hover:text-mva-turquesa transition-colors" />
               </Button>
             </DrawerTrigger>
             <Sidebar onClose={() => setOpen(false)} />

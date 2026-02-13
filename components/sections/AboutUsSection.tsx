@@ -2,11 +2,47 @@
 
 import { motion } from "motion/react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { AccordionValue } from "../ui/local/AccordionValue/AccordionValue";
+
+const VALUES = [
+  {
+    id: "calidad",
+    title: "Calidad",
+    description:
+      "Nos comprometemos a ofrecer servicios excepcionales, asegurando la satisfacción de nuestros clientes y el cumplimiento de estándares elevados en todas nuestras operaciones.",
+  },
+  {
+    id: "responsabilidad",
+    title: "Responsabilidad",
+    description:
+      "Actuamos con ética e integridad, priorizando la salud y seguridad de nuestros empleados y clientes en cada proyecto.",
+  },
+  {
+    id: "innovacion",
+    title: "Innovación",
+    description:
+      "Buscamos constantemente mejorar nuestros procesos y servicios mediante la adopción de nuevas tecnologías y enfoques, adaptándonos a las necesidades del mercado.",
+  },
+  {
+    id: "comunidad",
+    title: "Compromiso con la comunidad",
+    description:
+      "Trabajamos en colaboración con las comunidades locales, apoyando su desarrollo y bienestar a través de nuestras actividades.",
+  },
+  {
+    id: "equipo",
+    title: "Trabajo en equipo",
+    description:
+      "Valoramos la colaboración y la comunicación abierta, creando un ambiente donde cada miembro del equipo aporta al éxito colectivo.",
+  },
+];
 
 const AboutUsSection = () => {
+  const [expandedValue, setExpandedValue] = useState<string | null>(null);
+
   return (
     <>
-      {/* Sección Historia */}
       <section className="pt-32 pb-16 bg-[#F2F1EF]">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
@@ -34,7 +70,7 @@ const AboutUsSection = () => {
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00A6B2]/30 to-[#003F4F]/30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-mva-turquesa/30 to-mva-turquesa-500/30"></div>
               <div className="h-full w-full bg-[url('/images/camionetaEnSalar.jpg')] bg-cover bg-center"></div>
             </div>
           </motion.div>
@@ -64,17 +100,18 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Misión
                   </h3>
                   <p className="text-gray-700 font-poppins">
                     Brindar servicios de calidad que aumenten la satisfacción de
-                    nuestros clientes a través de respuestas ágiles, garantizando
-                    altos estándares de higiene y seguridad mientras promovemos el
-                    respeto por el medio ambiente y el desarrollo sustentable junto a
-                    nuestros colaboradores y la comunidad.
+                    nuestros clientes a través de respuestas ágiles,
+                    garantizando altos estándares de higiene y seguridad
+                    mientras promovemos el respeto por el medio ambiente y el
+                    desarrollo sustentable junto a nuestros colaboradores y la
+                    comunidad.
                   </p>
                 </CardContent>
               </Card>
@@ -87,17 +124,19 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Visión
                   </h3>
                   <p className="text-gray-700 font-poppins">
-                    Ser el principal proveedor de la provincia de Salta en servicios de
-                    limpieza de baños químicos y actividades afines. Buscamos
-                    nuevas oportunidades para expandir nuestro alcance y brindar
-                    soluciones integrales. Nos adaptamos a los nuevos contextos y
-                    desafíos del mercado, garantizando un servicio de excelencia.
+                    Ser la empresa líder en la provincia de Salta en soluciones
+                    integrales de limpieza corporativa, servicios de fumigación,
+                    mantenimiento de espacios verdes y gestión de residuos,
+                    reconocida por la calidad de nuestros servicios y por
+                    nuestra capacidad de adaptarnos a los nuevos contextos y
+                    desafíos del mercado, garantizando siempre un servicio de
+                    excelencia.
                   </p>
                 </CardContent>
               </Card>
@@ -110,36 +149,25 @@ const AboutUsSection = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <Card className="h-full shadow-lg border-t-4 border-[#00A6B2]">
+              <Card className="h-full shadow-lg border-t-4 border-mva-turquesa">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold text-[#003F4F] mb-4 font-montserrat">
                     Valores
                   </h3>
                   <ul className="text-gray-700 space-y-2 font-poppins">
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#00A6B2] font-bold">•</span>
-                      <strong>Calidad</strong>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#00A6B2] font-bold">•</span>
-                      <strong>Responsabilidad</strong>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#00A6B2] font-bold">•</span>
-                      <strong>Innovación</strong>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-[#00A6B2] font-bold">•</span>
-                      <strong>Compromiso con la comunidad</strong>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#00A6B2] font-bold">•</span>
-                      <div>
-                        <strong>Trabajo en equipo:</strong> Valoramos la colaboración y la comunicación abierta,
-                        creando un ambiente donde cada miembro del equipo contribuye al éxito
-                        colectivo.
-                      </div>
-                    </li>
+                    {VALUES.map((value) => (
+                      <AccordionValue
+                        key={value.id}
+                        title={value.title}
+                        description={value.description}
+                        isExpanded={expandedValue === value.id}
+                        onClick={() =>
+                          setExpandedValue(
+                            expandedValue === value.id ? null : value.id,
+                          )
+                        }
+                      />
+                    ))}
                   </ul>
                 </CardContent>
               </Card>

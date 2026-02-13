@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function ContactoPage() {
   return (
     <motion.div
-      className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 p-4 py-16 mt-[150px]"
+      className="flex-1 flex flex-col bg-mva-blanco-100 p-4 py-16 mt-[150px]"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -21,10 +21,10 @@ export default function ContactoPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-[#003F4F] mb-4 font-montserrat">
+          <h1 className="text-4xl md:text-5xl font-bold text-mva-azul mb-4 font-montserrat">
             Contáctanos
           </h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto font-poppins">
+          <p className="text-xl text-textBlackTitle max-w-3xl mx-auto font-poppins">
             Estamos a tu disposición para responder cualquier consulta y
             ofrecerte la mejor solución para tu proyecto.
           </p>
@@ -37,9 +37,9 @@ export default function ContactoPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white p-8 rounded-lg shadow-lg"
+            className="bg-mva-blanco-100 p-8 rounded-lg shadow-lg border-l-4 border-mva-turquesa"
           >
-            <h2 className="text-2xl font-semibold text-[#003F4F] mb-6 font-montserrat">
+            <h2 className="text-2xl font-semibold text-mva-azul mb-6 font-montserrat">
               Envíanos un mensaje
             </h2>
             <ContactForm />
@@ -53,64 +53,68 @@ export default function ContactoPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col gap-6"
           >
-            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+            {/* Ubicación */}
+            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-mva-blanco-100 border-l-4 border-mva-turquesa">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <MapPin className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa/10 p-3 rounded-full">
+                  <MapPin className="h-6 w-6 text-mva-turquesa" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#003F4F] font-montserrat">
+                  <h3 className="font-semibold text-mva-azul font-montserrat">
                     Ubicación
                   </h3>
-                  <p className="text-gray-700 font-poppins">
+                  <p className="text-textBlackTitle font-poppins">
                     Salta Capital, Argentina
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+            {/* Teléfono */}
+            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-mva-blanco-100 border-l-4 border-mva-celeste">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Phone className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-celeste/10 p-3 rounded-full">
+                  <Phone className="h-6 w-6 text-mva-celeste" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#003F4F] font-montserrat">
+                  <h3 className="font-semibold text-mva-azul font-montserrat">
                     Teléfono
                   </h3>
-                  <p className="text-gray-700 font-poppins">
+                  <p className="text-textBlackTitle font-poppins">
                     387-5555680
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+            {/* Email */}
+            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-mva-blanco-100 border-l-4 border-mva-azul">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Mail className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-azul/10 p-3 rounded-full">
+                  <Mail className="h-6 w-6 text-mva-azul" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#003F4F] font-montserrat">
+                  <h3 className="font-semibold text-mva-azul font-montserrat">
                     Email
                   </h3>
-                  <p className="text-gray-700 font-poppins">
+                  <p className="text-textBlackTitle font-poppins">
                     info@mvasrl.com
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+            {/* Horario */}
+            <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-mva-blanco-100 border-l-4 border-mva-turquesa-400">
               <CardContent className="p-6 flex items-start space-x-4">
-                <div className="bg-[#00A6B2]/10 p-3 rounded-full">
-                  <Clock className="h-6 w-6 text-[#00A6B2]" />
+                <div className="bg-mva-turquesa-200/20 p-3 rounded-full">
+                  <Clock className="h-6 w-6 text-mva-turquesa-400" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-[#003F4F] font-montserrat">
+                  <h3 className="font-semibold text-mva-azul font-montserrat">
                     Horario de Atención
                   </h3>
-                  <p className="text-gray-700 font-poppins">
+                  <p className="text-textBlackTitle font-poppins">
                     24/7, todos los días del año
                   </p>
                 </div>
