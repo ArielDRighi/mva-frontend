@@ -15,7 +15,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex flex-col overflow-hidden items-center justify-center h-screen text-center px-6 bg-gradient-to-b from-[#346e7c] to-gray-900">
+    <section className="relative flex flex-col overflow-hidden items-center justify-center h-screen text-center px-6 bg-gradient-to-b from-mva-azul/90 to-mva-azul-500/90">
       <motion.div
         initial={{ opacity: 0, scale: 1.1 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ const Hero = () => {
           src="/images/Inaguracion.jpg"
           alt="Fondo llamativo"
           fill
-          className="object-cover opacity-20 w-full h-full"
+          className="object-cover opacity-15 w-full h-full"
           loading="lazy"
           priority={false}
         />
@@ -44,9 +44,9 @@ const Hero = () => {
           <br />
           <span className="text-mva-turquesa">Innovación y Tecnología</span>
         </h1>
-        <p className="mt-5 text-xl text-gray-300 max-w-2xl font-poppins leading-relaxed">
-          Soluciones estratégicas para optimizar tu empresa. Elevamos la
-          logística y eficiencia con innovación de primer nivel.
+        <p className="mt-5 text-xl text-mva-blanco-200 max-w-2xl font-poppins leading-relaxed">
+          Soluciones estratégicas de logística y servicios. Optimizamos tu
+          operación con eficiencia y profesionalismo de primer nivel.
         </p>
         <motion.div
           initial={{ scale: 0.95 }}
@@ -88,7 +88,7 @@ const Hero = () => {
           className="w-full h-auto drop-shadow-[0_-8px_10px_rgba(255, 255, 255, 0.3)]"
         >
           <path
-            fill="#F2F1EF"
+            fill="#F2F2F2"
             fillOpacity="1"
             d="M0,224L120,240C240,256,480,288,720,277.3C960,267,1200,213,1320,186.7L1440,160L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
           ></path>

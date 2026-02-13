@@ -10,8 +10,6 @@ const HomePage = () => {
   return (
     <main className="font-montserrat">
       <Hero />
-      {/* <AboutUsHome />
-      <AboutUsSection /> */}
       <ServiciosPage />
       <Asks />
       <Cta />

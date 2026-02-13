@@ -83,7 +83,7 @@ function AccordionItem({
     <div>
       <div
         onClick={onClick}
-        className="flex justify-between items-center px-2 bg-[#00A6B2] h-10 rounded-r-sm cursor-pointer hover:bg-[#0095a1] transition-colors"
+        className="flex justify-between items-center px-2 bg-mva-turquesa h-10 rounded-r-sm cursor-pointer hover:bg-[#0095a1] transition-colors"
       >
         <p className="text-xs text-textBlack">{year}</p>
         <svg
