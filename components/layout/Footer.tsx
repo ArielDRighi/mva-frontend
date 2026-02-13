@@ -5,9 +5,12 @@ import { Separator } from "../ui/separator";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#121928] flex flex-col items-center">
+    <footer className="bg-mva-azul-500 flex flex-col items-center border-t border-[#7a7a7a]">
       <FooterTop />
-      <Separator orientation="horizontal" className="bg-[#7a7a7a] md-tablet:max-w-7xl max-w-screen-sm"/>
+      <Separator
+        orientation="horizontal"
+        className="md-tablet:max-w-7xl max-w-screen-sm bg-mva-blanco-200/20"
+      />
       <FooterBottom />
     </footer>
   );

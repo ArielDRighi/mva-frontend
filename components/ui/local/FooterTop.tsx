@@ -8,11 +8,11 @@ const FooterTop = () => {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/nosotros", label: "Nosotros" },
-    { href: "/clientes", label: "Clientes" },
+    // { href: "/clientes", label: "Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
   return (
-    <div className="max-w-screen-xl mx-auto md-tablet:h-20 flex justify-between w-full flex-col md-tablet:flex-row items-center py-4 md-tablet:py-0">
+    <div className="max-w-screen-xl mx-auto md-tablet:h-16 flex justify-between w-full flex-col md-tablet:flex-row items-center py-4 md-tablet:py-0">
       <div className="flex md-tablet:gap-10 gap-4 items-center md-tablet:pl-4 flex-col md-tablet:flex-row">
         {links.map(({ href, label }) => (
           <Link
@@ -27,10 +27,10 @@ const FooterTop = () => {
         ))}
       </div>
       <div className="flex md-tablet:mt-0 mt-4 justify-center items-center md-tablet:w-[140px] w-24 relative h-[60px] md-tablet:h-20 border border-[#7a7a7a] rounded-sm md-tablet:border-0 gap-4">
-        <Separator
+        {/* <Separator
           orientation="vertical"
           className="absolute left-0 h-16 bg-[#7a7a7a] hidden md-tablet:block"
-        />
+        /> */}
         <Link href="mailto:info@mvasrl.com">
           <Mail className="text-lg font-medium text-gray-300 duration-300 hover:text-mva-turquesa transition-colors after:scale-x-100" />
         </Link>
