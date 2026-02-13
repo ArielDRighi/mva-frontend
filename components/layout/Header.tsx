@@ -32,9 +32,9 @@ const Header = () => {
         backgroundColor:
           pathname === "/"
             ? isScrolled
-              ? "#068478"
+              ? "#15297C"
               : "rgba(0, 0, 0, 0)"
-            : "#068478",
+            : "#15297C",
       }}
       transition={{ duration: 0.3 }}
       className={`fixed top-0 w-full z-50 transition-all ${
@@ -49,7 +49,7 @@ const Header = () => {
         >
           <Link href="/">
             <Image
-              src="/images/MVA_LogoPNG.png"
+              src="/images/MVA_White_LogoPNG.png"
               alt="Logo"
               width={150}
               height={60}
