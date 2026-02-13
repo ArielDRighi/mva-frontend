@@ -45,7 +45,11 @@ export function ContactForm() {
     >
       <div>
         <Label htmlFor="fullName">Nombre y Apellido</Label>
-        <Input id="fullName" {...register("fullName")} placeholder="Ej: Juan Pérez" />
+        <Input
+          id="fullName"
+          {...register("fullName")}
+          placeholder="Ej: Juan Pérez"
+        />
         {errors.fullName && (
           <p className="text-red-500 text-sm">{errors.fullName.message}</p>
         )}
@@ -53,13 +57,23 @@ export function ContactForm() {
 
       <div>
         <Label htmlFor="email">Correo Electrónico</Label>
-        <Input id="email" {...register("email")} placeholder="correo@ejemplo.com" />
-        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+        <Input
+          id="email"
+          {...register("email")}
+          placeholder="correo@ejemplo.com"
+        />
+        {errors.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
       </div>
 
       <div>
         <Label htmlFor="subject">Asunto</Label>
-        <Input id="subject" {...register("subject")} placeholder="Motivo del mensaje" />
+        <Input
+          id="subject"
+          {...register("subject")}
+          placeholder="Motivo del mensaje"
+        />
         {errors.subject && (
           <p className="text-red-500 text-sm">{errors.subject.message}</p>
         )}
@@ -67,13 +81,21 @@ export function ContactForm() {
 
       <div>
         <Label htmlFor="message">Mensaje</Label>
-        <Textarea id="message" {...register("message")} placeholder="Escribe tu mensaje aquí..." />
+        <Textarea
+          id="message"
+          {...register("message")}
+          placeholder="Escribe tu mensaje aquí..."
+        />
         {errors.message && (
           <p className="text-red-500 text-sm">{errors.message.message}</p>
         )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting} className="w-full">
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-mva-turquesa hover:bg-mva-turquesa-400"
+      >
         {isSubmitting ? "Enviando..." : "Enviar"}
       </Button>
     </form>
