@@ -85,6 +85,7 @@ export function ContactForm() {
           id="message"
           {...register("message")}
           placeholder="Escribe tu mensaje aquí..."
+          className="resize-none"
         />
         {errors.message && (
           <p className="text-red-500 text-sm">{errors.message.message}</p>
