@@ -79,7 +79,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/Residuos.jpg",
+    image: "/images/Residuos.JPG",
     objectPosition: "0% 22%",
   },
   {
