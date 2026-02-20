@@ -17,7 +17,8 @@ const servicios = [
       "Cumplimiento de normas sanitarias",
       "Opciones para todo tipo de proyectos",
     ],
-    image: "/images/camionetaEnSalar.jpg",
+    image: "/images/ServicioLimpiezaCorporativa.png",
+    objectPosition: "0% 25%",
   },
   {
     title: "Limpieza final de obra",
@@ -29,7 +30,8 @@ const servicios = [
       "Rápida respuesta",
       "Manejo adecuado de residuos",
     ],
-    image: "/images/Inaguracion.jpg",
+    image: "/images/LimpiezaFinalObra.png",
+    objectPosition: "0% 21%",
   },
   {
     title: "Mantenimiento de áreas verdes",
@@ -53,7 +55,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/camionetaEnSalar.jpg",
+    image: "/images/AlquilerBañosQuimicos.jpeg",
   },
   {
     title: "Desagote",
@@ -65,7 +67,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/camionetaEnSalar.jpg",
+    image: "/images/ServicioDesagote.jpg",
   },
   {
     title: "Gestión de residuos",
@@ -77,7 +79,8 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/camionetaEnSalar.jpg",
+    image: "/images/Residuos.jpg",
+    objectPosition: "0% 22%",
   },
   {
     title: "Transporte de AVU",
@@ -89,7 +92,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/camionetaEnSalar.jpg",
+    image: "/images/ServicioTransporteAVU.jpeg",
   },
 ];
 
@@ -158,6 +161,11 @@ export default function ServiciosPage() {
                       width={600}
                       height={320}
                       className="rounded-lg object-cover h-full"
+                      style={
+                        servicio.objectPosition
+                          ? { objectPosition: servicio.objectPosition }
+                          : {}
+                      }
                     />
                   </div>
                 </div>

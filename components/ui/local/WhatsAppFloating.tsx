@@ -21,7 +21,7 @@ export default function WhatsAppFloating() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Abrir chat de WhatsApp"
-            className="fixed bottom-10 right-10 z-50 bg-[#25D366] hover:bg-[#1ebe57] text-white rounded-full p-4 shadow-lg shadow-slate-300 flex items-center justify-center"
+            className="fixed bottom-10 right-10 z-50 bg-[#25D366] hover:bg-[#1ebe57] text-white rounded-full p-4 shadow-md shadow-gray-500 flex items-center justify-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
