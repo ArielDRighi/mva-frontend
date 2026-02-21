@@ -23,14 +23,17 @@ const Hero = () => {
         transition={{ duration: 1.8, ease: "easeOut" }}
         className="absolute inset-0 z-0 overflow-hidden"
       >
-        <Image
-          src="/images/Inaguracion.jpg"
-          alt="Fondo llamativo"
-          fill
-          className="object-cover opacity-15 w-full h-full"
-          loading="lazy"
-          priority={false}
-        />
+        <div className="absolute inset-0 bg-black/60" />
+        <video
+          className="object-cover w-full h-full"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/images/HeroVideo.webm" type="video/webm" />
+          <source src="/images/HeroVideo.mp4" type="video/mp4" />
+        </video>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -71,7 +74,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-        className="absolute bottom-0 left-0 w-full text-mva-turquesa"
+        className="absolute -bottom-14 left-0 w-full text-mva-turquesa"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
@@ -81,7 +84,7 @@ const Hero = () => {
           ></path>
         </svg>
       </motion.div>
-      <div className="absolute bottom-0 left-0 w-full z-10">
+      <div className="absolute -bottom-12 left-0 w-full z-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
