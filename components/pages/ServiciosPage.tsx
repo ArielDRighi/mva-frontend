@@ -17,7 +17,7 @@ const servicios = [
       "Cumplimiento de normas sanitarias",
       "Opciones para todo tipo de proyectos",
     ],
-    image: "/images/ServicioLimpiezaCorporativa.png",
+    image: "/images/ServicioLimpiezaCorporativa.webp",
     objectPosition: "0% 25%",
   },
   {
@@ -30,7 +30,7 @@ const servicios = [
       "Rápida respuesta",
       "Manejo adecuado de residuos",
     ],
-    image: "/images/LimpiezaFinalObra.png",
+    image: "/images/LimpiezaFinalObra.webp",
     objectPosition: "0% 21%",
   },
   {
@@ -43,7 +43,7 @@ const servicios = [
       "Horarios flexibles",
       "Planes personalizados",
     ],
-    image: "/images/camionetas.jpg",
+    image: "/images/camionetas.webp",
   },
   {
     title: "Alquiler de baños químicos",
@@ -55,7 +55,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/AlquilerBañosQuimicos.jpeg",
+    image: "/images/AlquilerBañosQuimicos.webp",
   },
   {
     title: "Desagote",
@@ -67,7 +67,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/ServicioDesagote.jpg",
+    image: "/images/ServicioDesagote.webp",
   },
   {
     title: "Gestión de residuos",
@@ -79,7 +79,7 @@ const servicios = [
       "Mantenimiento preventivo",
       "Adaptación a necesidades específicas",
     ],
-    image: "/images/Residuos.JPG",
+    image: "/images/Residuos.webp",
     objectPosition: "0% 22%",
   },
   {
