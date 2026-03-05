@@ -19,15 +19,18 @@ export default function ContactoPage() {
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-start mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-mva-azul mb-4 font-montserrat">
+            <p className="text-xs sm-tablet:text-sm font-semibold tracking-[0.22em] uppercase text-mva-turquesa font-montserrat mb-3">
+              Estamos para ayudarte
+            </p>
+            <h1 className="text-4xl sm-tablet:text-5xl font-bold text-mva-azul font-montserrat mb-3">
               Contáctanos
             </h1>
-            <p className="text-xl text-textBlackTitle max-w-3xl mx-auto font-poppins">
+            <span className="block h-1 w-16 rounded-full bg-mva-turquesa mb-5" />
+            <p className="text-lg text-textBlackTitle max-w-2xl font-poppins leading-relaxed">
               Estamos a tu disposición para responder cualquier consulta y
               ofrecerte la mejor solución para tu proyecto.
             </p>

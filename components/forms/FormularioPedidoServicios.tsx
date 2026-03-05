@@ -198,7 +198,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           {/* Información de la empresa */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
+              <Label htmlFor="nombreEmpresa" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Cliente *
               </Label>
               <Input
@@ -211,7 +211,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="nombreContacto" className="text-sm font-medium">
+              <Label htmlFor="nombreContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Contacto *
               </Label>
               <Input
@@ -228,7 +228,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           </div>
           {/* CUIT */}
           <div className="space-y-2">
-            <Label htmlFor="cuit" className="text-sm font-medium">
+            <Label htmlFor="cuit" className="text-sm font-semibold text-mva-azul font-montserrat">
               CUIT (Opcional)
             </Label>
             <Input
@@ -243,7 +243,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           {/* Información de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="telefonoContacto" className="text-sm font-medium">
+              <Label htmlFor="telefonoContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Teléfono *
               </Label>
               <Input
@@ -258,7 +258,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="emailContacto" className="text-sm font-medium">
+              <Label htmlFor="emailContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Email *
               </Label>
               <Input
@@ -273,7 +273,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           </div>
           {/* Ubicación con desplegable */}
           <div className="space-y-2">
-            <Label htmlFor="ubicacion" className="text-sm font-medium">
+            <Label htmlFor="ubicacion" className="text-sm font-semibold text-mva-azul font-montserrat">
               Ubicación del Servicio *
             </Label>
             <div className="relative">
@@ -307,7 +307,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           </div>
           {/* Tipo de servicio — multi-select custom */}
           <div className="relative space-y-2" ref={serviciosRef}>
-            <Label className="text-sm font-medium">Tipo de Servicio *</Label>
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">Tipo de Servicio *</Label>
             {/* trigger */}
             <button
               type="button"
@@ -366,7 +366,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
           <div className="space-y-2">
             <Label
               htmlFor="detallesAdicionales"
-              className="text-sm font-medium"
+              className="text-sm font-semibold text-mva-azul font-montserrat"
             >
               Detalles Adicionales
             </Label>
@@ -381,12 +381,12 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
             />
           </div>
           {/* Información importante */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-mva-azul/5 border border-mva-azul/20 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-blue-800">
-                <p className="font-medium mb-1">Información del Servicio:</p>
-                <ul className="space-y-1 list-disc list-inside">
+              <Info className="w-5 h-5 text-mva-azul flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-mva-azul">
+                <p className="font-semibold font-montserrat mb-1">Información del Servicio:</p>
+                <ul className="space-y-1 list-disc list-inside font-poppins">
                   {/* <li>
                     El servicio incluye instalación, mantenimiento y retiro.
                   </li> */}
@@ -414,7 +414,7 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
             <Button
               type="submit"
               disabled={cargando || !validarFormulario()}
-              className="flex-1 bg-blue-500 hover:bg-blue-600 text-white"
+              className="flex-1 bg-mva-turquesa hover:bg-mva-turquesa-400 text-white font-montserrat font-semibold"
             >
               {cargando ? (
                 <>

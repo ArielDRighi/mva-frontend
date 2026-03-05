@@ -170,7 +170,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           {/* Información de la empresa */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
+              <Label htmlFor="nombreEmpresa" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Cliente *
               </Label>
               <Input
@@ -183,7 +183,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="nombreContacto" className="text-sm font-medium">
+              <Label htmlFor="nombreContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Contacto *
               </Label>
               <Input
@@ -202,7 +202,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           {/* Información de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="telefonoContacto" className="text-sm font-medium">
+              <Label htmlFor="telefonoContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Teléfono *
               </Label>
               <Input
@@ -217,7 +217,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="emailContacto" className="text-sm font-medium">
+              <Label htmlFor="emailContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Email *
               </Label>
               <Input
@@ -233,27 +233,35 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
 
           {/* Tipo de reclamo */}
           <div className="space-y-2">
-            <Label htmlFor="tipoReclamo" className="text-sm font-medium">
+            <Label htmlFor="tipoReclamo" className="text-sm font-semibold text-mva-azul font-montserrat">
               Tipo de Reclamo *
             </Label>
-            <select
-              id="tipoReclamo"
-              value={formulario.tipoReclamo}
-              onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Selecciona un tipo</option>
-              {tiposReclamo.map((tipo) => (
-                <option key={tipo.value} value={tipo.value}>
-                  {tipo.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="tipoReclamo"
+                value={formulario.tipoReclamo}
+                onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
+                className="w-full appearance-none px-3 py-2 pr-9 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-mva-turquesa"
+              >
+                <option value="">Selecciona un tipo</option>
+                {tiposReclamo.map((tipo) => (
+                  <option key={tipo.value} value={tipo.value}>
+                    {tipo.label}
+                  </option>
+                ))}
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
 
           {/* Descripción */}
           <div className="space-y-2">
-            <Label htmlFor="descripcion" className="text-sm font-medium">
+            <Label htmlFor="descripcion" className="text-sm font-semibold text-mva-azul font-montserrat">
               Descripción del Reclamo *
             </Label>
             <Textarea
@@ -266,12 +274,12 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           </div>
 
           {/* Alerta informativa */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <div className="bg-mva-azul/5 border border-mva-azul/20 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-amber-800">
-                <p className="font-medium mb-1">Importante:</p>
-                <p>
+              <AlertTriangle className="w-5 h-5 text-mva-azul flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-mva-azul">
+                <p className="font-semibold font-montserrat mb-1">Importante:</p>
+                <p className="font-poppins">
                   Tu reclamo será procesado en un plazo máximo de 48 horas
                   hábiles. Te contactaremos al email proporcionado con el
                   seguimiento correspondiente.
@@ -294,7 +302,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
             <Button
               type="submit"
               disabled={cargando || !validarFormulario()}
-              className="flex-1 bg-red-500 hover:bg-red-600 text-white"
+              className="flex-1 bg-mva-azul hover:bg-mva-azul-400 text-white font-montserrat font-semibold"
             >
               {cargando ? (
                 <>

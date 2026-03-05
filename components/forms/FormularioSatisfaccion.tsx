@@ -244,7 +244,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           {/* Información de la empresa */}
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
+              <Label htmlFor="nombreEmpresa" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Cliente *
               </Label>
               <Input
@@ -259,7 +259,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
             {/* Tipo de servicio — multi-select custom */}
             <div className="relative space-y-2" ref={serviciosRef}>
-              <Label className="text-sm font-medium">Tipo de Servicio *</Label>
+              <Label className="text-sm font-semibold text-mva-azul font-montserrat">Tipo de Servicio *</Label>
               {/* trigger */}
               <button
                 type="button"
@@ -321,7 +321,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="nombreContacto" className="text-sm font-medium">
+            <Label htmlFor="nombreContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
               Nombre, Apellido y Contacto (opcional)
             </Label>
             <Input
@@ -336,7 +336,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 1: Contacto inicial */}
           <div className="space-y-3">
-            <Label className="text-sm font-medium">
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">
               Contacto inicial ¿Cómo conoció Ud. a MVA, por qué medio de
               comunicación? *
             </Label>
@@ -368,7 +368,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                         );
                       }
                     }}
-                    className="rounded border-gray-300"
+                    className="rounded border-gray-300 accent-[#08B0A0] w-4 h-4"
                   />
                   <span className="text-sm">{opcion}</span>
                 </label>
@@ -378,7 +378,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 2: Tiempo de respuesta */}
           <div className="space-y-3">
-            <Label className="text-sm font-medium">
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">
               Al momento de solicitar una cotización, ¿En cuánto tiempo recibió
               respuesta a su pedido? *
             </Label>
@@ -395,7 +395,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                     name="tiempoRespuesta"
                     checked={formulario.tiempoRespuesta === opcion}
                     onChange={() => manejarCambio("tiempoRespuesta", opcion)}
-                    className="border-gray-300"
+                    className="border-gray-300 accent-[#08B0A0] w-4 h-4"
                   />
                   <span className="text-sm">{opcion}</span>
                 </label>
@@ -405,7 +405,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 3: Calificación de atención */}
           <div className="space-y-3">
-            <Label className="text-sm font-medium">
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">
               ¿Cómo calificaría la atención recibida por parte del equipo
               comercial de MVA SRL en el contacto inicial? *
             </Label>
@@ -414,7 +414,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 formulario.calificacionAtencion,
                 "calificacionAtencion",
               )}
-              <span className="text-sm text-slate-600">
+              <span className="text-sm font-semibold text-mva-azul font-montserrat">
                 {formulario.calificacionAtencion > 0
                   ? `${formulario.calificacionAtencion}/5`
                   : "Sin calificar"}
@@ -424,7 +424,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 3: Calificación del servicio */}
           <div className="space-y-3">
-            <Label className="text-sm font-medium">
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">
               Cómo evalúa la calidad del servicio ofrecido por MVA? *
             </Label>
             <div className="flex items-center gap-3">
@@ -432,7 +432,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 formulario.calificacionServicio,
                 "calificacionServicio",
               )}
-              <span className="text-sm text-slate-600">
+              <span className="text-sm font-semibold text-mva-azul font-montserrat">
                 {formulario.calificacionServicio > 0
                   ? `${formulario.calificacionServicio}/5`
                   : "Sin calificar"}
@@ -442,7 +442,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 9: Recomendación */}
           <div className="space-y-3">
-            <Label className="text-sm font-medium">
+            <Label className="text-sm font-semibold text-mva-azul font-montserrat">
               ¿Recomendaría a MVA SRL a otra empresa o colega? *
             </Label>
             <div className="flex gap-4">
@@ -451,15 +451,15 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 onClick={() => manejarCambio("recomendaria", "Sí, sin dudas")}
                 className={`flex-1 p-4 rounded-lg border-2 transition-all ${
                   formulario.recomendaria === "Sí, sin dudas"
-                    ? "border-green-500 bg-green-50"
+                    ? "border-mva-turquesa bg-mva-turquesa/10"
                     : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
-                    className={`font-medium ${
+                    className={`font-semibold font-montserrat text-sm ${
                       formulario.recomendaria === "Sí, sin dudas"
-                        ? "text-green-700"
+                        ? "text-mva-turquesa"
                         : "text-slate-600"
                     }`}
                   >
@@ -478,7 +478,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
-                    className={`font-medium ${
+                    className={`font-semibold font-montserrat text-sm ${
                       formulario.recomendaria === "Tal vez"
                         ? "text-amber-700"
                         : "text-slate-600"
@@ -499,7 +499,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
               >
                 <div className="flex items-center justify-center gap-2">
                   <span
-                    className={`font-medium ${
+                    className={`font-semibold font-montserrat text-sm ${
                       formulario.recomendaria === "No"
                         ? "text-red-700"
                         : "text-slate-600"
@@ -514,7 +514,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 10: Comentarios */}
           <div className="space-y-2">
-            <Label htmlFor="comentarios" className="text-sm font-medium">
+            <Label htmlFor="comentarios" className="text-sm font-semibold text-mva-azul font-montserrat">
               ¿Desea dejar algún comentario adicional sobre la atención
               comercial o sugerencias de mejora?
             </Label>
@@ -528,14 +528,14 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           </div>
 
           {/* Mensaje de agradecimiento */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="bg-mva-turquesa/5 border border-mva-turquesa/30 rounded-lg p-4">
             <div className="flex items-center gap-3">
-              <Heart className="w-5 h-5 text-green-600" />
-              <div className="text-sm text-green-800">
-                <p className="font-medium">
+              <Heart className="w-5 h-5 text-mva-turquesa flex-shrink-0" />
+              <div className="text-sm text-mva-turquesa-500">
+                <p className="font-semibold font-montserrat">
                   ¡Tu opinión es muy importante para nosotros!
                 </p>
-                <p>Nos ayuda a mejorar continuamente nuestros servicios.</p>
+                <p className="font-poppins">Nos ayuda a mejorar continuamente nuestros servicios.</p>
               </div>
             </div>
           </div>
@@ -554,7 +554,7 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
             <Button
               type="submit"
               disabled={cargando || !validarFormulario()}
-              className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+              className="flex-1 bg-mva-celeste hover:bg-mva-celeste-400 text-white font-montserrat font-semibold"
             >
               {cargando ? (
                 <>
