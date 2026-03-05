@@ -118,10 +118,10 @@ export default function ServiciosPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat">
               Nuestros Servicios
             </h1>
-            <p className="text-xl text-mva-blanco-100 max-w-3xl mx-auto leading-relaxed font-poppins">
-              Ofrecemos soluciones integrales de alta calidad para proyectos
-              mineros e industriales, cumpliendo con los más altos estándares de
-              seguridad y eficiencia.
+            <p className="text-lg md:text-xl text-mva-blanco-100 max-w-4xl mx-auto leading-relaxed font-poppins">
+              Ofrecemos soluciones integrales para proyectos mineros e
+              industriales cumpliendo con los más altos estándares de calidad ,
+              seguridad y compromiso ambiental.
             </p>
           </motion.div>
         </div>
