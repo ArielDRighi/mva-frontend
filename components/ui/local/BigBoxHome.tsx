@@ -43,7 +43,7 @@ const BigBoxHome = ({ template }: { template: number }) => {
         <div
           className="flex flex-col p-10 relative h-[324px] bg-cover bg-center justify-between"
           style={{
-            backgroundImage: "url('/images/camionetas.jpg')",
+            backgroundImage: "url('/images/camionetas.webp')",
             backgroundBlendMode: "overlay",
           }}
         >
