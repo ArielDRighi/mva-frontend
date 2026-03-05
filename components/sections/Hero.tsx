@@ -42,14 +42,41 @@ const Hero = () => {
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-20 flex flex-col items-center"
       >
-        <h1 className="text-4xl sm-tablet:text-5xl md-tablet:text-6xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg max-w-4xl">
-          SOLUCIONES INTEGRALES PARA CADA ENTORNO DE TRABAJO
-          {/* <br />
-          <span className="text-mva-turquesa">Innovación y Tecnología</span> */}
+        {/* Eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+          className="mb-5 flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-4 py-1.5"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-mva-turquesa" />
+          <span className="text-xs sm-tablet:text-sm font-semibold tracking-[0.2em] uppercase text-white/80 font-montserrat">
+            Salta, Argentina · Industria Minera
+          </span>
+        </motion.div>
+
+        {/* Title */}
+        <h1 className="text-4xl sm-tablet:text-5xl md-tablet:text-[64px] md-tablet:leading-[1.1] font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg max-w-4xl text-center">
+          SOLUCIONES{" "}
+          <span className="relative inline-block text-mva-turquesa">
+            INTEGRALES
+            <span className="absolute bottom-0 left-0 h-[3px] w-full rounded-full bg-mva-turquesa/50" />
+          </span>
+          <br />
+          PARA CADA ENTORNO DE TRABAJO
         </h1>
-        <p className="mt-5 text-xl text-mva-blanco-200 max-w-2xl font-poppins leading-relaxed">
-          Un servicio profesional con compromiso, eficiencia y calidad
-        </p>
+
+        {/* Divider + subtitle */}
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-10 bg-mva-turquesa/60" />
+            <span className="h-1.5 w-1.5 rounded-full bg-mva-turquesa" />
+            <span className="h-px w-10 bg-mva-turquesa/60" />
+          </div>
+          <p className="text-lg sm-tablet:text-xl text-white/75 max-w-xl font-poppins leading-relaxed tracking-wide text-center">
+            Un servicio profesional con compromiso, eficiencia y calidad
+          </p>
+        </div>
         <motion.div
           initial={{ scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0 }}
