@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
   Accordion,
@@ -8,11 +9,26 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const AsksData = [
+type ListItem = { text: string; href?: string };
+
+type AskItem =
+  | { question: string; answer: string; items?: never }
+  | { question: string; answer: string; items: ListItem[] };
+
+const AsksData: AskItem[] = [
   {
     question: "¿Qué tipo de servicios ofrece MVA SRL?",
     answer:
-      "Ofrecemos una amplia gama de servicios especializados: Alquiler de Baños Químicos, Servicio de Desagote de cámaras con tanques de 10m³ a 30m³, Mantenimiento de espacios Verdes, Servicio de Vigilancia, Alquiler de Garitas de Seguridad, Servicio de Limpieza de Oficinas, Limpieza y mantenimiento de Campamento, y Servicio de Fumigaciones. Todos nuestros servicios están diseñados para la industria minera e industrial.",
+      "Ofrecemos una amplia gama de servicios especializados: Alquiler de Baños Químicos, Servicio de Desagote de cámaras sépticas y biodigestores, Mantenimiento de espacios Verdes, Servicio de Limpieza de Oficinas, Limpieza final de obra. Servicios de Gestión de residuos y Servicios de Fumigación. Todos nuestros servicios están diseñados para la industria minera e industrial.",
+  },
+  {
+    question: "¿Cómo solicito una cotización?",
+    answer: "Podés comunicarte por:",
+    items: [
+      { text: "Teléfono / WhatsApp: 387-5555680" },
+      { text: "A través del formulario de contacto", href: "/contacto" },
+      { text: "Vía mail a info@mvasrl.com" },
+    ],
   },
   {
     question: "¿Cuál es el horario de atención?",
@@ -51,7 +67,7 @@ const Asks = () => {
         {/* Sección de FAQ con acordeón */}
         <div className="mt-12">
           <Accordion type="single" collapsible className="w-full">
-            {AsksData.map(({ question, answer }, index) => (
+            {AsksData.map(({ question, answer, items }, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -71,7 +87,26 @@ const Asks = () => {
                     {question}
                   </AccordionTrigger>
                   <AccordionContent className="text-textBlackTitle font-poppins">
-                    {answer}
+                    <p>{answer}</p>
+                    {items && (
+                      <ul className="mt-2 list-none space-y-2 pl-2">
+                        {items.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="mt-[6px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                            {item.href ? (
+                              <Link
+                                href={item.href}
+                                className="text-mva-turquesa underline underline-offset-2 hover:text-mva-turquesa-400 transition-colors"
+                              >
+                                {item.text}
+                              </Link>
+                            ) : (
+                              item.text
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               </motion.div>
