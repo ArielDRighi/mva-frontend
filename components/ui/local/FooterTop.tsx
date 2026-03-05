@@ -8,7 +8,7 @@ const FooterTop = () => {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/nosotros", label: "Nosotros" },
-    // { href: "/clientes", label: "Clientes" },
+    { href: "/clientes", label: "Portal Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
   return (
