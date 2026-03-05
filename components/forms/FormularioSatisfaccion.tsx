@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Send, Loader2, Heart } from "lucide-react";
 import { toast } from "sonner";
 import { getFullApiUrl, API_ENDPOINTS } from "@/lib/api-config";
+import { opcionesServicios } from "./FormularioPedidoServicios";
 
 interface FormularioSatisfaccionProps {
   onClose: () => void;
@@ -19,18 +20,21 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
   const [formulario, setFormulario] = useState({
     // Información de contacto
     nombreEmpresa: "",
-    lugarProyecto: "",
+    servicios: [] as string[],
     nombreContacto: "",
 
     // Preguntas de la encuesta
     contactoInicial: [] as string[],
     tiempoRespuesta: "",
     calificacionAtencion: 0,
+    calificacionServicio: 0,
     accesibilidadContacto: "",
     relacionPrecioValor: "",
     recomendaria: "" as string,
     comentarios: "",
   });
+  const [serviciosAbierto, setServiciosAbierto] = useState(false);
+  const serviciosRef = useRef<HTMLDivElement>(null);
 
   const manejarCambio = (campo: string, valor: any) => {
     setFormulario((prev) => ({
@@ -41,23 +45,19 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
   const validarFormulario = () => {
     // Campos básicos requeridos
-    const camposRequeridos = [
-      "nombreEmpresa",
-      "lugarProyecto",
-    ];
+    const camposRequeridos = ["nombreEmpresa", "servicios"];
 
-    const camposCompletos = camposRequeridos.every(
-      (campo) => {
-        const valor = formulario[campo as keyof typeof formulario];
-        return valor !== "" && valor !== null && valor !== undefined;
-      }
-    );
+    const camposCompletos = camposRequeridos.every((campo) => {
+      const valor = formulario[campo as keyof typeof formulario];
+      return valor !== "" && valor !== null && valor !== undefined;
+    });
 
     // Validar preguntas específicas requeridas según el DTO
     const preguntasCompletas = [
       formulario.contactoInicial.length > 0, // medio_contacto
       formulario.tiempoRespuesta !== "", // tiempo_respuesta
       formulario.calificacionAtencion > 0, // calificacion_atencion
+      formulario.calificacionServicio > 0, // calificacion_servicio
       formulario.accesibilidadContacto !== "", // accesibilidad_comercial
       formulario.relacionPrecioValor !== "", // relacion_precio_valor
       formulario.recomendaria !== "", // recomendaria
@@ -68,47 +68,63 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
       preguntasCompletas,
       formulario: {
         nombreEmpresa: formulario.nombreEmpresa,
-        lugarProyecto: formulario.lugarProyecto,
+        servicios: formulario.servicios,
         contactoInicial: formulario.contactoInicial,
         tiempoRespuesta: formulario.tiempoRespuesta,
         calificacionAtencion: formulario.calificacionAtencion,
+        calificacionServicio: formulario.calificacionServicio,
         accesibilidadContacto: formulario.accesibilidadContacto,
         relacionPrecioValor: formulario.relacionPrecioValor,
         recomendaria: formulario.recomendaria,
-      }
+      },
     });
 
     return camposCompletos && preguntasCompletas;
   };
 
   // Función de mapeo de datos para el backend
-const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
-  const mappedData = {
-    nombre_empresa: formData.nombreEmpresa.trim(),
-    lugar_proyecto: formData.lugarProyecto.trim(),
-    contacto: formData.nombreContacto.trim() || null,
-    medio_contacto: formData.contactoInicial.join(", "),
-    tiempo_respuesta: formData.tiempoRespuesta,
-    calificacion_atencion: formData.calificacionAtencion,
-    accesibilidad_comercial: formData.accesibilidadContacto,
-    relacion_precio_valor: formData.relacionPrecioValor,
-    recomendaria: formData.recomendaria,
-    comentario_adicional: formData.comentarios.trim() || null,
+  const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
+    const mappedData = {
+      nombre_empresa: formData.nombreEmpresa.trim(),
+      servicios: formData.servicios,
+      contacto: formData.nombreContacto.trim() || null,
+      medio_contacto: formData.contactoInicial.join(", "),
+      tiempo_respuesta: formData.tiempoRespuesta,
+      calificacion_atencion: formData.calificacionAtencion,
+      calificacion_servicio: formData.calificacionServicio,
+      accesibilidad_comercial: formData.accesibilidadContacto,
+      relacion_precio_valor: formData.relacionPrecioValor,
+      recomendaria: formData.recomendaria,
+      comentario_adicional: formData.comentarios.trim() || null,
+    };
+
+    console.log("Datos originales del formulario:", formData);
+    console.log("Datos mapeados para el backend:", mappedData);
+
+    // Verificar que los campos requeridos no estén vacíos
+    const camposRequeridos = [
+      "nombre_empresa",
+      "servicios",
+      "medio_contacto",
+      "tiempo_respuesta",
+      "accesibilidad_comercial",
+      "relacion_precio_valor",
+      "recomendaria",
+    ];
+    camposRequeridos.forEach((campo) => {
+      if (
+        !mappedData[campo as keyof typeof mappedData] ||
+        mappedData[campo as keyof typeof mappedData] === ""
+      ) {
+        console.warn(
+          `Campo requerido vacío: ${campo}`,
+          mappedData[campo as keyof typeof mappedData],
+        );
+      }
+    });
+
+    return mappedData;
   };
-  
-  console.log("Datos originales del formulario:", formData);
-  console.log("Datos mapeados para el backend:", mappedData);
-  
-  // Verificar que los campos requeridos no estén vacíos
-  const camposRequeridos = ['nombre_empresa', 'lugar_proyecto', 'medio_contacto', 'tiempo_respuesta', 'accesibilidad_comercial', 'relacion_precio_valor', 'recomendaria'];
-  camposRequeridos.forEach(campo => {
-    if (!mappedData[campo as keyof typeof mappedData] || mappedData[campo as keyof typeof mappedData] === '') {
-      console.warn(`Campo requerido vacío: ${campo}`, mappedData[campo as keyof typeof mappedData]);
-    }
-  });
-  
-  return mappedData;
-};
 
   const renderEstrellas = (calificacion: number, campo: string) => {
     return (
@@ -146,8 +162,14 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
       // Mapear los datos según el formato esperado por el backend
       const encuestaData = mapearDatosEncuestaSatisfaccion(formulario);
 
-      console.log("URL de envío:", getFullApiUrl(API_ENDPOINTS.SATISFACTION_SURVEYS));
-      console.log("Datos finales a enviar:", JSON.stringify(encuestaData, null, 2));
+      console.log(
+        "URL de envío:",
+        getFullApiUrl(API_ENDPOINTS.SATISFACTION_SURVEYS),
+      );
+      console.log(
+        "Datos finales a enviar:",
+        JSON.stringify(encuestaData, null, 2),
+      );
 
       const respuesta = await fetch(
         getFullApiUrl(API_ENDPOINTS.SATISFACTION_SURVEYS),
@@ -157,13 +179,13 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(encuestaData),
-        }
+        },
       );
 
       console.log("Respuesta del servidor:", {
         status: respuesta.status,
         statusText: respuesta.statusText,
-        ok: respuesta.ok
+        ok: respuesta.ok,
       });
 
       if (respuesta.ok) {
@@ -171,15 +193,16 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
         console.log("Encuesta enviada exitosamente:", resultado);
 
         toast.success(
-          "¡Gracias por tu feedback! Tu opinión es muy valiosa para nosotros."
+          "¡Gracias por tu feedback! Tu opinión es muy valiosa para nosotros.",
         );
         setFormulario({
           nombreEmpresa: "",
-          lugarProyecto: "",
+          servicios: [],
           nombreContacto: "",
           contactoInicial: [],
           tiempoRespuesta: "",
           calificacionAtencion: 0,
+          calificacionServicio: 0,
           accesibilidadContacto: "",
           relacionPrecioValor: "",
           recomendaria: "",
@@ -193,7 +216,7 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
         console.error("Error del servidor:", {
           status: respuesta.status,
           statusText: respuesta.statusText,
-          errorData
+          errorData,
         });
         throw new Error(errorData.message || "Error al enviar la encuesta");
       }
@@ -205,6 +228,15 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
     }
   };
 
+  const toggleServicio = (valor: string) => {
+    setFormulario((prev) => ({
+      ...prev,
+      servicios: prev.servicios.includes(valor)
+        ? prev.servicios.filter((s) => s !== valor)
+        : [...prev.servicios, valor],
+    }));
+  };
+
   return (
     <Card className="border-0 shadow-none">
       <CardContent className="p-0">
@@ -213,29 +245,78 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
-                Nombre de la empresa *
+                Nombre del Cliente *
               </Label>
               <Input
                 id="nombreEmpresa"
                 type="text"
-                placeholder="Ingresa el nombre de tu empresa"
+                placeholder="Ingresa el nombre del cliente"
                 value={formulario.nombreEmpresa}
                 onChange={(e) => manejarCambio("nombreEmpresa", e.target.value)}
                 className="w-full"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="lugarProyecto" className="text-sm font-medium">
-                Lugar o Proyecto donde se instalaron los baños *
-              </Label>
-              <Input
-                id="lugarProyecto"
-                type="text"
-                placeholder="Ej: Mina San José, Proyecto Cerro Negro, etc."
-                value={formulario.lugarProyecto}
-                onChange={(e) => manejarCambio("lugarProyecto", e.target.value)}
-                className="w-full"
-              />
+
+            {/* Tipo de servicio — multi-select custom */}
+            <div className="relative space-y-2" ref={serviciosRef}>
+              <Label className="text-sm font-medium">Tipo de Servicio *</Label>
+              {/* trigger */}
+              <button
+                type="button"
+                onClick={() => setServiciosAbierto((prev) => !prev)}
+                className="w-full flex items-center justify-between px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left"
+              >
+                <span
+                  className={
+                    formulario.servicios.length === 0
+                      ? "text-[#0f172a] text-[15px]"
+                      : ""
+                  }
+                >
+                  {formulario.servicios.length === 0
+                    ? "Selecciona un servicio"
+                    : formulario.servicios.length === 1
+                      ? formulario.servicios[0]
+                      : `${formulario.servicios.length} servicios seleccionados`}
+                </span>
+                <svg
+                  className={`w-4 h-4 text-slate-500 transition-transform ${serviciosAbierto ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              {/* dropdown */}
+              {serviciosAbierto && (
+                <div className="absolute w-full top-full border border-slate-600 rounded-md bg-[#3a3a3a]/85 backdrop-blur-sm shadow-lg max-h-56 overflow-y-auto">
+                  {opcionesServicios.map((opcion) => {
+                    const seleccionado = formulario.servicios.includes(
+                      opcion.value,
+                    );
+                    return (
+                      <div
+                        key={opcion.value}
+                        onClick={() => toggleServicio(opcion.value)}
+                        className="flex items-center px-3 py-[7px] cursor-pointer hover:bg-[#5a5a5a] select-none"
+                      >
+                        <span className="w-5 shrink-0 text-white text-sm">
+                          {seleccionado ? "✓" : ""}
+                        </span>
+                        <span className="text-sm text-white">
+                          {opcion.label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 
@@ -256,7 +337,7 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
           {/* Pregunta 1: Contacto inicial */}
           <div className="space-y-3">
             <Label className="text-sm font-medium">
-              Contacto inicial ¿Cómo conoció Ud. a MVA, por que medio de
+              Contacto inicial ¿Cómo conoció Ud. a MVA, por qué medio de
               comunicación? *
             </Label>
             <div className="grid grid-cols-1 gap-2">
@@ -282,8 +363,8 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
                         manejarCambio(
                           "contactoInicial",
                           formulario.contactoInicial.filter(
-                            (item) => item !== opcion
-                          )
+                            (item) => item !== opcion,
+                          ),
                         );
                       }
                     }}
@@ -306,7 +387,7 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
                 "Entre 0 y 3 días",
                 "Entre 3 y 5 días",
                 "Entre 5 y 7 días",
-                "Otro",
+                "Mayor a 7 días",
               ].map((opcion) => (
                 <label key={opcion} className="flex items-center space-x-2">
                   <input
@@ -331,7 +412,7 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
             <div className="flex items-center gap-3">
               {renderEstrellas(
                 formulario.calificacionAtencion,
-                "calificacionAtencion"
+                "calificacionAtencion",
               )}
               <span className="text-sm text-slate-600">
                 {formulario.calificacionAtencion > 0
@@ -341,57 +422,21 @@ const mapearDatosEncuestaSatisfaccion = (formData: typeof formulario) => {
             </div>
           </div>
 
-          {/* Pregunta 5: Accesibilidad del contacto */}
+          {/* Pregunta 3: Calificación del servicio */}
           <div className="space-y-3">
             <Label className="text-sm font-medium">
-              ¿Qué tan accesible le resulta el contacto con el área comercial
-              ante consultas o necesidades? (Ej. Pedido de nuevo baño, cambio en
-              la frecuencia, certificaciones, facturación, etc) *
+              Cómo evalúa la calidad del servicio ofrecido por MVA? *
             </Label>
-            <div className="space-y-2">
-              {[
-                "Muy accesible",
-                "Accesible",
-                "Poco accesible",
-                "Inaccesible",
-              ].map((opcion) => (
-                <label key={opcion} className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="accesibilidadContacto"
-                    checked={formulario.accesibilidadContacto === opcion}
-                    onChange={() =>
-                      manejarCambio("accesibilidadContacto", opcion)
-                    }
-                    className="border-gray-300"
-                  />
-                  <span className="text-sm">{opcion}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Pregunta 7: Relación precio/valor */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium">
-              ¿Cómo evalúa la relación precio / valor del servicio ofrecido por
-              MVA SRL? *
-            </Label>
-            <div className="space-y-2">
-              {["Muy buena", "Aceptable", "Mejorable", "Mala"].map((opcion) => (
-                <label key={opcion} className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="relacionPrecioValor"
-                    checked={formulario.relacionPrecioValor === opcion}
-                    onChange={() =>
-                      manejarCambio("relacionPrecioValor", opcion)
-                    }
-                    className="border-gray-300"
-                  />
-                  <span className="text-sm">{opcion}</span>
-                </label>
-              ))}
+            <div className="flex items-center gap-3">
+              {renderEstrellas(
+                formulario.calificacionServicio,
+                "calificacionServicio",
+              )}
+              <span className="text-sm text-slate-600">
+                {formulario.calificacionServicio > 0
+                  ? `${formulario.calificacionServicio}/5`
+                  : "Sin calificar"}
+              </span>
             </div>
           </div>
 

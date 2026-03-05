@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,41 +12,96 @@ interface FormularioPedidoServiciosProps {
   onClose: () => void;
 }
 
-const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ onClose }) => {
-  const [cargando, setCargando] = useState(false);  const [formulario, setFormulario] = useState({
+export const opcionesServicios = [
+  {
+    value: "Alquiler de baños químicos",
+    label: "Alquiler de baños químicos",
+  },
+  { value: "Desagote de efluentes", label: "Desagote de efluentes" },
+  { value: "Limpieza de oficina", label: "Limpieza de oficina" },
+  { value: "Limpieza final de obra,", label: "Limpieza final de obra," },
+  {
+    value: "Servicio de fumigación y control de plagas",
+    label: "Servicio de fumigación y control de plagas",
+  },
+  { value: "Gestión de residuos", label: "Gestión de residuos" },
+  {
+    value: "Mantenimiento de espacios verdes",
+    label: "Mantenimiento de espacios verdes",
+  },
+  {
+    value: "Transporte de Aceite Vegetal Usado",
+    label: "Transporte de Aceite Vegetal Usado",
+  },
+  { value: "OTRO", label: "Otro" },
+];
+
+const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({
+  onClose,
+}) => {
+  const [cargando, setCargando] = useState(false);
+  const [formulario, setFormulario] = useState({
     nombreEmpresa: "",
     nombreContacto: "",
     telefonoContacto: "",
     emailContacto: "",
     tipoServicio: "INSTALACION",
     ubicacion: "",
+    servicios: [] as string[],
     detallesAdicionales: "",
-    cuit: ""
+    cuit: "",
   });
+  const [serviciosAbierto, setServiciosAbierto] = useState(false);
+  const serviciosRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        serviciosRef.current &&
+        !serviciosRef.current.contains(e.target as Node)
+      ) {
+        setServiciosAbierto(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const opcionesUbicacion = [
     { value: "SALTA_CAPITAL", label: "Salta Capital" },
     { value: "PROYECTO_MINERO", label: "Proyecto Minero" },
-    { value: "OTRO", label: "Otro" }
+    { value: "OTRO", label: "Otro" },
   ];
 
   const manejarCambio = (campo: string, valor: string) => {
-    setFormulario(prev => ({
+    setFormulario((prev) => ({
       ...prev,
-      [campo]: valor
+      [campo]: valor,
+    }));
+  };
+
+  const toggleServicio = (valor: string) => {
+    setFormulario((prev) => ({
+      ...prev,
+      servicios: prev.servicios.includes(valor)
+        ? prev.servicios.filter((s) => s !== valor)
+        : [...prev.servicios, valor],
     }));
   };
 
   const validarFormulario = () => {
     const camposRequeridos = [
       "nombreEmpresa",
-      "nombreContacto", 
+      "nombreContacto",
       "telefonoContacto",
       "emailContacto",
-      "ubicacion"
+      "ubicacion",
     ];
-    
-    return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
+    const camposOk = camposRequeridos.every(
+      (campo) =>
+        (formulario[campo as keyof typeof formulario] as string).trim() !== "",
+    );
+    return camposOk && formulario.servicios.length > 0;
   };
 
   // Función de mapeo de datos para el backend
@@ -58,62 +113,73 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
       telefono: formData.telefonoContacto,
       nombreEmpresa: formData.nombreEmpresa,
       zonaDireccion: formData.ubicacion,
-      
+
       // Campos opcionales
       rolPersona: "Contacto",
       cuit: formData.cuit || "",
       rubroEmpresa: "", // Campo eliminado del formulario
       cantidadBaños: "1-5", // Valor por defecto ya que se eliminó del formulario
-      tipoEvento: "Servicio de baños químicos",
+      tipoEvento: formData.servicios.join(", "),
       duracionAlquiler: "Por definir", // Valor por defecto ya que se eliminó del formulario
       startDate: new Date().toISOString(), // Fecha actual ya que se eliminó fecha deseada
-      comentarios: formData.detallesAdicionales || ""
+      comentarios: formData.detallesAdicionales || "",
     };
   };
 
   const enviarPedido = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validarFormulario()) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
     }
 
     setCargando(true);
-      try {
+    try {
       // Mapear los datos según el formato esperado por el backend
       const solicitudData = mapearDatosSolicitudServicio(formulario);
-      
-      console.log('Datos a enviar:', solicitudData); // Para debug
-      console.log('URL de envío:', getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE));
 
-      const respuesta = await fetch(getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      console.log("Datos a enviar:", solicitudData); // Para debug
+      console.log(
+        "URL de envío:",
+        getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE),
+      );
+
+      const respuesta = await fetch(
+        getFullApiUrl(API_ENDPOINTS.ASK_FOR_SERVICE),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(solicitudData),
         },
-        body: JSON.stringify(solicitudData),
-      });
+      );
 
       if (respuesta.ok) {
         const resultado = await respuesta.json();
-        console.log('Solicitud enviada exitosamente:', resultado);
-        
-        toast.success("Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.");        setFormulario({
+        console.log("Solicitud enviada exitosamente:", resultado);
+
+        toast.success(
+          "Solicitud de servicio enviada exitosamente. Te contactaremos para coordinar los detalles.",
+        );
+        setFormulario({
           nombreEmpresa: "",
           nombreContacto: "",
           telefonoContacto: "",
           emailContacto: "",
           tipoServicio: "INSTALACION",
           ubicacion: "",
+          servicios: [],
           detallesAdicionales: "",
-          cuit: ""
+          cuit: "",
         });
         setTimeout(() => {
           onClose();
-        }, 1500);      } else {
+        }, 1500);
+      } else {
         const errorData = await respuesta.json().catch(() => ({}));
-        console.error('Error del servidor:', errorData);
+        console.error("Error del servidor:", errorData);
         throw new Error(errorData.message || "Error al enviar la solicitud");
       }
     } catch (error) {
@@ -127,16 +193,18 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
   return (
     <Card className="border-0 shadow-none mx-7">
       <CardContent className="p-0">
-        <form onSubmit={enviarPedido} className="space-y-6">          {/* Información de la empresa */}
+        <form onSubmit={enviarPedido} className="space-y-6">
+          {" "}
+          {/* Información de la empresa */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
-                Nombre de la Empresa *
+                Nombre del Cliente *
               </Label>
               <Input
                 id="nombreEmpresa"
                 type="text"
-                placeholder="Ingresa el nombre de tu empresa"
+                placeholder="Ingresa el nombre del cliente"
                 value={formulario.nombreEmpresa}
                 onChange={(e) => manejarCambio("nombreEmpresa", e.target.value)}
                 className="w-full"
@@ -151,12 +219,13 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
                 type="text"
                 placeholder="Tu nombre completo"
                 value={formulario.nombreContacto}
-                onChange={(e) => manejarCambio("nombreContacto", e.target.value)}
+                onChange={(e) =>
+                  manejarCambio("nombreContacto", e.target.value)
+                }
                 className="w-full"
               />
             </div>
           </div>
-
           {/* CUIT */}
           <div className="space-y-2">
             <Label htmlFor="cuit" className="text-sm font-medium">
@@ -171,7 +240,6 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
               className="w-full"
             />
           </div>
-
           {/* Información de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -183,7 +251,9 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
                 type="tel"
                 placeholder="+54 11 1234-5678"
                 value={formulario.telefonoContacto}
-                onChange={(e) => manejarCambio("telefonoContacto", e.target.value)}
+                onChange={(e) =>
+                  manejarCambio("telefonoContacto", e.target.value)
+                }
                 className="w-full"
               />
             </div>
@@ -201,41 +271,115 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
               />
             </div>
           </div>
-
           {/* Ubicación con desplegable */}
           <div className="space-y-2">
             <Label htmlFor="ubicacion" className="text-sm font-medium">
               Ubicación del Servicio *
             </Label>
-            <select
-              id="ubicacion"
-              value={formulario.ubicacion}
-              onChange={(e) => manejarCambio("ubicacion", e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Selecciona una ubicación</option>
-              {opcionesUbicacion.map((opcion) => (
-                <option key={opcion.value} value={opcion.value}>
-                  {opcion.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="ubicacion"
+                value={formulario.ubicacion}
+                onChange={(e) => manejarCambio("ubicacion", e.target.value)}
+                className="w-full appearance-none px-3 py-2 pr-9 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Selecciona una ubicación</option>
+                {opcionesUbicacion.map((opcion) => (
+                  <option key={opcion.value} value={opcion.value}>
+                    {opcion.label}
+                  </option>
+                ))}
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
           </div>
-
+          {/* Tipo de servicio — multi-select custom */}
+          <div className="relative space-y-2" ref={serviciosRef}>
+            <Label className="text-sm font-medium">Tipo de Servicio *</Label>
+            {/* trigger */}
+            <button
+              type="button"
+              onClick={() => setServiciosAbierto((prev) => !prev)}
+              className="w-full flex items-center justify-between px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left"
+            >
+              <span
+                className={
+                  formulario.servicios.length === 0 ? "text-[#0f172a]" : ""
+                }
+              >
+                {formulario.servicios.length === 0
+                  ? "Selecciona un servicio"
+                  : formulario.servicios.length === 1
+                    ? formulario.servicios[0]
+                    : `${formulario.servicios.length} servicios seleccionados`}
+              </span>
+              <svg
+                className={`w-4 h-4 text-slate-500 transition-transform ${serviciosAbierto ? "rotate-180" : ""}`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            {/* dropdown */}
+            {serviciosAbierto && (
+              <div className="absolute w-full top-full border border-slate-600 rounded-md bg-[#3a3a3a]/85 backdrop-blur-sm shadow-lg max-h-56 overflow-y-auto">
+                {opcionesServicios.map((opcion) => {
+                  const seleccionado = formulario.servicios.includes(
+                    opcion.value,
+                  );
+                  return (
+                    <div
+                      key={opcion.value}
+                      onClick={() => toggleServicio(opcion.value)}
+                      className="flex items-center px-3 py-[7px] cursor-pointer hover:bg-[#5a5a5a] select-none"
+                    >
+                      <span className="w-5 shrink-0 text-white text-sm">
+                        {seleccionado ? "✓" : ""}
+                      </span>
+                      <span className="text-sm text-white">{opcion.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
           {/* Detalles adicionales */}
           <div className="space-y-2">
-            <Label htmlFor="detallesAdicionales" className="text-sm font-medium">
+            <Label
+              htmlFor="detallesAdicionales"
+              className="text-sm font-medium"
+            >
               Detalles Adicionales
             </Label>
             <Textarea
               id="detallesAdicionales"
               placeholder="Cantidad de baños requerida, fecha requerida, horarios preferidos, condiciones especiales, etc."
               value={formulario.detallesAdicionales}
-              onChange={(e) => manejarCambio("detallesAdicionales", e.target.value)}
+              onChange={(e) =>
+                manejarCambio("detallesAdicionales", e.target.value)
+              }
               className="min-h-[100px] resize-none"
             />
           </div>
-
           {/* Información importante */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="flex items-start gap-3">
@@ -243,14 +387,19 @@ const FormularioPedidoServicios: React.FC<FormularioPedidoServiciosProps> = ({ o
               <div className="text-sm text-blue-800">
                 <p className="font-medium mb-1">Información del Servicio:</p>
                 <ul className="space-y-1 list-disc list-inside">
-                  <li>El servicio incluye instalación, mantenimiento y retiro.</li>
-                  <li>Nos contactaremos contigo dentro de 24 horas para confirmar disponibilidad.</li>
-                  <li>Los precios varían según ubicación y duración del servicio.</li>
+                  {/* <li>
+                    El servicio incluye instalación, mantenimiento y retiro.
+                  </li> */}
+                  <li>
+                    Nos contactaremos contigo en las próximas 24 horas hábiles.
+                  </li>
+                  {/* <li>
+                    Los precios varían según ubicación y duración del servicio.
+                  </li> */}
                 </ul>
               </div>
             </div>
           </div>
-
           {/* Botones */}
           <div className="flex gap-3 pt-4">
             <Button

@@ -149,21 +149,6 @@ const Cta = () => {
               </CardContent>
             </Card>
           </motion.div>
-          {/* Botones de acción */}
-          {/* <motion.div
-          initial={{ scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mt-8 flex gap-6 w-full justify-center sm-tablet:flex-row flex-col items-center"
-        >
-          <ButtonHome
-            text="Servicios"
-            className="max-w-[215px] w-full h-11"
-            onClick={handleServiciosClick}
-          />
-          <ButtonHomeServices onClick={handleContactoClick} />
-        </motion.div> */}
         </div>
       </section>
 
