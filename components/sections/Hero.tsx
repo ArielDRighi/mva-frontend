@@ -42,14 +42,13 @@ const Hero = () => {
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-20 flex flex-col items-center"
       >
-        <h1 className="text-4xl sm-tablet:text-5xl md:text-7xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg">
-          Impulsa tu Negocio con
-          <br />
-          <span className="text-mva-turquesa">Innovación y Tecnología</span>
+        <h1 className="text-4xl sm-tablet:text-5xl md-tablet:text-6xl font-extrabold text-white font-montserrat tracking-wide leading-tight drop-shadow-lg max-w-4xl">
+          SOLUCIONES INTEGRALES PARA CADA ENTORNO DE TRABAJO
+          {/* <br />
+          <span className="text-mva-turquesa">Innovación y Tecnología</span> */}
         </h1>
         <p className="mt-5 text-xl text-mva-blanco-200 max-w-2xl font-poppins leading-relaxed">
-          Soluciones estratégicas de logística y servicios. Optimizamos tu
-          operación con eficiencia y profesionalismo de primer nivel.
+          Un servicio profesional con compromiso, eficiencia y calidad
         </p>
         <motion.div
           initial={{ scale: 0.95 }}
