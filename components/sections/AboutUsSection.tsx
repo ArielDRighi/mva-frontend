@@ -57,16 +57,64 @@ const AboutUsSection = () => {
                 Nuestra Historia
               </h2>
               <p className="text-gray-700 mb-4 font-poppins">
-                MVA SRL nació en 2018 como respuesta a la creciente demanda de
-                servicios de calidad en el sector minero. Con un enfoque inicial
-                en baños químicos, rápidamente expandimos nuestra oferta hacia
-                soluciones logísticas integrales.
+                Desde 2018, MVA SRL acompaña a empresas del sector minero,
+                industrial y comercial con servicios especializados en
+                soluciones de limpieza, gestión de residuos y logística.
+              </p>
+              <p className="text-gray-700 mb-4 font-poppins">
+                Comenzamos respondiendo a una necesidad concreta de servicios de
+                alquiler y limpieza de baños químicos y, con el tiempo,
+                ampliamos nuestra oferta para brindar soluciones integrales que
+                apoyan operaciones de gran escala, siempre manteniendo altos
+                estándares de calidad, seguridad y cuidado del medio ambiente.
               </p>
               <p className="text-gray-700 mb-4 font-poppins">
                 En estos años hemos construido una reputación basada en la
-                confiabilidad, la calidad de servicio y el compromiso con
-                nuestros clientes, siempre manteniendo altos estándares de
-                seguridad y cuidado del medio ambiente.
+                confiabilidad, la eficiencia operativa y el compromiso con cada
+                cliente. Esta trayectoria nos permitió crecer de manera
+                sostenida, incorporando nuevos servicios, tecnología y procesos
+                que fortalecen nuestra capacidad de respuesta en contextos de
+                alta exigencia.
+              </p>
+              <p className="text-gray-700 mb-4 font-poppins">
+                Conscientes del impacto que nuestra actividad genera en la
+                comunidad y el entorno, desarrollamos una Política de
+                Responsabilidad Social Empresaria que guía nuestras decisiones y
+                acciones.
+              </p>
+              <p className="text-gray-700 mb-2 font-poppins">
+                Esta política se basa en:
+              </p>
+              <ul className="text-gray-700 mb-4 font-poppins list-none space-y-2 pl-2">
+                <li className="flex items-start gap-2">
+                  <span className="mt-[7px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                  La generación de empleo formal y capacitación continua de
+                  nuestro equipo.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-[7px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                  El cumplimiento estricto de normativas ambientales y de
+                  seguridad.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-[7px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                  La correcta gestión y disposición de residuos.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-[7px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                  El acompañamiento a proveedores y actores locales, promoviendo
+                  el desarrollo regional.
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-[7px] shrink-0 w-2 h-2 rounded-full bg-mva-turquesa" />
+                  El respeto por las comunidades donde operamos, especialmente
+                  en entornos industriales y mineros.
+                </li>
+              </ul>
+              <p className="text-gray-700 mb-4 font-poppins">
+                En MVA SRL entendemos que crecer no es solo expandir servicios,
+                sino hacerlo de manera responsable, sostenible y generando valor
+                para todos los grupos de interés.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg h-80 relative">

@@ -10,12 +10,11 @@ const servicios = [
   {
     title: "Limpieza Corporativa",
     description:
-      "Mantenemos sus espacios de trabajo impecables y seguros. Ofrecemos servicios diarios o programados para oficinas, edificios y espacios comunes, con personal capacitado, supervisión constante y productos de primera calidad.",
+      "Mantenemos sus espacios de trabajo impecables y seguros. Ofrecemos servicios diarios, mensuales y  programados para oficinas, edificios y espacios comunes.Aseguramos ambientes seguros, higiénicos y alineados con estándares internos de calidad.",
     features: [
-      "Disponibles 24/7",
-      "Mantenimiento programado",
-      "Cumplimiento de normas sanitarias",
-      "Opciones para todo tipo de proyectos",
+      "Personal capacitado y supervisión permanente.",
+      "Uso responsable de productos y maquinaria profesional.",
+      "Horarios flexibles.",
     ],
     image: "/images/ServicioLimpiezaCorporativa.webp",
     objectPosition: "0% 25%",
@@ -23,12 +22,11 @@ const servicios = [
   {
     title: "Limpieza final de obra",
     description:
-      "Garantizamos la entrega perfecta de su proyecto. Nos ocupamos del retiro de residuos, polvo y materiales, dejando cada ambiente listo para ser habitado o presentado, con equipamiento y protocolos adecuados a cada superficie.",
+      "Desarrollamos tareas de mantenimiento y acondicionamiento de espacios verdes en predios industriales y corporativos, contribuyendo a la seguridad, imagen institucional y cuidado ambiental.",
     features: [
-      "Equipos de última generación",
-      "Capacidad de 10m³ - 30m³",
-      "Rápida respuesta",
-      "Manejo adecuado de residuos",
+      "Garantizamos la entrega perfecta de su proyecto.",
+      "Equipamiento y protocolos adecuados a cada superficie.",
+      "Puede incluir retiro de escombros.",
     ],
     image: "/images/LimpiezaFinalObra.webp",
     objectPosition: "0% 21%",
@@ -36,24 +34,23 @@ const servicios = [
   {
     title: "Mantenimiento de áreas verdes",
     description:
-      "Cuidamos los entornos exteriores de su empresa o predio con cortes de pasto y poda. Nuestro objetivo es conservar espacios prolijos y seguros, que reflejen la imagen profesional de su organización.",
+      "Desarrollamos tareas de mantenimiento y acondicionamiento de espacios verdes en predios industriales y corporativos, contribuyendo a la seguridad, imagen institucional y cuidado ambiental.",
     features: [
-      "Personal especializado",
-      "Productos ecológicos",
-      "Horarios flexibles",
-      "Planes personalizados",
+      "Corte y mantenimiento periódico.",
+      "Control de malezas.",
+      "Limpieza de áreas exteriores.",
+      "Puede contratar además fumigación y control de plagas.",
     ],
-    image: "/images/camionetas.webp",
+    image: "/images/areasVerdes.webp",
   },
   {
     title: "Alquiler de baños químicos",
     description:
-      "Brindamos el servicio completo: instalación, limpieza periódica, reposición de insumos y mantenimiento, con logística propia en toda la provincia.",
+      "Brindamos el servicio completo: instalación, alquiler , limpieza periódica, reposición de insumos y desagote de efluentes, con logística propia en toda la provincia.",
     features: [
-      "Logística completa",
-      "Soluciones habitacionales",
-      "Mantenimiento preventivo",
-      "Adaptación a necesidades específicas",
+      "Unidades nuevas.",
+      "Gestión y transporte de efluentes con disposición final habilitada.",
+      "Registro y trazabilidad del servicio.",
     ],
     image: "/images/AlquilerBañosQuimicos.webp",
   },
@@ -62,10 +59,10 @@ const servicios = [
     description:
       "Desagotes de cámaras sépticas, biodigestores y pozos ciegos. Actuamos con rapidez, seguridad y cumplimiento de las normativas vigentes.",
     features: [
-      "Logística completa",
-      "Soluciones habitacionales",
-      "Mantenimiento preventivo",
-      "Adaptación a necesidades específicas",
+      "Equipos de última generación.",
+      "Capacidad de 10m³ - 30m³",
+      "Rápida respuesta.",
+      "Manejo adecuado de residuos.",
     ],
     image: "/images/ServicioDesagote.webp",
   },
@@ -74,10 +71,10 @@ const servicios = [
     description:
       "Ofrecemos soluciones para garantizar la gestión integral de residuos, desde su generación hasta el transporte a sitios de disposición final, de manera segura, eficiente y ambientalmente responsable.",
     features: [
-      "Logística completa",
-      "Soluciones habitacionales",
-      "Mantenimiento preventivo",
-      "Adaptación a necesidades específicas",
+      "Residuos reciclables: papel, cartón y plástico.",
+      "Soluciones para residuos compostables.",
+      "Residuos peligrosos Y08, Y09 e Y48.",
+      "Proyectos integrales.",
     ],
     image: "/images/Residuos.webp",
     objectPosition: "0% 22%",
@@ -87,10 +84,9 @@ const servicios = [
     description:
       "Transporte de aceite vegetal usado (AVU). Trabajamos en conjunto con las empresas de cátering realizando el traslado seguro del aceite de cocina que se descarta después de su uso.",
     features: [
-      "Logística completa",
-      "Soluciones habitacionales",
-      "Mantenimiento preventivo",
-      "Adaptación a necesidades específicas",
+      "Logistica propia.",
+      "Recolección, acopio, tratamiento y reciclaje.",
+      "Trazabilidad completa.",
     ],
     image: "/images/ServicioTransporteAVU.jpeg",
   },
@@ -118,10 +114,10 @@ export default function ServiciosPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat">
               Nuestros Servicios
             </h1>
-            <p className="text-xl text-mva-blanco-100 max-w-3xl mx-auto leading-relaxed font-poppins">
-              Ofrecemos soluciones integrales de alta calidad para proyectos
-              mineros e industriales, cumpliendo con los más altos estándares de
-              seguridad y eficiencia.
+            <p className="text-lg md:text-xl text-mva-blanco-100 max-w-4xl mx-auto leading-relaxed font-poppins">
+              Ofrecemos soluciones integrales para proyectos mineros e
+              industriales cumpliendo con los más altos estándares de calidad ,
+              seguridad y compromiso ambiental.
             </p>
           </motion.div>
         </div>

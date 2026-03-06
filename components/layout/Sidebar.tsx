@@ -15,9 +15,9 @@ type SidebarProps = {
 const Sidebar = ({ onClose }: SidebarProps) => {
   const links = [
     { href: "/", label: "Inicio" },
-    { href: "/servicios", label: "Servicios" },
+    { href: "/nosotros", label: "Nosotros" },
+    { href: "/clientes", label: "Portal Clientes" },
     { href: "/contacto", label: "Contacto" },
-    { href: "/clientes", label: "Clientes" },
   ];
 
   return (

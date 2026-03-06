@@ -5,6 +5,7 @@ import AboutUsSection from "../sections/AboutUsSection";
 import Asks from "../sections/Asks";
 import Cta from "../sections/Cta";
 import ServiciosPage from "./ServiciosPage";
+import ClientesCarousel from "../sections/ClientesCarousel";
 import WhatsAppFloating from "../ui/local/WhatsAppFloating";
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Hero />
       <ServiciosPage />
       <Asks />
+      <ClientesCarousel />
       <Cta />
       <WhatsAppFloating />
     </main>

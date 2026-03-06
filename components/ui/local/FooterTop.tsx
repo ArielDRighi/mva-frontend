@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Mail, Linkedin } from "lucide-react";
+import { Mail, Linkedin, Instagram } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Separator } from "../separator";
@@ -8,7 +8,7 @@ const FooterTop = () => {
   const links = [
     { href: "/", label: "Inicio" },
     { href: "/nosotros", label: "Nosotros" },
-    // { href: "/clientes", label: "Clientes" },
+    { href: "/clientes", label: "Portal Clientes" },
     { href: "/contacto", label: "Contacto" },
   ];
   return (
@@ -40,6 +40,13 @@ const FooterTop = () => {
           rel="noopener noreferrer"
         >
           <Linkedin className="text-lg font-medium text-gray-300 duration-300 hover:text-mva-turquesa transition-colors after:scale-x-100" />
+        </Link>
+        <Link
+          href="https://www.instagram.com/mva.srl?igsh=M2F2dDR1MnpxZTY4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Instagram className="text-lg font-medium text-gray-300 duration-300 hover:text-mva-turquesa transition-colors after:scale-x-100" />
         </Link>
       </div>
     </div>

@@ -20,7 +20,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     telefonoContacto: "",
     emailContacto: "",
     tipoReclamo: "",
-    descripcion: ""
+    descripcion: "",
   });
   const tiposReclamo = [
     { value: "CALIDAD_SERVICIO", label: "Calidad del Servicio" },
@@ -28,84 +28,86 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     { value: "FACTURACION", label: "Facturación" },
     { value: "PERSONAL", label: "Comportamiento del Personal" },
     { value: "PRODUCTO_DEFECTUOSO", label: "Defecto del Producto" },
-    { value: "OTRO", label: "Otro" }
+    { value: "OTRO", label: "Otro" },
   ];
 
   // Funciones helper para convertir enums
   const convertirTipoReclamo = (tipo: string) => {
     const mapeo: { [key: string]: string } = {
-      'CALIDAD_SERVICIO': 'service_quality',
-      'DEMORA': 'delay',
-      'FACTURACION': 'billing',
-      'PERSONAL': 'staff_behavior',
-      'PRODUCTO_DEFECTUOSO': 'product_defect',
-      'OTRO': 'other'
+      CALIDAD_SERVICIO: "service_quality",
+      DEMORA: "delay",
+      FACTURACION: "billing",
+      PERSONAL: "staff_behavior",
+      PRODUCTO_DEFECTUOSO: "product_defect",
+      OTRO: "other",
     };
-    return mapeo[tipo] || 'other';
+    return mapeo[tipo] || "other";
   };
   // Función de mapeo de datos para el backend
   const mapearDatosReclamo = (formData: typeof formulario) => {
     return {
       // Mapeo de campos del formulario a campos del backend
       cliente: formData.nombreEmpresa,
-      titulo: `Reclamo de ${formData.nombreContacto} - ${tiposReclamo.find(t => t.value === formData.tipoReclamo)?.label || formData.tipoReclamo}`,
+      titulo: `Reclamo de ${formData.nombreContacto} - ${tiposReclamo.find((t) => t.value === formData.tipoReclamo)?.label || formData.tipoReclamo}`,
       descripcion: `${formData.descripcion}\n\nDatos de contacto:\nContacto: ${formData.nombreContacto}\nTeléfono: ${formData.telefonoContacto}\nEmail: ${formData.emailContacto}`,
-      
+
       // Convertir enums a formato correcto (lowercase con underscores)
       tipoReclamo: convertirTipoReclamo(formData.tipoReclamo),
-      prioridad: 'medium', // Prioridad fija en medium
-      
+      prioridad: "medium", // Prioridad fija en medium
+
       // Fecha actual en formato ISO
       fechaIncidente: new Date().toISOString(),
-      
+
       // Campos adicionales según DTO
       esUrgente: false, // Sin selección de prioridad, por defecto no urgente
-      requiereCompensacion: false
+      requiereCompensacion: false,
     };
   };
 
   const manejarCambio = (campo: string, valor: string) => {
-    setFormulario(prev => ({
+    setFormulario((prev) => ({
       ...prev,
-      [campo]: valor
+      [campo]: valor,
     }));
   };
 
   const validarFormulario = () => {
     const camposRequeridos = [
       "nombreEmpresa",
-      "nombreContacto", 
+      "nombreContacto",
       "telefonoContacto",
       "emailContacto",
       "tipoReclamo",
-      "descripcion"
+      "descripcion",
     ];
-    
-    return camposRequeridos.every(campo => formulario[campo as keyof typeof formulario].trim() !== "");
+
+    return camposRequeridos.every(
+      (campo) => formulario[campo as keyof typeof formulario].trim() !== "",
+    );
   };
   const enviarReclamo = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validarFormulario()) {
       toast.error("Por favor completa todos los campos obligatorios");
       return;
     }
 
     setCargando(true);
-    
+
     try {
       // Mapear los datos según el formato esperado por el backend
       const datosParaBackend = mapearDatosReclamo(formulario);
-      
+
       console.log("Datos a enviar:", datosParaBackend);
       console.log("URL de envío:", getFullApiUrl(API_ENDPOINTS.CLAIMS));
-      
+
       const respuesta = await fetch(getFullApiUrl(API_ENDPOINTS.CLAIMS), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           // Agregar headers adicionales para CORS si es necesario
-          "Accept": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(datosParaBackend),
       });
@@ -114,13 +116,13 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
         status: respuesta.status,
         statusText: respuesta.statusText,
         ok: respuesta.ok,
-        headers: Object.fromEntries(respuesta.headers.entries())
+        headers: Object.fromEntries(respuesta.headers.entries()),
       });
 
       if (respuesta.ok) {
         const resultado = await respuesta.json();
         console.log("Reclamo enviado exitosamente:", resultado);
-        
+
         toast.success("Reclamo enviado exitosamente. Te contactaremos pronto.");
         setFormulario({
           nombreEmpresa: "",
@@ -128,7 +130,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           telefonoContacto: "",
           emailContacto: "",
           tipoReclamo: "",
-          descripcion: ""
+          descripcion: "",
         });
         setTimeout(() => {
           onClose();
@@ -138,16 +140,21 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
         console.error("Error del servidor:", {
           status: respuesta.status,
           statusText: respuesta.statusText,
-          errorData
+          errorData,
         });
         throw new Error(errorData.message || "Error al enviar el reclamo");
       }
     } catch (error) {
       console.error("Error completo:", error);
-      
+
       // Detectar errores específicos de CORS
-      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        toast.error("Error de conexión. Verifica que el servidor esté disponible y configurado correctamente para CORS.");
+      if (
+        error instanceof TypeError &&
+        error.message.includes("Failed to fetch")
+      ) {
+        toast.error(
+          "Error de conexión. Verifica que el servidor esté disponible y configurado correctamente para CORS.",
+        );
       } else {
         toast.error("Error al enviar el reclamo. Inténtalo nuevamente.");
       }
@@ -163,20 +170,20 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           {/* Información de la empresa */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nombreEmpresa" className="text-sm font-medium">
-                Nombre de la Empresa *
+              <Label htmlFor="nombreEmpresa" className="text-sm font-semibold text-mva-azul font-montserrat">
+                Nombre del Cliente *
               </Label>
               <Input
                 id="nombreEmpresa"
                 type="text"
-                placeholder="Ingresa el nombre de tu empresa"
+                placeholder="Ingresa el nombre del cliente"
                 value={formulario.nombreEmpresa}
                 onChange={(e) => manejarCambio("nombreEmpresa", e.target.value)}
                 className="w-full"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="nombreContacto" className="text-sm font-medium">
+              <Label htmlFor="nombreContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Nombre del Contacto *
               </Label>
               <Input
@@ -184,7 +191,9 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
                 type="text"
                 placeholder="Tu nombre completo"
                 value={formulario.nombreContacto}
-                onChange={(e) => manejarCambio("nombreContacto", e.target.value)}
+                onChange={(e) =>
+                  manejarCambio("nombreContacto", e.target.value)
+                }
                 className="w-full"
               />
             </div>
@@ -193,7 +202,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           {/* Información de contacto */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="telefonoContacto" className="text-sm font-medium">
+              <Label htmlFor="telefonoContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Teléfono *
               </Label>
               <Input
@@ -201,12 +210,14 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
                 type="tel"
                 placeholder="+54 11 1234-5678"
                 value={formulario.telefonoContacto}
-                onChange={(e) => manejarCambio("telefonoContacto", e.target.value)}
+                onChange={(e) =>
+                  manejarCambio("telefonoContacto", e.target.value)
+                }
                 className="w-full"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="emailContacto" className="text-sm font-medium">
+              <Label htmlFor="emailContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
                 Email *
               </Label>
               <Input
@@ -222,27 +233,35 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
 
           {/* Tipo de reclamo */}
           <div className="space-y-2">
-            <Label htmlFor="tipoReclamo" className="text-sm font-medium">
+            <Label htmlFor="tipoReclamo" className="text-sm font-semibold text-mva-azul font-montserrat">
               Tipo de Reclamo *
             </Label>
-            <select
-              id="tipoReclamo"
-              value={formulario.tipoReclamo}
-              onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Selecciona un tipo</option>
-              {tiposReclamo.map((tipo) => (
-                <option key={tipo.value} value={tipo.value}>
-                  {tipo.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="tipoReclamo"
+                value={formulario.tipoReclamo}
+                onChange={(e) => manejarCambio("tipoReclamo", e.target.value)}
+                className="w-full appearance-none px-3 py-2 pr-9 border border-slate-300 rounded-md bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-mva-turquesa"
+              >
+                <option value="">Selecciona un tipo</option>
+                {tiposReclamo.map((tipo) => (
+                  <option key={tipo.value} value={tipo.value}>
+                    {tipo.label}
+                  </option>
+                ))}
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
 
           {/* Descripción */}
           <div className="space-y-2">
-            <Label htmlFor="descripcion" className="text-sm font-medium">
+            <Label htmlFor="descripcion" className="text-sm font-semibold text-mva-azul font-montserrat">
               Descripción del Reclamo *
             </Label>
             <Textarea
@@ -255,12 +274,16 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
           </div>
 
           {/* Alerta informativa */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <div className="bg-mva-azul/5 border border-mva-azul/20 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-amber-800">
-                <p className="font-medium mb-1">Importante:</p>
-                <p>Tu reclamo será procesado en un plazo máximo de 48 horas hábiles. Te contactaremos al email proporcionado con el seguimiento correspondiente.</p>
+              <AlertTriangle className="w-5 h-5 text-mva-azul flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-mva-azul">
+                <p className="font-semibold font-montserrat mb-1">Importante:</p>
+                <p className="font-poppins">
+                  Tu reclamo será procesado en un plazo máximo de 48 horas
+                  hábiles. Te contactaremos al email proporcionado con el
+                  seguimiento correspondiente.
+                </p>
               </div>
             </div>
           </div>
@@ -279,7 +302,7 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
             <Button
               type="submit"
               disabled={cargando || !validarFormulario()}
-              className="flex-1 bg-red-500 hover:bg-red-600 text-white"
+              className="flex-1 bg-mva-azul hover:bg-mva-azul-400 text-white font-montserrat font-semibold"
             >
               {cargando ? (
                 <>
