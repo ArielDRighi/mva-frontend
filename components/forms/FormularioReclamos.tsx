@@ -48,8 +48,11 @@ const FormularioReclamos: React.FC<FormularioReclamosProps> = ({ onClose }) => {
     return {
       // Mapeo de campos del formulario a campos del backend
       cliente: formData.nombreEmpresa,
+      nombreContacto: formData.nombreContacto,
+      emailContacto: formData.emailContacto,
+      telefonoContacto: formData.telefonoContacto,
       titulo: `Reclamo de ${formData.nombreContacto} - ${tiposReclamo.find((t) => t.value === formData.tipoReclamo)?.label || formData.tipoReclamo}`,
-      descripcion: `${formData.descripcion}\n\nDatos de contacto:\nContacto: ${formData.nombreContacto}\nTeléfono: ${formData.telefonoContacto}\nEmail: ${formData.emailContacto}`,
+      descripcion: formData.descripcion,
 
       // Convertir enums a formato correcto (lowercase con underscores)
       tipoReclamo: convertirTipoReclamo(formData.tipoReclamo),
