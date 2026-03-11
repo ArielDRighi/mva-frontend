@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { Boureau } from "@/public/images/Boureau";
 
 const Header = () => {
   const pathname = usePathname();
@@ -46,6 +47,7 @@ const Header = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="flex items-center gap-8"
         >
           <Link href="/">
             <Image
@@ -56,6 +58,36 @@ const Header = () => {
               className="sm-tablet:w-[150px] w-[100px] object-contain"
             />
           </Link>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm">
+            <Image
+              src="/images/industry-iso-90012015-seeklogo.png"
+              alt="ISO 9001:2015"
+              width={150}
+              height={60}
+              className="w-[32px] object-contain grayscale brightness-150 opacity-70"
+            />
+            <div className="w-px h-7 bg-white/20 mx-1" />
+            <div className="flex flex-col leading-none gap-[3px]">
+              <span className="flex justify-between text-white/40 font-semibold text-[8px] uppercase tracking-widest">
+                {"CERTIFIED".split("").map((char, i) => (
+                  <span key={i}>{char}</span>
+                ))}
+              </span>
+              <span
+                className="text-white font-bold text-[13px]"
+                style={{ textAlign: "justify", textAlignLast: "justify" }}
+              >
+                ISO 9001
+              </span>
+              <span
+                className="text-white/45 font-light text-[8px]"
+                style={{ textAlign: "justify", textAlignLast: "justify" }}
+              >
+                C° AR-0242016
+              </span>
+            </div>
+            <Boureau className="h-11 w-auto text-white opacity-60 ml-1" />
+          </div>
         </motion.div>
 
         {/* Navbar desktop */}
