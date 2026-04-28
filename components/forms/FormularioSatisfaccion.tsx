@@ -28,8 +28,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
     tiempoRespuesta: "",
     calificacionAtencion: 0,
     calificacionServicio: 0,
-    accesibilidadContacto: "",
-    relacionPrecioValor: "",
     recomendaria: "" as string,
     comentarios: "",
   });
@@ -58,8 +56,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
       formulario.tiempoRespuesta !== "", // tiempo_respuesta
       formulario.calificacionAtencion > 0, // calificacion_atencion
       formulario.calificacionServicio > 0, // calificacion_servicio
-      formulario.accesibilidadContacto !== "", // accesibilidad_comercial
-      formulario.relacionPrecioValor !== "", // relacion_precio_valor
       formulario.recomendaria !== "", // recomendaria
     ].every((condicion) => condicion);
 
@@ -73,8 +69,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
         tiempoRespuesta: formulario.tiempoRespuesta,
         calificacionAtencion: formulario.calificacionAtencion,
         calificacionServicio: formulario.calificacionServicio,
-        accesibilidadContacto: formulario.accesibilidadContacto,
-        relacionPrecioValor: formulario.relacionPrecioValor,
         recomendaria: formulario.recomendaria,
       },
     });
@@ -92,8 +86,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
       tiempo_respuesta: formData.tiempoRespuesta,
       calificacion_atencion: formData.calificacionAtencion,
       calificacion_servicio: formData.calificacionServicio,
-      accesibilidad_comercial: formData.accesibilidadContacto,
-      relacion_precio_valor: formData.relacionPrecioValor,
       recomendaria: formData.recomendaria,
       comentario_adicional: formData.comentarios.trim() || null,
     };
@@ -203,8 +195,6 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           tiempoRespuesta: "",
           calificacionAtencion: 0,
           calificacionServicio: 0,
-          accesibilidadContacto: "",
-          relacionPrecioValor: "",
           recomendaria: "",
           comentarios: "",
         });
@@ -244,7 +234,10 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           {/* Información de la empresa */}
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="nombreEmpresa" className="text-sm font-semibold text-mva-azul font-montserrat">
+              <Label
+                htmlFor="nombreEmpresa"
+                className="text-sm font-semibold text-mva-azul font-montserrat"
+              >
                 Nombre del Cliente *
               </Label>
               <Input
@@ -259,7 +252,9 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
             {/* Tipo de servicio — multi-select custom */}
             <div className="relative space-y-2" ref={serviciosRef}>
-              <Label className="text-sm font-semibold text-mva-azul font-montserrat">Tipo de Servicio *</Label>
+              <Label className="text-sm font-semibold text-mva-azul font-montserrat">
+                Tipo de Servicio *
+              </Label>
               {/* trigger */}
               <button
                 type="button"
@@ -321,7 +316,10 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="nombreContacto" className="text-sm font-semibold text-mva-azul font-montserrat">
+            <Label
+              htmlFor="nombreContacto"
+              className="text-sm font-semibold text-mva-azul font-montserrat"
+            >
               Nombre, Apellido y Contacto (opcional)
             </Label>
             <Input
@@ -514,7 +512,10 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
 
           {/* Pregunta 10: Comentarios */}
           <div className="space-y-2">
-            <Label htmlFor="comentarios" className="text-sm font-semibold text-mva-azul font-montserrat">
+            <Label
+              htmlFor="comentarios"
+              className="text-sm font-semibold text-mva-azul font-montserrat"
+            >
               ¿Desea dejar algún comentario adicional sobre la atención
               comercial o sugerencias de mejora?
             </Label>
@@ -535,7 +536,9 @@ const FormularioSatisfaccion: React.FC<FormularioSatisfaccionProps> = ({
                 <p className="font-semibold font-montserrat">
                   ¡Tu opinión es muy importante para nosotros!
                 </p>
-                <p className="font-poppins">Nos ayuda a mejorar continuamente nuestros servicios.</p>
+                <p className="font-poppins">
+                  Nos ayuda a mejorar continuamente nuestros servicios.
+                </p>
               </div>
             </div>
           </div>
